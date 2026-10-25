@@ -1,7 +1,7 @@
 # Proyecto 3 — Text-to-SQL con LoRA
 
 Deep Learning 2026, Universidad del Valle de Guatemala.
-Integrantes: **Anggie Quezada** (`Qu3zada22`) y **[Compañera]** (`[usuario-github]`).
+Integrantes: **Anggie Quezada** (`Qu3zada22`) y **Iris Ayala** (`[usuario-github]`).
 
 Fine-tuning con LoRA de **Qwen/Qwen2.5-Coder-1.5B-Instruct** para que, dado el esquema de una
 base MySQL (`SHOW CREATE TABLE`, con `COMMENT`) y una pregunta en español, genere una consulta
@@ -63,8 +63,28 @@ bash scripts/datos/01_descargar_spider.sh              # Spider 1.0 + checksum
 ```
 
 ### 2. Entrenamiento (Colab, T4)
-`notebooks/02_entrenamiento.ipynb`, o bien `python scripts/entrenamiento/entrenar.py --config A|B`.
+Se entrena en Google Colab con GPU T4 (en una computadora sin GPU no es viable):
+
+1. Abrir `notebooks/02_entrenamiento.ipynb` en Colab (desde GitHub o *Subir cuaderno*).
+2. *Entorno de ejecución → Cambiar tipo → T4 GPU*.
+3. Guardar un token de GitHub (acceso de lectura y escritura a este repo) en *Secrets* como
+   `GH_TOKEN`. Si los Secrets no están disponibles (p. ej. con la extensión de Colab para VS Code),
+   el notebook pide el token en un cuadro de texto.
+4. *Ejecutar todas*. El notebook monta Google Drive, clona el repo, entrena A y B con
+   `scripts/entrenamiento/entrenar.py` y sube los resultados de cada configuración al repo apenas
+   termina.
+
+Los checkpoints se guardan cada 50 pasos en `MyDrive/t2s_checkpoints/<config>/`. Si Colab se
+desconecta, volver a ejecutar el notebook continúa desde el último checkpoint, y una configuración
+que ya está en el repo no se vuelve a entrenar.
+
+Fuera del notebook: `python scripts/entrenamiento/entrenar.py --config A|B --checkpoints <carpeta>`.
 El adapter elegido se copia a `adapter/`.
+
+| Config | Módulos con LoRA | Parámetros entrenables | Pasos | Tiempo por paso (T4) |
+|---|---|---|---|---|
+| A | atención (`q, k, v, o`) | 4,358,144 (0.282 %) | 495 | ~19 s (~2 h 40 min en total) |
+| B | atención + MLP (`gate, up, down`) | *(por completar)* | 495 | *(por completar)* |
 
 ### 3. Evaluación
 `T2S_CONFIG=configs/baseline.json python scripts/evaluacion/evaluar.py` (ver `PLAN_TRABAJO.md`).

@@ -11,3 +11,6 @@ datos/crudo/
 # checkpoints intermedios de entrenamiento (solo se versiona adapter/ final)
 checkpoints/
 runs/
+
+# capturas de pantalla sueltas en la raíz
+/*.png

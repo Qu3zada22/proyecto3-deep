@@ -1,7 +1,7 @@
 # Plan de trabajo y división de tareas
 
 Entrega: **domingo 25 de octubre de 2026, 23:59**. Integrantes: **Anggie Quezada** (`Qu3zada22`)
-y **[Compañera]** (`[usuario-github]`).
+y **Iris Ayala** (`[usuario-github]`).
 
 El enunciado exige que cada integrante sea responsable de al menos un área (datos,
 entrenamiento, o validación y errores) y que **ambas hagan commits desde su propia cuenta**.
@@ -11,19 +11,19 @@ La división busca que las dos trabajen en paralelo sin bloquearse:
 |---|---|---|
 | **Datos** | Anggie | pipeline Spider → MySQL → español, 12 esquemas propios, `datos/`, reporte de descartes |
 | **Entrenamiento** | Anggie | `scripts/entrenamiento/entrenar.py`, configuraciones A y B, hipótesis, curvas de loss, `adapter/` final |
-| **Validación y errores** | [Compañera] | 2 esquemas de validación + 40 preguntas, evaluador EX, baseline, experimento de inferencia, análisis de errores, `resultados/validacion_propia.csv` |
+| **Validación y errores** | Iris Ayala | 2 esquemas de validación + 40 preguntas, evaluador EX, baseline, experimento de inferencia, análisis de errores, `resultados/validacion_propia.csv` |
 | **Entrega** | Ambas | prueba en Colab T4, predicción de EX, `presentacion.pdf`, README, BITACORA, `historial_git.txt` |
 
 ## Cronograma
 
-| Día | Anggie | [Compañera] |
+| Día | Anggie | Iris Ayala |
 |---|---|---|
 | Jue 22 | Estructura del repo, `solucion.py`, pipeline de datos, esquemas propios | Diseñar los 2 esquemas de validación (dominios **distintos** a los de entrenamiento) |
 | Vie 23 | Construir dataset; entrenar A y B en Colab | 40 preguntas + SQL de referencia; evaluador `scripts/evaluacion/evaluar.py`; **baseline** |
 | Sáb 24 | Elegir adapter, copiarlo a `adapter/`, probar tiempos en T4 | Evaluar A y B; experimento de inferencia; análisis de errores |
 | Dom 25 | Presentación (datos y entrenamiento), README | Presentación (validación y errores), predicción de EX |
 
-## Tareas de [Compañera]: validación y errores
+## Tareas de Iris Ayala: validación y errores
 
 ### 1. Esquemas de validación (`datos/validacion/<nombre>/`)
 - **Dos** esquemas de 5 a 10 tablas cada uno, de dominios que NO estén en el entrenamiento.
