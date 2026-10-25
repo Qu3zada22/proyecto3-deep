@@ -824,3 +824,13 @@ INSERT INTO pagos (id_pago, id_membresia, fecha_pago, monto, metodo) VALUES
 (145, 107, '2024-02-01', 250.00, 'tarjeta'),
 (146, 108, '2024-04-22', 480.00, 'efectivo'),
 (147, 108, '2024-07-21', 480.00, 'tarjeta');
+
+INSERT INTO socios (id_socio, nombre, apellido, genero, fecha_nacimiento, telefono, correo, id_sede_principal, fecha_alta) VALUES
+(61, 'Lucía', 'Archila', 'F', '1999-04-18', '55123344', NULL, 2, '2025-08-11'),
+(62, 'Esteban', 'Quiñónez', 'M', '1987-11-02', NULL, 'esteban.quinonez@correo.com', 3, '2025-09-02'),
+(63, 'Marta', 'Solares', 'F', '1975-06-25', '41239870', 'marta.solares@correo.com', 4, '2025-09-20');
+
+INSERT INTO membresias (id_membresia, id_socio, id_plan, fecha_inicio, fecha_fin, estado) VALUES
+(109, 61, 1, '2025-08-11', '2025-09-10', 'vencida'),
+(110, 62, 2, '2025-09-02', '2025-12-01', 'activa'),
+(111, 63, 1, '2025-09-20', '2025-10-20', 'activa');

@@ -560,3 +560,7 @@ INSERT INTO antc (antc_id, prod_id, fec_antc, monto, pagado) VALUES
 (53, 17, '2025-09-22', 4500.00, 0),
 (54, 21, '2025-09-23', 9500.00, 0),
 (55, 11, '2025-10-12', 15000.00, 0);
+
+INSERT INTO cli (cli_id, nom_cli, pais, tipo) VALUES
+(13, 'Andes Specialty Roasters', 'Perú', 'tostador'),
+(14, 'Café Tal Cual', 'Guatemala', 'cafeteria');
