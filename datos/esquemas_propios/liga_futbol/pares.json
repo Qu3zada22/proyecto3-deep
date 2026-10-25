@@ -1,0 +1,402 @@
+[
+  {
+    "pregunta": "¿Cuál es el nombre y la ciudad de todos los estadios?",
+    "sql": "SELECT nombre_estadio, ciudad FROM estadios",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista el nombre y el apellido de los jugadores que juegan como portero.",
+    "sql": "SELECT nombre, apellido FROM jugadores WHERE posicion = 'portero'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué estadios tienen techo? Devuelve: nombre_estadio, capacidad.",
+    "sql": "SELECT nombre_estadio, capacidad FROM estadios WHERE tiene_techo = 1",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos jugadores son agentes libres, es decir, no pertenecen a ningún equipo? Devuelve: total_agentes_libres.",
+    "sql": "SELECT COUNT(*) AS total_agentes_libres FROM jugadores WHERE id_equipo IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra el nombre y el presupuesto anual de los equipos con un presupuesto mayor a 12 millones de dólares.",
+    "sql": "SELECT nombre_equipo, presupuesto_anual FROM equipos WHERE presupuesto_anual > 12000000",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es la capacidad promedio de los estadios? Devuelve: capacidad_promedio (redondeada a 2 decimales).",
+    "sql": "SELECT ROUND(AVG(capacidad), 2) AS capacidad_promedio FROM estadios",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es el salario mensual más alto que cobra un jugador? Devuelve: salario_maximo.",
+    "sql": "SELECT MAX(salario_mensual) AS salario_maximo FROM jugadores",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Dame el nombre, el apellido y el salario mensual de los 5 jugadores mejor pagados, de mayor a menor salario (en caso de empate, por id_jugador ascendente).",
+    "sql": "SELECT nombre, apellido, salario_mensual FROM jugadores ORDER BY salario_mensual DESC, id_jugador ASC LIMIT 5",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos jugadores hay en cada posición? Devuelve: posicion, cantidad_jugadores.",
+    "sql": "SELECT posicion, COUNT(*) AS cantidad_jugadores FROM jugadores GROUP BY posicion",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista los árbitros de categoría internacional con su nombre, apellido y años de experiencia.",
+    "sql": "SELECT nombre_arbitro, apellido_arbitro, anios_experiencia FROM arbitros WHERE categoria = 'internacional'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué equipos no tienen entrenador registrado? Devuelve solo nombre_equipo.",
+    "sql": "SELECT nombre_equipo FROM equipos WHERE entrenador IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra el nombre y la fecha de inicio de las temporadas que comenzaron en 2023 o después.",
+    "sql": "SELECT nombre_temporada, fecha_inicio FROM temporadas WHERE fecha_inicio >= '2023-01-01'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos partidos han sido suspendidos? Devuelve: total_suspendidos.",
+    "sql": "SELECT COUNT(*) AS total_suspendidos FROM partidos WHERE estado = 'suspendido'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista los partidos en los que se anotaron más de 4 goles en total. Devuelve: id_partido, goles_local, goles_visitante.",
+    "sql": "SELECT id_partido, goles_local, goles_visitante FROM partidos WHERE goles_local + goles_visitante > 4",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos goles se han anotado de penal? Devuelve: total_penales.",
+    "sql": "SELECT COUNT(*) AS total_penales FROM goles WHERE tipo_gol = 'penal'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué jugadores nacieron antes de 1992? Muestra nombre, apellido y fecha_nacimiento.",
+    "sql": "SELECT nombre, apellido, fecha_nacimiento FROM jugadores WHERE fecha_nacimiento < '1992-01-01'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuáles son las distintas nacionalidades de los jugadores registrados? Devuelve: nacionalidad.",
+    "sql": "SELECT DISTINCT nacionalidad FROM jugadores",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es la asistencia total registrada sumando todos los partidos? Devuelve: asistencia_total.",
+    "sql": "SELECT SUM(asistencia) AS asistencia_total FROM partidos",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra el partido, el jugador y el minuto de cada tarjeta roja. Devuelve: id_partido, id_jugador, minuto.",
+    "sql": "SELECT id_partido, id_jugador, minuto FROM tarjetas WHERE color = 'roja'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Ordena los estadios de mayor a menor capacidad mostrando nombre_estadio y capacidad.",
+    "sql": "SELECT nombre_estadio, capacidad FROM estadios ORDER BY capacidad DESC",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántas tarjetas no tienen un motivo registrado? Devuelve: total_sin_motivo.",
+    "sql": "SELECT COUNT(*) AS total_sin_motivo FROM tarjetas WHERE motivo IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué árbitros tienen más de 10 años de experiencia? Indica su nombre y apellido.",
+    "sql": "SELECT nombre_arbitro, apellido_arbitro FROM arbitros WHERE anios_experiencia > 10",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista los partidos que todavía están programados con su id_partido y fecha_hora.",
+    "sql": "SELECT id_partido, fecha_hora FROM partidos WHERE estado = 'programado'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué goles se anotaron en tiempo de reposición, es decir, después del minuto 90? Devuelve: id_gol, id_partido, minuto.",
+    "sql": "SELECT id_gol, id_partido, minuto FROM goles WHERE minuto > 90",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Dame el nombre, apellido y dorsal de los delanteros de nacionalidad uruguaya.",
+    "sql": "SELECT nombre, apellido, dorsal FROM jugadores WHERE posicion = 'delantero' AND nacionalidad = 'Uruguay'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es el nombre de cada equipo y el nombre del estadio donde juega de local?",
+    "sql": "SELECT e.nombre_equipo, s.nombre_estadio FROM equipos e JOIN estadios s ON e.id_estadio = s.id_estadio",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos jugadores tiene registrados cada equipo? Devuelve: nombre_equipo, total_jugadores.",
+    "sql": "SELECT e.nombre_equipo, COUNT(j.id_jugador) AS total_jugadores FROM equipos e JOIN jugadores j ON j.id_equipo = e.id_equipo GROUP BY e.id_equipo, e.nombre_equipo",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Muestra el total de goles a favor de cada equipo según la tabla de goles, ordenado de mayor a menor. Devuelve: nombre_equipo, total_goles.",
+    "sql": "SELECT e.nombre_equipo, COUNT(g.id_gol) AS total_goles FROM equipos e JOIN goles g ON g.id_equipo = e.id_equipo GROUP BY e.id_equipo, e.nombre_equipo ORDER BY total_goles DESC",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Quiénes son los 5 máximos goleadores sin contar autogoles? Devuelve: nombre, apellido, goles, ordenado por goles de mayor a menor y, en caso de empate, por id_jugador.",
+    "sql": "SELECT j.nombre, j.apellido, COUNT(*) AS goles FROM goles g JOIN jugadores j ON g.id_jugador = j.id_jugador WHERE g.tipo_gol <> 'autogol' GROUP BY j.id_jugador, j.nombre, j.apellido ORDER BY goles DESC, j.id_jugador ASC LIMIT 5",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada árbitro, ¿cuántos partidos tiene asignados (jugados, suspendidos o programados)? Incluye a los que no tienen ninguno. Devuelve: nombre_arbitro, apellido_arbitro, partidos_dirigidos.",
+    "sql": "SELECT a.nombre_arbitro, a.apellido_arbitro, COUNT(p.id_partido) AS partidos_dirigidos FROM arbitros a LEFT JOIN partidos p ON p.id_arbitro = a.id_arbitro GROUP BY a.id_arbitro, a.nombre_arbitro, a.apellido_arbitro",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué equipos pagan a sus jugadores un salario mensual promedio superior a 35000 dólares? Devuelve: nombre_equipo, salario_promedio (redondeado a 2 decimales).",
+    "sql": "SELECT e.nombre_equipo, ROUND(AVG(j.salario_mensual), 2) AS salario_promedio FROM equipos e JOIN jugadores j ON j.id_equipo = e.id_equipo GROUP BY e.id_equipo, e.nombre_equipo HAVING AVG(j.salario_mensual) > 35000",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas tarjetas amarillas han recibido los jugadores de cada equipo? Devuelve: nombre_equipo, total_amarillas.",
+    "sql": "SELECT e.nombre_equipo, COUNT(t.id_tarjeta) AS total_amarillas FROM tarjetas t JOIN jugadores j ON t.id_jugador = j.id_jugador JOIN equipos e ON j.id_equipo = e.id_equipo WHERE t.color = 'amarilla' GROUP BY e.id_equipo, e.nombre_equipo",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Lista los jugadores que han recibido 3 o más tarjetas (de cualquier color). Devuelve: nombre, apellido, total_tarjetas.",
+    "sql": "SELECT j.nombre, j.apellido, COUNT(*) AS total_tarjetas FROM tarjetas t JOIN jugadores j ON t.id_jugador = j.id_jugador GROUP BY j.id_jugador, j.nombre, j.apellido HAVING COUNT(*) >= 3",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuál es la asistencia promedio de cada equipo en los partidos que jugó como local? Devuelve: nombre_equipo, asistencia_promedio (redondeada a 2 decimales).",
+    "sql": "SELECT e.nombre_equipo, ROUND(AVG(p.asistencia), 2) AS asistencia_promedio FROM partidos p JOIN equipos e ON p.id_equipo_local = e.id_equipo GROUP BY e.id_equipo, e.nombre_equipo",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos partidos se jugaron (estado jugado) en cada temporada? Devuelve: nombre_temporada, partidos_jugados.",
+    "sql": "SELECT t.nombre_temporada, COUNT(p.id_partido) AS partidos_jugados FROM temporadas t JOIN partidos p ON p.id_temporada = t.id_temporada WHERE p.estado = 'jugado' GROUP BY t.id_temporada, t.nombre_temporada",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "En la temporada 2024-2025, ¿cuántos goles hubo de cada tipo? Devuelve: tipo_gol, cantidad.",
+    "sql": "SELECT g.tipo_gol, COUNT(*) AS cantidad FROM goles g JOIN partidos p ON g.id_partido = p.id_partido JOIN temporadas t ON p.id_temporada = t.id_temporada WHERE t.nombre_temporada = '2024-2025' GROUP BY g.tipo_gol",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué equipo fue campeón en cada temporada ya terminada? Devuelve: nombre_temporada, nombre_equipo.",
+    "sql": "SELECT t.nombre_temporada, e.nombre_equipo FROM temporadas t JOIN equipos e ON t.id_equipo_campeon = e.id_equipo",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Muestra los partidos de la temporada 2022-2023 con el nombre del equipo local y del visitante. Devuelve: id_partido, equipo_local, equipo_visitante, goles_local, goles_visitante.",
+    "sql": "SELECT p.id_partido, el.nombre_equipo AS equipo_local, ev.nombre_equipo AS equipo_visitante, p.goles_local, p.goles_visitante FROM partidos p JOIN equipos el ON p.id_equipo_local = el.id_equipo JOIN equipos ev ON p.id_equipo_visitante = ev.id_equipo JOIN temporadas t ON p.id_temporada = t.id_temporada WHERE t.nombre_temporada = '2022-2023'",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué jugadores han dado al menos 3 asistencias de gol? Devuelve: nombre, apellido, total_asistencias.",
+    "sql": "SELECT j.nombre, j.apellido, COUNT(*) AS total_asistencias FROM goles g JOIN jugadores j ON g.id_jugador_asistencia = j.id_jugador GROUP BY j.id_jugador, j.nombre, j.apellido HAVING COUNT(*) >= 3",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos goles se han anotado en cada estadio? Devuelve: nombre_estadio, total_goles.",
+    "sql": "SELECT s.nombre_estadio, COUNT(g.id_gol) AS total_goles FROM goles g JOIN partidos p ON g.id_partido = p.id_partido JOIN estadios s ON p.id_estadio = s.id_estadio GROUP BY s.id_estadio, s.nombre_estadio",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada delantero, ¿cuántos goles ha anotado? Incluye a los que tienen cero goles. Devuelve: nombre, apellido, total_goles.",
+    "sql": "SELECT j.nombre, j.apellido, COUNT(g.id_gol) AS total_goles FROM jugadores j LEFT JOIN goles g ON g.id_jugador = j.id_jugador WHERE j.posicion = 'delantero' GROUP BY j.id_jugador, j.nombre, j.apellido",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas tarjetas rojas han recibido los jugadores de cada equipo? Incluye los equipos sin ninguna roja. Devuelve: nombre_equipo, tarjetas_rojas.",
+    "sql": "SELECT e.nombre_equipo, COUNT(t.id_tarjeta) AS tarjetas_rojas FROM equipos e LEFT JOIN jugadores j ON j.id_equipo = e.id_equipo LEFT JOIN tarjetas t ON t.id_jugador = j.id_jugador AND t.color = 'roja' GROUP BY e.id_equipo, e.nombre_equipo",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos partidos ganó cada equipo jugando como local? Devuelve: nombre_equipo, victorias_local.",
+    "sql": "SELECT e.nombre_equipo, COUNT(*) AS victorias_local FROM partidos p JOIN equipos e ON p.id_equipo_local = e.id_equipo WHERE p.goles_local > p.goles_visitante GROUP BY e.id_equipo, e.nombre_equipo",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué nacionalidades tienen más de 3 jugadores registrados? Devuelve: nacionalidad, total_jugadores.",
+    "sql": "SELECT nacionalidad, COUNT(*) AS total_jugadores FROM jugadores GROUP BY nacionalidad HAVING COUNT(*) > 3",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuál fue el promedio de goles por partido jugado en cada temporada? Devuelve: nombre_temporada, promedio_goles (redondeado a 2 decimales).",
+    "sql": "SELECT t.nombre_temporada, ROUND(AVG(p.goles_local + p.goles_visitante), 2) AS promedio_goles FROM partidos p JOIN temporadas t ON p.id_temporada = t.id_temporada WHERE p.estado = 'jugado' GROUP BY t.id_temporada, t.nombre_temporada",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué árbitros han mostrado más de 5 tarjetas en los partidos que dirigieron? Devuelve: nombre_arbitro, apellido_arbitro, total_tarjetas.",
+    "sql": "SELECT a.nombre_arbitro, a.apellido_arbitro, COUNT(t.id_tarjeta) AS total_tarjetas FROM arbitros a JOIN partidos p ON p.id_arbitro = a.id_arbitro JOIN tarjetas t ON t.id_partido = p.id_partido GROUP BY a.id_arbitro, a.nombre_arbitro, a.apellido_arbitro HAVING COUNT(t.id_tarjeta) > 5",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuánto suma la nómina mensual de cada equipo? Ordena de mayor a menor. Devuelve: nombre_equipo, nomina_mensual (redondeada a 2 decimales).",
+    "sql": "SELECT e.nombre_equipo, ROUND(SUM(j.salario_mensual), 2) AS nomina_mensual FROM equipos e JOIN jugadores j ON j.id_equipo = e.id_equipo GROUP BY e.id_equipo, e.nombre_equipo ORDER BY nomina_mensual DESC",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada partido de la temporada 2024-2025, muestra quién lo arbitró. Devuelve: id_partido, fecha_hora, nombre_arbitro, apellido_arbitro.",
+    "sql": "SELECT p.id_partido, p.fecha_hora, a.nombre_arbitro, a.apellido_arbitro FROM partidos p JOIN arbitros a ON p.id_arbitro = a.id_arbitro JOIN temporadas t ON p.id_temporada = t.id_temporada WHERE t.nombre_temporada = '2024-2025'",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos goles, sin contar autogoles, ha anotado cada posición? Devuelve: posicion, total_goles.",
+    "sql": "SELECT j.posicion, COUNT(*) AS total_goles FROM goles g JOIN jugadores j ON g.id_jugador = j.id_jugador WHERE g.tipo_gol <> 'autogol' GROUP BY j.posicion",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué equipos acumulan más de 20 goles a favor en la tabla de goles? Devuelve: nombre_equipo, total_goles.",
+    "sql": "SELECT e.nombre_equipo, COUNT(*) AS total_goles FROM goles g JOIN equipos e ON g.id_equipo = e.id_equipo GROUP BY e.id_equipo, e.nombre_equipo HAVING COUNT(*) > 20",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos partidos se han programado o jugado en cada estadio? Incluye los estadios sin partidos. Devuelve: nombre_estadio, total_partidos.",
+    "sql": "SELECT s.nombre_estadio, COUNT(p.id_partido) AS total_partidos FROM estadios s LEFT JOIN partidos p ON p.id_estadio = s.id_estadio GROUP BY s.id_estadio, s.nombre_estadio",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿En qué minuto promedio se anota cada tipo de gol? Devuelve: tipo_gol, minuto_promedio (redondeado a 2 decimales).",
+    "sql": "SELECT tipo_gol, ROUND(AVG(minuto), 2) AS minuto_promedio FROM goles GROUP BY tipo_gol",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas tarjetas amarillas tiene cada jugador de Tiburones del Golfo? Incluye a los que no tienen ninguna. Devuelve: nombre, apellido, amarillas.",
+    "sql": "SELECT j.nombre, j.apellido, COUNT(t.id_tarjeta) AS amarillas FROM jugadores j JOIN equipos e ON j.id_equipo = e.id_equipo LEFT JOIN tarjetas t ON t.id_jugador = j.id_jugador AND t.color = 'amarilla' WHERE e.nombre_equipo = 'Tiburones del Golfo' GROUP BY j.id_jugador, j.nombre, j.apellido",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos partidos (de cualquier estado) tienen asignados los árbitros de cada categoría? Devuelve: categoria, total_partidos.",
+    "sql": "SELECT a.categoria, COUNT(p.id_partido) AS total_partidos FROM arbitros a JOIN partidos p ON p.id_arbitro = a.id_arbitro GROUP BY a.categoria",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos goles ha anotado cada equipo jugando como visitante en partidos ya jugados? Devuelve: nombre_equipo, goles_como_visitante.",
+    "sql": "SELECT e.nombre_equipo, SUM(p.goles_visitante) AS goles_como_visitante FROM partidos p JOIN equipos e ON p.id_equipo_visitante = e.id_equipo WHERE p.estado = 'jugado' GROUP BY e.id_equipo, e.nombre_equipo",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Construye la tabla de posiciones de la temporada 2024-2025 (3 puntos por victoria, 1 por empate) ordenada por puntos de mayor a menor y, en caso de empate, por nombre del equipo. Devuelve: nombre_equipo, puntos.",
+    "sql": "WITH resultados AS (SELECT p.id_equipo_local AS id_equipo, CASE WHEN p.goles_local > p.goles_visitante THEN 3 WHEN p.goles_local = p.goles_visitante THEN 1 ELSE 0 END AS puntos FROM partidos p JOIN temporadas t ON p.id_temporada = t.id_temporada WHERE t.nombre_temporada = '2024-2025' AND p.estado = 'jugado' UNION ALL SELECT p.id_equipo_visitante, CASE WHEN p.goles_visitante > p.goles_local THEN 3 WHEN p.goles_visitante = p.goles_local THEN 1 ELSE 0 END FROM partidos p JOIN temporadas t ON p.id_temporada = t.id_temporada WHERE t.nombre_temporada = '2024-2025' AND p.estado = 'jugado') SELECT e.nombre_equipo, SUM(r.puntos) AS puntos FROM resultados r JOIN equipos e ON r.id_equipo = e.id_equipo GROUP BY e.id_equipo, e.nombre_equipo ORDER BY puntos DESC, e.nombre_equipo ASC",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Quién fue el máximo goleador de cada temporada (sin contar autogoles)? Si hay empate, muestra a todos los empatados. Devuelve: nombre_temporada, nombre, apellido, goles.",
+    "sql": "WITH goleo AS (SELECT p.id_temporada, g.id_jugador, COUNT(*) AS goles, RANK() OVER (PARTITION BY p.id_temporada ORDER BY COUNT(*) DESC) AS rk FROM goles g JOIN partidos p ON g.id_partido = p.id_partido WHERE g.tipo_gol <> 'autogol' GROUP BY p.id_temporada, g.id_jugador) SELECT t.nombre_temporada, j.nombre, j.apellido, go.goles FROM goleo go JOIN temporadas t ON go.id_temporada = t.id_temporada JOIN jugadores j ON go.id_jugador = j.id_jugador WHERE go.rk = 1",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Cuál es el jugador mejor pagado de cada equipo? En caso de empate, elige el de menor id_jugador. Devuelve: nombre_equipo, nombre, apellido, salario_mensual.",
+    "sql": "WITH ranking AS (SELECT j.*, ROW_NUMBER() OVER (PARTITION BY j.id_equipo ORDER BY j.salario_mensual DESC, j.id_jugador ASC) AS rn FROM jugadores j WHERE j.id_equipo IS NOT NULL) SELECT e.nombre_equipo, r.nombre, r.apellido, r.salario_mensual FROM ranking r JOIN equipos e ON r.id_equipo = e.id_equipo WHERE r.rn = 1",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada temporada, muestra el total de goles registrados y el total de la temporada anterior, en orden cronológico. Devuelve: nombre_temporada, total_goles, goles_temporada_anterior.",
+    "sql": "WITH por_temporada AS (SELECT t.id_temporada, t.nombre_temporada, t.fecha_inicio, COUNT(g.id_gol) AS total_goles FROM temporadas t LEFT JOIN partidos p ON p.id_temporada = t.id_temporada LEFT JOIN goles g ON g.id_partido = p.id_partido GROUP BY t.id_temporada, t.nombre_temporada, t.fecha_inicio) SELECT nombre_temporada, total_goles, LAG(total_goles) OVER (ORDER BY fecha_inicio) AS goles_temporada_anterior FROM por_temporada ORDER BY fecha_inicio",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para el Atlético Jardín en la temporada 2024-2025, muestra cada partido jugado con los goles que anotó y sus goles acumulados en orden cronológico. Devuelve: id_partido, fecha_hora, goles_anotados, goles_acumulados.",
+    "sql": "WITH partidos_equipo AS (SELECT p.id_partido, p.fecha_hora, CASE WHEN p.id_equipo_local = e.id_equipo THEN p.goles_local ELSE p.goles_visitante END AS goles_anotados FROM partidos p JOIN equipos e ON e.id_equipo IN (p.id_equipo_local, p.id_equipo_visitante) JOIN temporadas t ON p.id_temporada = t.id_temporada WHERE e.nombre_equipo = 'Atlético Jardín' AND t.nombre_temporada = '2024-2025' AND p.estado = 'jugado') SELECT id_partido, fecha_hora, goles_anotados, SUM(goles_anotados) OVER (ORDER BY fecha_hora, id_partido) AS goles_acumulados FROM partidos_equipo ORDER BY fecha_hora, id_partido",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué jugadores ganan un salario mensual superior al promedio de su propio equipo? Devuelve: nombre, apellido, nombre_equipo, salario_mensual.",
+    "sql": "SELECT j.nombre, j.apellido, e.nombre_equipo, j.salario_mensual FROM jugadores j JOIN equipos e ON j.id_equipo = e.id_equipo WHERE j.salario_mensual > (SELECT AVG(j2.salario_mensual) FROM jugadores j2 WHERE j2.id_equipo = j.id_equipo)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué árbitros no tienen asignado ningún partido? Devuelve: nombre_arbitro, apellido_arbitro.",
+    "sql": "SELECT a.nombre_arbitro, a.apellido_arbitro FROM arbitros a WHERE NOT EXISTS (SELECT 1 FROM partidos p WHERE p.id_arbitro = a.id_arbitro)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué jugadores que pertenecen a un equipo nunca aparecen como autores de un gol? Devuelve: nombre, apellido, posicion.",
+    "sql": "SELECT j.nombre, j.apellido, j.posicion FROM jugadores j WHERE j.id_equipo IS NOT NULL AND NOT EXISTS (SELECT 1 FROM goles g WHERE g.id_jugador = j.id_jugador)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué equipos han ganado al menos un partido como visitante por una diferencia de 2 o más goles? Devuelve: nombre_equipo.",
+    "sql": "SELECT e.nombre_equipo FROM equipos e WHERE EXISTS (SELECT 1 FROM partidos p WHERE p.id_equipo_visitante = e.id_equipo AND p.goles_visitante - p.goles_local >= 2)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Cuántos goles se anotaron en cada mes del año 2024? Muestra el mes en formato AAAA-MM y ordena cronológicamente. Devuelve: mes, total_goles.",
+    "sql": "SELECT DATE_FORMAT(p.fecha_hora, '%Y-%m') AS mes, COUNT(g.id_gol) AS total_goles FROM goles g JOIN partidos p ON g.id_partido = p.id_partido WHERE YEAR(p.fecha_hora) = 2024 GROUP BY DATE_FORMAT(p.fecha_hora, '%Y-%m') ORDER BY mes",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué edad en años cumplidos tenía cada jugador de Venados de Yucatán al 1 de enero de 2025? Devuelve: nombre, apellido, edad.",
+    "sql": "SELECT j.nombre, j.apellido, TIMESTAMPDIFF(YEAR, j.fecha_nacimiento, '2025-01-01') AS edad FROM jugadores j JOIN equipos e ON j.id_equipo = e.id_equipo WHERE e.nombre_equipo = 'Venados de Yucatán'",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada temporada, ¿cuál fue la fecha del primer y del último partido jugado y cuántos días pasaron entre ambos? Devuelve: nombre_temporada, primer_partido, ultimo_partido, dias_transcurridos.",
+    "sql": "SELECT t.nombre_temporada, MIN(p.fecha_hora) AS primer_partido, MAX(p.fecha_hora) AS ultimo_partido, DATEDIFF(MAX(p.fecha_hora), MIN(p.fecha_hora)) AS dias_transcurridos FROM temporadas t JOIN partidos p ON p.id_temporada = t.id_temporada WHERE p.estado = 'jugado' GROUP BY t.id_temporada, t.nombre_temporada",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Quiénes fueron los 3 jugadores con más goles (sin autogoles) en partidos disputados entre el 1 de agosto y el 31 de diciembre de 2024? Ordena por goles descendente y desempata por id_jugador. Devuelve: nombre, apellido, goles.",
+    "sql": "SELECT j.nombre, j.apellido, COUNT(*) AS goles FROM goles g JOIN partidos p ON g.id_partido = p.id_partido JOIN jugadores j ON g.id_jugador = j.id_jugador WHERE g.tipo_gol <> 'autogol' AND p.fecha_hora BETWEEN '2024-08-01 00:00:00' AND '2024-12-31 23:59:59' GROUP BY j.id_jugador, j.nombre, j.apellido ORDER BY goles DESC, j.id_jugador ASC LIMIT 3",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Calcula los goles a favor, los goles en contra y la diferencia de goles de cada equipo en la temporada 2023-2024. Devuelve: nombre_equipo, goles_favor, goles_contra, diferencia.",
+    "sql": "WITH marcadores AS (SELECT p.id_equipo_local AS id_equipo, p.goles_local AS gf, p.goles_visitante AS gc FROM partidos p JOIN temporadas t ON p.id_temporada = t.id_temporada WHERE t.nombre_temporada = '2023-2024' AND p.estado = 'jugado' UNION ALL SELECT p.id_equipo_visitante, p.goles_visitante, p.goles_local FROM partidos p JOIN temporadas t ON p.id_temporada = t.id_temporada WHERE t.nombre_temporada = '2023-2024' AND p.estado = 'jugado') SELECT e.nombre_equipo, SUM(m.gf) AS goles_favor, SUM(m.gc) AS goles_contra, SUM(m.gf) - SUM(m.gc) AS diferencia FROM marcadores m JOIN equipos e ON m.id_equipo = e.id_equipo GROUP BY e.id_equipo, e.nombre_equipo",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Clasifica los estadios según su asistencia promedio usando un ranking denso (1 = mayor asistencia). Devuelve: nombre_estadio, asistencia_promedio (redondeada a 2 decimales), posicion.",
+    "sql": "SELECT s.nombre_estadio, ROUND(AVG(p.asistencia), 2) AS asistencia_promedio, DENSE_RANK() OVER (ORDER BY AVG(p.asistencia) DESC) AS posicion FROM estadios s JOIN partidos p ON p.id_estadio = s.id_estadio WHERE p.asistencia IS NOT NULL GROUP BY s.id_estadio, s.nombre_estadio",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué jugadores marcaron al menos un gol (sin contar autogoles) en dos o más temporadas distintas? Devuelve: nombre, apellido, temporadas_con_gol.",
+    "sql": "SELECT j.nombre, j.apellido, COUNT(DISTINCT p.id_temporada) AS temporadas_con_gol FROM goles g JOIN partidos p ON g.id_partido = p.id_partido JOIN jugadores j ON g.id_jugador = j.id_jugador WHERE g.tipo_gol <> 'autogol' GROUP BY j.id_jugador, j.nombre, j.apellido HAVING COUNT(DISTINCT p.id_temporada) >= 2",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué partidos tuvieron una asistencia mayor que la asistencia promedio de su propia temporada? Devuelve: id_partido, nombre_temporada, asistencia.",
+    "sql": "SELECT p.id_partido, t.nombre_temporada, p.asistencia FROM partidos p JOIN temporadas t ON p.id_temporada = t.id_temporada WHERE p.asistencia > (SELECT AVG(p2.asistencia) FROM partidos p2 WHERE p2.id_temporada = p.id_temporada)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada partido del Club Deportivo Norteño (como local o visitante), muestra su fecha, la fecha de su siguiente partido y los días que hay entre ambos, en orden cronológico. Devuelve: id_partido, fecha_hora, fecha_siguiente, dias_hasta_siguiente.",
+    "sql": "WITH pe AS (SELECT p.id_partido, p.fecha_hora FROM partidos p JOIN equipos e ON e.id_equipo IN (p.id_equipo_local, p.id_equipo_visitante) WHERE e.nombre_equipo = 'Club Deportivo Norteño') SELECT id_partido, fecha_hora, LEAD(fecha_hora) OVER (ORDER BY fecha_hora) AS fecha_siguiente, DATEDIFF(LEAD(fecha_hora) OVER (ORDER BY fecha_hora), fecha_hora) AS dias_hasta_siguiente FROM pe ORDER BY fecha_hora",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué jugadores han anotado un gol en los primeros 15 minutos de algún partido y también un gol después del minuto 75? Devuelve: nombre, apellido.",
+    "sql": "SELECT j.nombre, j.apellido FROM jugadores j WHERE EXISTS (SELECT 1 FROM goles g WHERE g.id_jugador = j.id_jugador AND g.minuto <= 15) AND EXISTS (SELECT 1 FROM goles g WHERE g.id_jugador = j.id_jugador AND g.minuto > 75)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada temporada con campeón, ¿cuántos goles anotó el equipo campeón en esa temporada? Devuelve: nombre_temporada, nombre_equipo, goles_temporada.",
+    "sql": "SELECT t.nombre_temporada, e.nombre_equipo, (SELECT COUNT(*) FROM goles g JOIN partidos p ON g.id_partido = p.id_partido WHERE g.id_equipo = t.id_equipo_campeon AND p.id_temporada = t.id_temporada) AS goles_temporada FROM temporadas t JOIN equipos e ON t.id_equipo_campeon = e.id_equipo",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "En cada equipo, ¿qué jugador acumula más tarjetas (amarillas y rojas)? Si hay empate, incluye a todos los empatados. Devuelve: nombre_equipo, nombre, apellido, total_tarjetas.",
+    "sql": "WITH conteo AS (SELECT j.id_equipo, j.id_jugador, j.nombre, j.apellido, COUNT(*) AS total_tarjetas, RANK() OVER (PARTITION BY j.id_equipo ORDER BY COUNT(*) DESC) AS rk FROM tarjetas t JOIN jugadores j ON t.id_jugador = j.id_jugador GROUP BY j.id_equipo, j.id_jugador, j.nombre, j.apellido) SELECT e.nombre_equipo, c.nombre, c.apellido, c.total_tarjetas FROM conteo c JOIN equipos e ON c.id_equipo = e.id_equipo WHERE c.rk = 1",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué partidos de la temporada 2024-2025 se jugaron dentro de los 60 días previos a la fecha de fin de esa temporada? Devuelve: id_partido, fecha_hora.",
+    "sql": "SELECT p.id_partido, p.fecha_hora FROM partidos p JOIN temporadas t ON p.id_temporada = t.id_temporada WHERE t.nombre_temporada = '2024-2025' AND p.fecha_hora BETWEEN DATE_SUB(t.fecha_fin, INTERVAL 60 DAY) AND t.fecha_fin",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué jugadores llevaban más de 3 años completos en su equipo actual al 30 de junio de 2025? Devuelve: nombre, apellido, fecha_fichaje, anios_en_equipo.",
+    "sql": "SELECT nombre, apellido, fecha_fichaje, TIMESTAMPDIFF(YEAR, fecha_fichaje, '2025-06-30') AS anios_en_equipo FROM jugadores WHERE id_equipo IS NOT NULL AND TIMESTAMPDIFF(YEAR, fecha_fichaje, '2025-06-30') > 3",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada temporada y jornada, muestra cuántos goles se marcaron en la jornada y el acumulado de goles de la temporada hasta esa jornada, ordenado por temporada y jornada. Devuelve: nombre_temporada, jornada, goles_jornada, goles_acumulados.",
+    "sql": "WITH por_jornada AS (SELECT t.id_temporada, t.nombre_temporada, p.jornada, COUNT(g.id_gol) AS goles_jornada FROM partidos p JOIN temporadas t ON p.id_temporada = t.id_temporada LEFT JOIN goles g ON g.id_partido = p.id_partido WHERE p.estado = 'jugado' GROUP BY t.id_temporada, t.nombre_temporada, p.jornada) SELECT nombre_temporada, jornada, goles_jornada, SUM(goles_jornada) OVER (PARTITION BY id_temporada ORDER BY jornada) AS goles_acumulados FROM por_jornada ORDER BY id_temporada, jornada",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada equipo, ¿cuál fue su partido como local con mayor asistencia? En caso de empate, toma el de menor id_partido. Devuelve: nombre_equipo, id_partido, fecha_hora, asistencia.",
+    "sql": "WITH r AS (SELECT p.id_equipo_local, p.id_partido, p.fecha_hora, p.asistencia, ROW_NUMBER() OVER (PARTITION BY p.id_equipo_local ORDER BY p.asistencia DESC, p.id_partido ASC) AS rn FROM partidos p WHERE p.asistencia IS NOT NULL) SELECT e.nombre_equipo, r.id_partido, r.fecha_hora, r.asistencia FROM r JOIN equipos e ON r.id_equipo_local = e.id_equipo WHERE r.rn = 1",
+    "nivel": "dificil"
+  }
+]

@@ -1,0 +1,402 @@
+[
+  {
+    "pregunta": "¿Cuál es el nombre y la ciudad de cada proveedor?",
+    "sql": "SELECT nom_prov, ciu_prov FROM prov",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué proveedores están inactivos? Devuelve: nom_prov, nit_prov.",
+    "sql": "SELECT nom_prov, nit_prov FROM prov WHERE act = 0",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista los artículos cuyo precio unitario de costo supera los 100 quetzales. Devuelve: cod_art, nom_art, pu.",
+    "sql": "SELECT cod_art, nom_art, pu FROM art WHERE pu > 100",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos artículos están descontinuados? Devuelve: total_descontinuados.",
+    "sql": "SELECT COUNT(*) AS total_descontinuados FROM art WHERE act = 0",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué almacenes no tienen un responsable asignado? Muestra el nombre y la ciudad del almacén.",
+    "sql": "SELECT nom_alm, ciu_alm FROM alm WHERE resp_alm IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es la capacidad total, en metros cúbicos, sumando todos los almacenes? Devuelve: cap_total.",
+    "sql": "SELECT SUM(cap_m3) AS cap_total FROM alm",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué proveedores no tienen correo electrónico registrado? Devuelve su nombre y su teléfono.",
+    "sql": "SELECT nom_prov, tel_prov FROM prov WHERE eml_prov IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Dame el nombre y apellido de todos los empleados con cargo de bodeguero.",
+    "sql": "SELECT nom_emp, ape_emp FROM emp WHERE crg_emp = 'BOD'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuáles son los 5 artículos con mayor precio de venta? Ordena de mayor a menor y desempata por id_art. Devuelve: nom_art, pv.",
+    "sql": "SELECT nom_art, pv FROM art ORDER BY pv DESC, id_art ASC LIMIT 5",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Calcula el margen unitario (precio de venta menos precio de costo) de cada artículo. Devuelve: nom_art, margen.",
+    "sql": "SELECT nom_art, pv - pu AS margen FROM art",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra el número, la fecha y las observaciones de las órdenes de compra canceladas.",
+    "sql": "SELECT num_oc, fec_oc, obs_oc FROM oc WHERE est_oc = 'CANC'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántas órdenes de compra se emitieron durante 2024? Devuelve: total_oc_2024.",
+    "sql": "SELECT COUNT(*) AS total_oc_2024 FROM oc WHERE fec_oc BETWEEN '2024-01-01' AND '2024-12-31'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es el precio de venta promedio de los artículos activos? Devuelve: pv_promedio (redondeado a 2 decimales).",
+    "sql": "SELECT ROUND(AVG(pv), 2) AS pv_promedio FROM art WHERE act = 1",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué artículos se manejan en metros como unidad de medida? Devuelve: cod_art, nom_art.",
+    "sql": "SELECT cod_art, nom_art FROM art WHERE um = 'MT'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista los empleados que ganan más de 8000 quetzales, de mayor a menor salario. Devuelve: nom_emp, ape_emp, sal_emp.",
+    "sql": "SELECT nom_emp, ape_emp, sal_emp FROM emp WHERE sal_emp > 8000 ORDER BY sal_emp DESC",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué empleados ingresaron a la empresa a partir de 2024? Devuelve: nom_emp, ape_emp, fec_ing.",
+    "sql": "SELECT nom_emp, ape_emp, fec_ing FROM emp WHERE fec_ing >= '2024-01-01'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra todos los movimientos de inventario que son ajustes. Devuelve: id_mov, id_art, cant, fec_mov.",
+    "sql": "SELECT id_mov, id_art, cant, fec_mov FROM mov_inv WHERE tp_mov = 'AJU'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos movimientos de inventario hay de cada tipo? Devuelve: tp_mov, total_movs.",
+    "sql": "SELECT tp_mov, COUNT(*) AS total_movs FROM mov_inv GROUP BY tp_mov",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué existencias nunca han tenido un conteo físico? Devuelve: id_art, id_alm, cant_act.",
+    "sql": "SELECT id_art, id_alm, cant_act FROM stk WHERE fec_ult_cnt IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista las líneas de órdenes de compra que tuvieron un descuento del 10 %. Devuelve: id_oc, id_art, cant.",
+    "sql": "SELECT id_oc, id_art, cant FROM oc_det WHERE dsc_pct = 10",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué órdenes de compra aún no tienen fecha de entrega real? Devuelve: num_oc, est_oc.",
+    "sql": "SELECT num_oc, est_oc FROM oc WHERE fec_ent_real IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué categorías de artículos no tienen descripción? Devuelve: nom_cat.",
+    "sql": "SELECT nom_cat FROM cat_art WHERE desc_cat IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántas unidades hay en existencia en total en el almacén con id 1? Devuelve: total_unidades.",
+    "sql": "SELECT SUM(cant_act) AS total_unidades FROM stk WHERE id_alm = 1",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué proveedores están en Guatemala o en Quetzaltenango? Devuelve: nom_prov, ciu_prov.",
+    "sql": "SELECT nom_prov, ciu_prov FROM prov WHERE ciu_prov IN ('Guatemala', 'Quetzaltenango')",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál fue la fecha de la primera y de la última orden de compra emitida? Devuelve: primera_oc, ultima_oc.",
+    "sql": "SELECT MIN(fec_oc) AS primera_oc, MAX(fec_oc) AS ultima_oc FROM oc",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra cada artículo junto con el nombre de su categoría. Devuelve: nom_art, nom_cat.",
+    "sql": "SELECT a.nom_art, c.nom_cat FROM art a JOIN cat_art c ON a.id_cat = c.id_cat",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos artículos hay en cada categoría? Devuelve: nom_cat, total_art.",
+    "sql": "SELECT c.nom_cat, COUNT(a.id_art) AS total_art FROM cat_art c JOIN art a ON a.id_cat = c.id_cat GROUP BY c.id_cat, c.nom_cat",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas órdenes de compra se le han hecho a cada proveedor? Incluye a los proveedores sin órdenes. Devuelve: nom_prov, total_oc.",
+    "sql": "SELECT p.nom_prov, COUNT(o.id_oc) AS total_oc FROM prov p LEFT JOIN oc o ON o.id_prov = p.id_prov GROUP BY p.id_prov, p.nom_prov",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuál es el monto total de cada orden de compra, aplicando el descuento de cada línea? Devuelve: num_oc, monto_total (redondeado a 2 decimales).",
+    "sql": "SELECT o.num_oc, ROUND(SUM(d.cant * d.pu * (1 - d.dsc_pct / 100)), 2) AS monto_total FROM oc o JOIN oc_det d ON d.id_oc = o.id_oc GROUP BY o.id_oc, o.num_oc",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿A qué proveedores se les ha comprado más de 20000 quetzales en órdenes recibidas (con descuento aplicado)? Devuelve: nom_prov, monto_comprado (redondeado a 2 decimales).",
+    "sql": "SELECT p.nom_prov, ROUND(SUM(d.cant * d.pu * (1 - d.dsc_pct / 100)), 2) AS monto_comprado FROM prov p JOIN oc o ON o.id_prov = p.id_prov JOIN oc_det d ON d.id_oc = o.id_oc WHERE o.est_oc = 'RECIB' GROUP BY p.id_prov, p.nom_prov HAVING SUM(d.cant * d.pu * (1 - d.dsc_pct / 100)) > 20000",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué empleados han emitido más de 5 órdenes de compra? Devuelve: nom_emp, ape_emp, total_oc.",
+    "sql": "SELECT e.nom_emp, e.ape_emp, COUNT(o.id_oc) AS total_oc FROM emp e JOIN oc o ON o.id_emp = e.id_emp GROUP BY e.id_emp, e.nom_emp, e.ape_emp HAVING COUNT(o.id_oc) > 5",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas unidades en existencia hay en cada almacén? Devuelve: nom_alm, unidades_totales.",
+    "sql": "SELECT al.nom_alm, SUM(s.cant_act) AS unidades_totales FROM alm al JOIN stk s ON s.id_alm = al.id_alm GROUP BY al.id_alm, al.nom_alm",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas órdenes de compra tiene como destino cada almacén? Incluye los almacenes que no tienen ninguna. Devuelve: nom_alm, total_oc.",
+    "sql": "SELECT al.nom_alm, COUNT(o.id_oc) AS total_oc FROM alm al LEFT JOIN oc o ON o.id_alm = al.id_alm GROUP BY al.id_alm, al.nom_alm",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué artículos tienen una existencia por debajo de su stock mínimo en algún almacén? Devuelve: nom_art, nom_alm, cant_act, stk_min.",
+    "sql": "SELECT a.nom_art, al.nom_alm, s.cant_act, a.stk_min FROM stk s JOIN art a ON s.id_art = a.id_art JOIN alm al ON s.id_alm = al.id_alm WHERE s.cant_act < a.stk_min",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas unidades han salido en total de cada artículo según los movimientos de salida? Devuelve: nom_art, unidades_salidas.",
+    "sql": "SELECT a.nom_art, SUM(m.cant) AS unidades_salidas FROM mov_inv m JOIN art a ON m.id_art = a.id_art WHERE m.tp_mov = 'SAL' GROUP BY a.id_art, a.nom_art",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos empleados hay de cada cargo en cada almacén? Devuelve: nom_alm, crg_emp, total_emp.",
+    "sql": "SELECT al.nom_alm, e.crg_emp, COUNT(*) AS total_emp FROM emp e JOIN alm al ON e.id_alm = al.id_alm GROUP BY al.id_alm, al.nom_alm, e.crg_emp",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuál es el valor del inventario de cada almacén, calculado con el precio de costo de los artículos? Devuelve: nom_alm, valor_inventario (redondeado a 2 decimales).",
+    "sql": "SELECT al.nom_alm, ROUND(SUM(s.cant_act * a.pu), 2) AS valor_inventario FROM stk s JOIN art a ON s.id_art = a.id_art JOIN alm al ON s.id_alm = al.id_alm GROUP BY al.id_alm, al.nom_alm",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué categorías tienen más de 4 artículos? Devuelve: nom_cat, total_art.",
+    "sql": "SELECT c.nom_cat, COUNT(*) AS total_art FROM cat_art c JOIN art a ON a.id_cat = c.id_cat GROUP BY c.id_cat, c.nom_cat HAVING COUNT(*) > 4",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuál es el porcentaje de descuento promedio que ha otorgado cada proveedor en las líneas de sus órdenes? Devuelve: nom_prov, dsc_promedio (redondeado a 2 decimales).",
+    "sql": "SELECT p.nom_prov, ROUND(AVG(d.dsc_pct), 2) AS dsc_promedio FROM prov p JOIN oc o ON o.id_prov = p.id_prov JOIN oc_det d ON d.id_oc = o.id_oc GROUP BY p.id_prov, p.nom_prov",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos movimientos de inventario ha registrado cada empleado? Incluye a quienes no han registrado ninguno. Devuelve: nom_emp, ape_emp, total_movs.",
+    "sql": "SELECT e.nom_emp, e.ape_emp, COUNT(m.id_mov) AS total_movs FROM emp e LEFT JOIN mov_inv m ON m.id_emp = e.id_emp GROUP BY e.id_emp, e.nom_emp, e.ape_emp",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué artículos no tienen ningún movimiento de inventario registrado? Usa un LEFT JOIN. Devuelve: cod_art, nom_art.",
+    "sql": "SELECT a.cod_art, a.nom_art FROM art a LEFT JOIN mov_inv m ON m.id_art = a.id_art WHERE m.id_mov IS NULL",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas unidades se pidieron de cada artículo en órdenes emitidas durante 2023? Devuelve: nom_art, cant_pedida.",
+    "sql": "SELECT a.nom_art, SUM(d.cant) AS cant_pedida FROM oc_det d JOIN oc o ON d.id_oc = o.id_oc JOIN art a ON d.id_art = a.id_art WHERE o.fec_oc BETWEEN '2023-01-01' AND '2023-12-31' GROUP BY a.id_art, a.nom_art",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos artículos tiene cada proveedor como proveedor principal? Incluye a los que no tienen ninguno. Devuelve: nom_prov, total_art.",
+    "sql": "SELECT p.nom_prov, COUNT(a.id_art) AS total_art FROM prov p LEFT JOIN art a ON a.id_prov = p.id_prov GROUP BY p.id_prov, p.nom_prov",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué órdenes de compra tienen 3 o más líneas de detalle? Devuelve: num_oc, total_lineas.",
+    "sql": "SELECT o.num_oc, COUNT(d.id_det) AS total_lineas FROM oc o JOIN oc_det d ON d.id_oc = o.id_oc GROUP BY o.id_oc, o.num_oc HAVING COUNT(d.id_det) >= 3",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada artículo comprado, compara su precio de costo de catálogo con el precio unitario promedio pactado en las órdenes. Devuelve: nom_art, pu, pu_promedio_compra (redondeado a 2 decimales).",
+    "sql": "SELECT a.nom_art, a.pu, ROUND(AVG(d.pu), 2) AS pu_promedio_compra FROM art a JOIN oc_det d ON d.id_art = a.id_art GROUP BY a.id_art, a.nom_art, a.pu",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas unidades entraron a cada almacén durante 2024? Devuelve: nom_alm, unidades_entrada.",
+    "sql": "SELECT al.nom_alm, SUM(m.cant) AS unidades_entrada FROM mov_inv m JOIN alm al ON m.id_alm = al.id_alm WHERE m.tp_mov = 'ENT' AND m.fec_mov BETWEEN '2024-01-01 00:00:00' AND '2024-12-31 23:59:59' GROUP BY al.id_alm, al.nom_alm",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas órdenes de compra se han emitido a proveedores de cada ciudad? Devuelve: ciu_prov, total_oc.",
+    "sql": "SELECT p.ciu_prov, COUNT(o.id_oc) AS total_oc FROM prov p JOIN oc o ON o.id_prov = p.id_prov GROUP BY p.ciu_prov",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Muestra el detalle de la orden de compra OC-2024-0033 con el nombre de cada artículo. Devuelve: nom_art, cant, pu, dsc_pct.",
+    "sql": "SELECT a.nom_art, d.cant, d.pu, d.dsc_pct FROM oc_det d JOIN oc o ON d.id_oc = o.id_oc JOIN art a ON d.id_art = a.id_art WHERE o.num_oc = 'OC-2024-0033'",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuánto se ha comprado en cada categoría de artículo, sumando todas las líneas de órdenes con su descuento? Devuelve: nom_cat, monto_comprado (redondeado a 2 decimales).",
+    "sql": "SELECT c.nom_cat, ROUND(SUM(d.cant * d.pu * (1 - d.dsc_pct / 100)), 2) AS monto_comprado FROM oc_det d JOIN art a ON d.id_art = a.id_art JOIN cat_art c ON a.id_cat = c.id_cat GROUP BY c.id_cat, c.nom_cat",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué artículos tienen existencias registradas en 2 o más almacenes? Devuelve: nom_art, num_almacenes.",
+    "sql": "SELECT a.nom_art, COUNT(s.id_alm) AS num_almacenes FROM art a JOIN stk s ON s.id_art = a.id_art GROUP BY a.id_art, a.nom_art HAVING COUNT(s.id_alm) >= 2",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada almacén, muestra su responsable y cuántos empleados trabajan en él, incluyendo almacenes sin empleados. Devuelve: nom_alm, resp_alm, total_emp.",
+    "sql": "SELECT al.nom_alm, al.resp_alm, COUNT(e.id_emp) AS total_emp FROM alm al LEFT JOIN emp e ON e.id_alm = al.id_alm GROUP BY al.id_alm, al.nom_alm, al.resp_alm",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuál es el ajuste neto de unidades (suma de las cantidades de los ajustes) en cada almacén? Devuelve: nom_alm, ajuste_neto.",
+    "sql": "SELECT al.nom_alm, SUM(m.cant) AS ajuste_neto FROM mov_inv m JOIN alm al ON m.id_alm = al.id_alm WHERE m.tp_mov = 'AJU' GROUP BY al.id_alm, al.nom_alm",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuál es el salario promedio de los empleados de cada almacén? Devuelve: nom_alm, sal_promedio (redondeado a 2 decimales).",
+    "sql": "SELECT al.nom_alm, ROUND(AVG(e.sal_emp), 2) AS sal_promedio FROM alm al JOIN emp e ON e.id_alm = al.id_alm GROUP BY al.id_alm, al.nom_alm",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada empleado con cargo de comprador, ¿cuál es el monto total de las órdenes que ha emitido (con descuento)? Devuelve: nom_emp, ape_emp, monto_total (redondeado a 2 decimales).",
+    "sql": "SELECT e.nom_emp, e.ape_emp, ROUND(SUM(d.cant * d.pu * (1 - d.dsc_pct / 100)), 2) AS monto_total FROM emp e JOIN oc o ON o.id_emp = e.id_emp JOIN oc_det d ON d.id_oc = o.id_oc WHERE e.crg_emp = 'COMP' GROUP BY e.id_emp, e.nom_emp, e.ape_emp",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Lista las salidas de inventario de la Bodega Occidente con el nombre del artículo. Devuelve: fec_mov, nom_art, cant.",
+    "sql": "SELECT m.fec_mov, a.nom_art, m.cant FROM mov_inv m JOIN art a ON m.id_art = a.id_art JOIN alm al ON m.id_alm = al.id_alm WHERE al.nom_alm = 'Bodega Occidente' AND m.tp_mov = 'SAL'",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué órdenes de compra recibidas llegaron después de la fecha estimada y con cuántos días de retraso? Devuelve: num_oc, fec_ent_est, fec_ent_real, dias_retraso.",
+    "sql": "SELECT num_oc, fec_ent_est, fec_ent_real, DATEDIFF(fec_ent_real, fec_ent_est) AS dias_retraso FROM oc WHERE est_oc = 'RECIB' AND DATEDIFF(fec_ent_real, fec_ent_est) > 0",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Cuántos días tarda en promedio cada proveedor en entregar, desde la emisión de la orden hasta la entrega real? Considera solo órdenes recibidas. Devuelve: nom_prov, dias_promedio (redondeado a 2 decimales).",
+    "sql": "SELECT p.nom_prov, ROUND(AVG(DATEDIFF(o.fec_ent_real, o.fec_oc)), 2) AS dias_promedio FROM oc o JOIN prov p ON o.id_prov = p.id_prov WHERE o.est_oc = 'RECIB' GROUP BY p.id_prov, p.nom_prov",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Cuánto se compró (con descuento) en cada mes de 2024 según la fecha de emisión de la orden, sin contar las canceladas? Muestra el mes como AAAA-MM en orden cronológico. Devuelve: mes, monto (redondeado a 2 decimales).",
+    "sql": "SELECT DATE_FORMAT(o.fec_oc, '%Y-%m') AS mes, ROUND(SUM(d.cant * d.pu * (1 - d.dsc_pct / 100)), 2) AS monto FROM oc o JOIN oc_det d ON d.id_oc = o.id_oc WHERE YEAR(o.fec_oc) = 2024 AND o.est_oc <> 'CANC' GROUP BY DATE_FORMAT(o.fec_oc, '%Y-%m') ORDER BY mes",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada año, muestra el monto total comprado (con descuento, sin órdenes canceladas) y el monto del año anterior, en orden cronológico. Devuelve: anio, monto_total, monto_anio_anterior.",
+    "sql": "WITH por_anio AS (SELECT YEAR(o.fec_oc) AS anio, ROUND(SUM(d.cant * d.pu * (1 - d.dsc_pct / 100)), 2) AS monto_total FROM oc o JOIN oc_det d ON d.id_oc = o.id_oc WHERE o.est_oc <> 'CANC' GROUP BY YEAR(o.fec_oc)) SELECT anio, monto_total, LAG(monto_total) OVER (ORDER BY anio) AS monto_anio_anterior FROM por_anio ORDER BY anio",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "En cada categoría, ¿cuál es el artículo del que más unidades se han pedido en órdenes de compra? Si hay empate, elige el de menor id_art. Devuelve: nom_cat, nom_art, cant_total.",
+    "sql": "WITH pedidos AS (SELECT a.id_cat, a.id_art, a.nom_art, SUM(d.cant) AS cant_total, ROW_NUMBER() OVER (PARTITION BY a.id_cat ORDER BY SUM(d.cant) DESC, a.id_art ASC) AS rn FROM oc_det d JOIN art a ON d.id_art = a.id_art GROUP BY a.id_cat, a.id_art, a.nom_art) SELECT c.nom_cat, p.nom_art, p.cant_total FROM pedidos p JOIN cat_art c ON p.id_cat = c.id_cat WHERE p.rn = 1",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Clasifica a los proveedores según el monto total que se les ha comprado en órdenes recibidas (con descuento), usando RANK donde 1 es el mayor. Devuelve: nom_prov, monto_total (redondeado a 2 decimales), posicion.",
+    "sql": "SELECT p.nom_prov, ROUND(SUM(d.cant * d.pu * (1 - d.dsc_pct / 100)), 2) AS monto_total, RANK() OVER (ORDER BY SUM(d.cant * d.pu * (1 - d.dsc_pct / 100)) DESC) AS posicion FROM prov p JOIN oc o ON o.id_prov = p.id_prov JOIN oc_det d ON d.id_oc = o.id_oc WHERE o.est_oc = 'RECIB' GROUP BY p.id_prov, p.nom_prov",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Muestra el kárdex del artículo 'Guantes de cuero par' en la Bodega Occidente: cada movimiento con su saldo acumulado (las entradas y ajustes suman, las salidas restan), en orden cronológico. Devuelve: fec_mov, tp_mov, cant, saldo.",
+    "sql": "SELECT m.fec_mov, m.tp_mov, m.cant, SUM(CASE WHEN m.tp_mov = 'SAL' THEN -m.cant ELSE m.cant END) OVER (ORDER BY m.fec_mov, m.id_mov) AS saldo FROM mov_inv m JOIN art a ON m.id_art = a.id_art JOIN alm al ON m.id_alm = al.id_alm WHERE a.nom_art = 'Guantes de cuero par' AND al.nom_alm = 'Bodega Occidente' ORDER BY m.fec_mov, m.id_mov",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué proveedores activos nunca han recibido una orden de compra? Devuelve: nom_prov, fec_alta.",
+    "sql": "SELECT p.nom_prov, p.fec_alta FROM prov p WHERE p.act = 1 AND NOT EXISTS (SELECT 1 FROM oc o WHERE o.id_prov = p.id_prov)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué artículos activos nunca han aparecido en el detalle de una orden de compra? Devuelve: cod_art, nom_art.",
+    "sql": "SELECT a.cod_art, a.nom_art FROM art a WHERE a.act = 1 AND NOT EXISTS (SELECT 1 FROM oc_det d WHERE d.id_art = a.id_art)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué almacenes registraron al menos una entrada de mercadería durante 2025? Devuelve: nom_alm.",
+    "sql": "SELECT al.nom_alm FROM alm al WHERE EXISTS (SELECT 1 FROM mov_inv m WHERE m.id_alm = al.id_alm AND m.tp_mov = 'ENT' AND YEAR(m.fec_mov) = 2025)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué artículos tienen un precio de costo mayor que el precio de costo promedio de su propia categoría? Devuelve: nom_art, nom_cat, pu.",
+    "sql": "SELECT a.nom_art, c.nom_cat, a.pu FROM art a JOIN cat_art c ON a.id_cat = c.id_cat WHERE a.pu > (SELECT AVG(a2.pu) FROM art a2 WHERE a2.id_cat = a.id_cat)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué órdenes de compra tienen un monto (con descuento) superior al monto promedio de las órdenes de su mismo proveedor? Devuelve: num_oc, nom_prov, monto_oc (redondeado a 2 decimales).",
+    "sql": "WITH montos AS (SELECT o.id_oc, o.num_oc, o.id_prov, SUM(d.cant * d.pu * (1 - d.dsc_pct / 100)) AS monto FROM oc o JOIN oc_det d ON d.id_oc = o.id_oc GROUP BY o.id_oc, o.num_oc, o.id_prov) SELECT m.num_oc, p.nom_prov, ROUND(m.monto, 2) AS monto_oc FROM montos m JOIN prov p ON m.id_prov = p.id_prov WHERE m.monto > (SELECT AVG(m2.monto) FROM montos m2 WHERE m2.id_prov = m.id_prov)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Cuántos meses completos de antigüedad tenía cada empleado al 31 de diciembre de 2025? Devuelve: nom_emp, ape_emp, meses_antiguedad.",
+    "sql": "SELECT nom_emp, ape_emp, TIMESTAMPDIFF(MONTH, fec_ing, '2025-12-31') AS meses_antiguedad FROM emp",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué órdenes de compra se entregaron realmente más de 14 días después de su fecha de emisión? Devuelve: num_oc, fec_oc, fec_ent_real.",
+    "sql": "SELECT num_oc, fec_oc, fec_ent_real FROM oc WHERE fec_ent_real > DATE_ADD(fec_oc, INTERVAL 14 DAY)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada proveedor con órdenes recibidas, calcula cuántas recibió, cuántas llegaron a tiempo (en o antes de la fecha estimada) y el porcentaje de puntualidad. Devuelve: nom_prov, ordenes_recibidas, a_tiempo, pct_a_tiempo (redondeado a 2 decimales).",
+    "sql": "WITH entregas AS (SELECT o.id_prov, COUNT(*) AS ordenes_recibidas, SUM(CASE WHEN o.fec_ent_real <= o.fec_ent_est THEN 1 ELSE 0 END) AS a_tiempo FROM oc o WHERE o.est_oc = 'RECIB' GROUP BY o.id_prov) SELECT p.nom_prov, e.ordenes_recibidas, e.a_tiempo, ROUND(100 * e.a_tiempo / e.ordenes_recibidas, 2) AS pct_a_tiempo FROM entregas e JOIN prov p ON e.id_prov = p.id_prov",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué artículos ocupan los 3 primeros puestos en unidades salidas del inventario, usando un ranking denso? Devuelve: nom_art, unidades_salidas, ranking.",
+    "sql": "WITH salidas AS (SELECT a.id_art, a.nom_art, SUM(m.cant) AS unidades_salidas, DENSE_RANK() OVER (ORDER BY SUM(m.cant) DESC) AS ranking FROM mov_inv m JOIN art a ON m.id_art = a.id_art WHERE m.tp_mov = 'SAL' GROUP BY a.id_art, a.nom_art) SELECT nom_art, unidades_salidas, ranking FROM salidas WHERE ranking <= 3",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada entrada de mercadería en la Bodega Central, muestra la fecha de la siguiente entrada en esa bodega y los días transcurridos entre ambas, en orden cronológico. Devuelve: fec_mov, siguiente_entrada, dias_entre.",
+    "sql": "WITH ent AS (SELECT m.id_mov, m.fec_mov FROM mov_inv m JOIN alm al ON m.id_alm = al.id_alm WHERE al.nom_alm = 'Bodega Central' AND m.tp_mov = 'ENT') SELECT fec_mov, LEAD(fec_mov) OVER (ORDER BY fec_mov, id_mov) AS siguiente_entrada, TIMESTAMPDIFF(DAY, fec_mov, LEAD(fec_mov) OVER (ORDER BY fec_mov, id_mov)) AS dias_entre FROM ent ORDER BY fec_mov, id_mov",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué artículos activos tienen una existencia total (sumando todos los almacenes, y contando 0 si no tienen existencias) menor que su stock mínimo? Devuelve: nom_art, stock_total, stk_min.",
+    "sql": "WITH tot AS (SELECT a.id_art, a.nom_art, a.stk_min, COALESCE(SUM(s.cant_act), 0) AS stock_total FROM art a LEFT JOIN stk s ON s.id_art = a.id_art WHERE a.act = 1 GROUP BY a.id_art, a.nom_art, a.stk_min) SELECT nom_art, stock_total, stk_min FROM tot WHERE stock_total < stk_min",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para los artículos que se han pedido en más de una orden de compra, ¿cuál fue la fecha de la primera y de la última orden y cuántos días hay entre ellas? Devuelve: nom_art, primera_compra, ultima_compra, dias_entre.",
+    "sql": "SELECT a.nom_art, MIN(o.fec_oc) AS primera_compra, MAX(o.fec_oc) AS ultima_compra, DATEDIFF(MAX(o.fec_oc), MIN(o.fec_oc)) AS dias_entre FROM oc_det d JOIN oc o ON d.id_oc = o.id_oc JOIN art a ON d.id_art = a.id_art GROUP BY a.id_art, a.nom_art HAVING COUNT(DISTINCT o.id_oc) > 1",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué empleado emitió más órdenes de compra en cada año? Si hay empate, muestra a todos los empatados. Devuelve: anio, nom_emp, ape_emp, total_oc.",
+    "sql": "WITH conteo AS (SELECT YEAR(o.fec_oc) AS anio, o.id_emp, COUNT(*) AS total_oc, RANK() OVER (PARTITION BY YEAR(o.fec_oc) ORDER BY COUNT(*) DESC) AS rk FROM oc o GROUP BY YEAR(o.fec_oc), o.id_emp) SELECT c.anio, e.nom_emp, e.ape_emp, c.total_oc FROM conteo c JOIN emp e ON c.id_emp = e.id_emp WHERE c.rk = 1",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Entre el 1 de octubre y el 31 de diciembre de 2024, ¿cuántas unidades entraron y cuántas salieron de cada almacén? Devuelve: nom_alm, unidades_entrada, unidades_salida.",
+    "sql": "SELECT al.nom_alm, SUM(CASE WHEN m.tp_mov = 'ENT' THEN m.cant ELSE 0 END) AS unidades_entrada, SUM(CASE WHEN m.tp_mov = 'SAL' THEN m.cant ELSE 0 END) AS unidades_salida FROM mov_inv m JOIN alm al ON m.id_alm = al.id_alm WHERE m.fec_mov BETWEEN '2024-10-01 00:00:00' AND '2024-12-31 23:59:59' GROUP BY al.id_alm, al.nom_alm",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada orden de compra no cancelada, ¿qué porcentaje representa su monto (con descuento) dentro del total comprado a su proveedor en órdenes no canceladas? Devuelve: num_oc, nom_prov, monto_oc, pct_del_proveedor (ambos redondeados a 2 decimales).",
+    "sql": "WITH montos AS (SELECT o.id_oc, o.num_oc, o.id_prov, SUM(d.cant * d.pu * (1 - d.dsc_pct / 100)) AS monto FROM oc o JOIN oc_det d ON d.id_oc = o.id_oc WHERE o.est_oc <> 'CANC' GROUP BY o.id_oc, o.num_oc, o.id_prov) SELECT m.num_oc, p.nom_prov, ROUND(m.monto, 2) AS monto_oc, ROUND(100 * m.monto / SUM(m.monto) OVER (PARTITION BY m.id_prov), 2) AS pct_del_proveedor FROM montos m JOIN prov p ON m.id_prov = p.id_prov",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué artículos se pidieron en alguna orden de compra de 2022 y también en alguna de 2024 o posterior? Devuelve: cod_art, nom_art.",
+    "sql": "SELECT a.cod_art, a.nom_art FROM art a WHERE EXISTS (SELECT 1 FROM oc_det d JOIN oc o ON d.id_oc = o.id_oc WHERE d.id_art = a.id_art AND YEAR(o.fec_oc) = 2022) AND EXISTS (SELECT 1 FROM oc_det d JOIN oc o ON d.id_oc = o.id_oc WHERE d.id_art = a.id_art AND o.fec_oc >= '2024-01-01')",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada mes de 2025 con salidas, muestra las unidades que salieron del inventario y la variación respecto al mes anterior con salidas, en orden cronológico. Devuelve: mes, unidades_salida, variacion.",
+    "sql": "WITH sal AS (SELECT DATE_FORMAT(fec_mov, '%Y-%m') AS mes, SUM(cant) AS unidades_salida FROM mov_inv WHERE tp_mov = 'SAL' AND YEAR(fec_mov) = 2025 GROUP BY DATE_FORMAT(fec_mov, '%Y-%m')) SELECT mes, unidades_salida, unidades_salida - LAG(unidades_salida) OVER (ORDER BY mes) AS variacion FROM sal ORDER BY mes",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué empleados han registrado movimientos de inventario pero nunca han emitido una orden de compra? Devuelve: nom_emp, ape_emp, crg_emp.",
+    "sql": "SELECT e.nom_emp, e.ape_emp, e.crg_emp FROM emp e WHERE EXISTS (SELECT 1 FROM mov_inv m WHERE m.id_emp = e.id_emp) AND NOT EXISTS (SELECT 1 FROM oc o WHERE o.id_emp = e.id_emp)",
+    "nivel": "dificil"
+  }
+]

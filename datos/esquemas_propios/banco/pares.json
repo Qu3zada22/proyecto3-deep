@@ -1,0 +1,402 @@
+[
+  {
+    "pregunta": "¿Cuál es el nombre, el apellido y el correo de los clientes del segmento platino?",
+    "sql": "SELECT nom_cli, ape_cli, email FROM cli WHERE seg = 'platino'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista el nombre y la ciudad de todas las sucursales del banco.",
+    "sql": "SELECT nom_suc, ciu FROM suc",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántas cuentas están activas? Devuelve: cuentas_activas.",
+    "sql": "SELECT COUNT(*) AS cuentas_activas FROM cta WHERE act = 1",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra el número de cuenta y el saldo de las cuentas en dólares.",
+    "sql": "SELECT num_cta, sdo FROM cta WHERE mon = 'USD'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué clientes no tienen correo electrónico registrado? Devuelve su nombre, apellido y teléfono.",
+    "sql": "SELECT nom_cli, ape_cli, tel FROM cli WHERE email IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es el salario promedio de los cajeros? Devuelve: salario_promedio con 2 decimales.",
+    "sql": "SELECT ROUND(AVG(sal), 2) AS salario_promedio FROM emp WHERE cargo = 'cajero'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántas transacciones hay de cada tipo? Devuelve: tipo_trx, num_trx.",
+    "sql": "SELECT tipo_trx, COUNT(*) AS num_trx FROM trx GROUP BY tipo_trx",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuáles son las 5 cuentas en quetzales con mayor saldo? Devuelve num_cta y sdo, de mayor a menor saldo (en empate, por cta_id).",
+    "sql": "SELECT num_cta, sdo FROM cta WHERE mon = 'GTQ' ORDER BY sdo DESC, cta_id ASC LIMIT 5",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra el número y el límite de crédito de las tarjetas de crédito con un límite de al menos 25000.",
+    "sql": "SELECT num_tarj, lim_cred FROM tarj WHERE tipo_tarj = 'credito' AND lim_cred >= 25000",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué préstamos están en mora? Devuelve: prest_id, cli_id, mto_prest.",
+    "sql": "SELECT prest_id, cli_id, mto_prest FROM prest WHERE est_prest = 'moroso'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuánto dinero se ha retirado en total desde cajeros automáticos? Devuelve: total_retirado.",
+    "sql": "SELECT SUM(mto) AS total_retirado FROM trx WHERE tipo_trx = 'ret' AND canal = 'cajero'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué empleados entraron a trabajar al banco en 2024? Devuelve nombre, apellido y cargo.",
+    "sql": "SELECT nom_emp, ape_emp, cargo FROM emp WHERE YEAR(fec_ing) = 2024",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué sucursales no tienen dirección registrada? Devuelve el nombre de la sucursal.",
+    "sql": "SELECT nom_suc FROM suc WHERE dir IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es la tasa de interés más alta, la más baja y la promedio de los préstamos? Devuelve: tasa_max, tasa_min, tasa_prom (2 decimales).",
+    "sql": "SELECT MAX(tasa) AS tasa_max, MIN(tasa) AS tasa_min, ROUND(AVG(tasa), 2) AS tasa_prom FROM prest",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista el id, la fecha y el monto de las transacciones mayores a 3000.",
+    "sql": "SELECT trx_id, fec_trx, mto FROM trx WHERE mto > 3000",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué tarjetas están bloqueadas? Devuelve: tarj_id, num_tarj, tipo_tarj.",
+    "sql": "SELECT tarj_id, num_tarj, tipo_tarj FROM tarj WHERE bloq = 1",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué clientes nacieron antes de 1960? Devuelve nombre, apellido y fecha de nacimiento.",
+    "sql": "SELECT nom_cli, ape_cli, fec_nac FROM cli WHERE fec_nac < '1960-01-01'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Por tipo de préstamo, ¿cuántos préstamos hay y cuánto suman? Devuelve: tipo_prest, num_prest, mto_total.",
+    "sql": "SELECT tipo_prest, COUNT(*) AS num_prest, SUM(mto_prest) AS mto_total FROM prest GROUP BY tipo_prest",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuánto se ha cobrado en total por recargos de mora en los pagos de préstamos? Devuelve: mora_total.",
+    "sql": "SELECT SUM(mto_mora) AS mora_total FROM pag_prest",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué empleados no tienen jefe directo? Devuelve nombre, apellido y el id de su sucursal.",
+    "sql": "SELECT nom_emp, ape_emp, suc_id FROM emp WHERE jefe_id IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra las transferencias hacia otra cuenta del banco: trx_id, cta_id, cta_dest_id y mto.",
+    "sql": "SELECT trx_id, cta_id, cta_dest_id, mto FROM trx WHERE tipo_trx = 'trf' AND cta_dest_id IS NOT NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es el saldo total de las cuentas a plazo fijo en quetzales? Devuelve: saldo_total.",
+    "sql": "SELECT SUM(sdo) AS saldo_total FROM cta WHERE tipo_cta = 'plazo_fijo' AND mon = 'GTQ'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista los préstamos desembolsados en 2025 con su fecha de desembolso y monto, ordenados por fecha. Devuelve: prest_id, fec_desemb, mto_prest.",
+    "sql": "SELECT prest_id, fec_desemb, mto_prest FROM prest WHERE YEAR(fec_desemb) = 2025 ORDER BY fec_desemb, prest_id",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos clientes hay en cada segmento? Devuelve: seg, num_cli.",
+    "sql": "SELECT seg, COUNT(*) AS num_cli FROM cli GROUP BY seg",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué tarjetas vencen durante 2026? Devuelve: tarj_id, num_tarj, fec_venc.",
+    "sql": "SELECT tarj_id, num_tarj, fec_venc FROM tarj WHERE fec_venc BETWEEN '2026-01-01' AND '2026-12-31'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos clientes se afiliaron en cada sucursal? Incluye las sucursales sin clientes con 0. Devuelve: nom_suc, num_clientes.",
+    "sql": "SELECT s.nom_suc, COUNT(c.cli_id) AS num_clientes FROM suc s LEFT JOIN cli c ON c.suc_id = s.suc_id GROUP BY s.suc_id, s.nom_suc",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada cliente, muestra cuántas cuentas tiene, incluidos los que no tienen ninguna. Devuelve: nom_cli, ape_cli, num_ctas.",
+    "sql": "SELECT c.nom_cli, c.ape_cli, COUNT(t.cta_id) AS num_ctas FROM cli c LEFT JOIN cta t ON t.cli_id = c.cli_id GROUP BY c.cli_id, c.nom_cli, c.ape_cli",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué clientes tienen más de 20000 quetzales sumando sus cuentas activas en GTQ? Devuelve: nom_cli, ape_cli, saldo_total, de mayor a menor saldo.",
+    "sql": "SELECT c.nom_cli, c.ape_cli, SUM(t.sdo) AS saldo_total FROM cli c JOIN cta t ON t.cli_id = c.cli_id WHERE t.act = 1 AND t.mon = 'GTQ' GROUP BY c.cli_id, c.nom_cli, c.ape_cli HAVING SUM(t.sdo) > 20000 ORDER BY saldo_total DESC",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Muestra el nombre, apellido y cargo de los empleados que trabajan en sucursales de la ciudad de Guatemala, junto con el nombre de la sucursal.",
+    "sql": "SELECT e.nom_emp, e.ape_emp, e.cargo, s.nom_suc FROM emp e JOIN suc s ON s.suc_id = e.suc_id WHERE s.ciu = 'Guatemala'",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada empleado que tiene jefe, muestra su nombre y el de su jefe. Devuelve: nom_emp, ape_emp, nom_jefe, ape_jefe.",
+    "sql": "SELECT e.nom_emp, e.ape_emp, j.nom_emp AS nom_jefe, j.ape_emp AS ape_jefe FROM emp e JOIN emp j ON j.emp_id = e.jefe_id",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos préstamos ha gestionado cada asesor y por qué monto total? Incluye a los asesores sin préstamos (0). Devuelve: nom_emp, ape_emp, num_prest, mto_total.",
+    "sql": "SELECT e.nom_emp, e.ape_emp, COUNT(p.prest_id) AS num_prest, COALESCE(SUM(p.mto_prest), 0) AS mto_total FROM emp e LEFT JOIN prest p ON p.emp_id = e.emp_id WHERE e.cargo = 'asesor' GROUP BY e.emp_id, e.nom_emp, e.ape_emp",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Por canal, ¿cuánto se ha depositado y en cuántos depósitos? Devuelve: canal, total_depositado, num_dep.",
+    "sql": "SELECT canal, SUM(mto) AS total_depositado, COUNT(*) AS num_dep FROM trx WHERE tipo_trx = 'dep' GROUP BY canal",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Lista los clientes con préstamo y los datos del préstamo. Devuelve: nom_cli, ape_cli, tipo_prest, mto_prest, est_prest.",
+    "sql": "SELECT c.nom_cli, c.ape_cli, p.tipo_prest, p.mto_prest, p.est_prest FROM prest p JOIN cli c ON c.cli_id = p.cli_id",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuánto se ha abonado a cada préstamo y en cuántos pagos? Devuelve: prest_id, total_pagado, num_pagos.",
+    "sql": "SELECT prest_id, SUM(mto_pag) AS total_pagado, COUNT(*) AS num_pagos FROM pag_prest GROUP BY prest_id",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué préstamos todavía no tienen ningún pago registrado? Devuelve: prest_id, cli_id, fec_desemb.",
+    "sql": "SELECT p.prest_id, p.cli_id, p.fec_desemb FROM prest p LEFT JOIN pag_prest g ON g.prest_id = p.prest_id WHERE g.pag_id IS NULL",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuál es el saldo total de las cuentas activas en quetzales abiertas en cada sucursal, de mayor a menor? Devuelve: nom_suc, saldo_total_gtq.",
+    "sql": "SELECT s.nom_suc, SUM(t.sdo) AS saldo_total_gtq FROM suc s JOIN cta t ON t.suc_id = s.suc_id WHERE t.act = 1 AND t.mon = 'GTQ' GROUP BY s.suc_id, s.nom_suc ORDER BY saldo_total_gtq DESC",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué clientes tienen más de una cuenta? Devuelve: nom_cli, ape_cli, num_ctas.",
+    "sql": "SELECT c.nom_cli, c.ape_cli, COUNT(*) AS num_ctas FROM cli c JOIN cta t ON t.cli_id = c.cli_id GROUP BY c.cli_id, c.nom_cli, c.ape_cli HAVING COUNT(*) > 1",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada cliente con transacciones, ¿cuántas ha hecho y por qué monto total? Devuelve: nom_cli, ape_cli, num_trx, mto_total.",
+    "sql": "SELECT c.nom_cli, c.ape_cli, COUNT(*) AS num_trx, SUM(x.mto) AS mto_total FROM trx x JOIN cta t ON t.cta_id = x.cta_id JOIN cli c ON c.cli_id = t.cli_id GROUP BY c.cli_id, c.nom_cli, c.ape_cli",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuál es el salario promedio por cargo en cada sucursal? Devuelve: nom_suc, cargo, salario_promedio (2 decimales).",
+    "sql": "SELECT s.nom_suc, e.cargo, ROUND(AVG(e.sal), 2) AS salario_promedio FROM emp e JOIN suc s ON s.suc_id = e.suc_id GROUP BY s.suc_id, s.nom_suc, e.cargo",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Muestra las tarjetas de crédito con el nombre del cliente titular. Devuelve: nom_cli, ape_cli, num_tarj, lim_cred.",
+    "sql": "SELECT c.nom_cli, c.ape_cli, k.num_tarj, k.lim_cred FROM tarj k JOIN cta t ON t.cta_id = k.cta_id JOIN cli c ON c.cli_id = t.cli_id WHERE k.tipo_tarj = 'credito'",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué clientes tienen al menos una tarjeta bloqueada? Devuelve sin repetir nom_cli y ape_cli.",
+    "sql": "SELECT DISTINCT c.nom_cli, c.ape_cli FROM tarj k JOIN cta t ON t.cta_id = k.cta_id JOIN cli c ON c.cli_id = t.cli_id WHERE k.bloq = 1",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿En qué préstamos se ha cobrado mora y cuánto en total? Devuelve: prest_id, nom_cli, ape_cli, total_mora.",
+    "sql": "SELECT p.prest_id, c.nom_cli, c.ape_cli, SUM(g.mto_mora) AS total_mora FROM prest p JOIN cli c ON c.cli_id = p.cli_id JOIN pag_prest g ON g.prest_id = p.prest_id GROUP BY p.prest_id, c.nom_cli, c.ape_cli HAVING SUM(g.mto_mora) > 0",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuál es el saldo promedio de las cuentas activas en quetzales según el segmento del cliente? Devuelve: seg, saldo_promedio (2 decimales).",
+    "sql": "SELECT c.seg, ROUND(AVG(t.sdo), 2) AS saldo_promedio FROM cli c JOIN cta t ON t.cli_id = c.cli_id WHERE t.act = 1 AND t.mon = 'GTQ' GROUP BY c.seg",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué cuentas no tienen ninguna transacción de origen registrada? Devuelve: num_cta, tipo_cta.",
+    "sql": "SELECT t.num_cta, t.tipo_cta FROM cta t LEFT JOIN trx x ON x.cta_id = t.cta_id WHERE x.trx_id IS NULL",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Según la sucursal del asesor que lo gestionó, ¿cuántos préstamos se otorgaron y por qué monto? Devuelve: nom_suc, num_prest, mto_total.",
+    "sql": "SELECT s.nom_suc, COUNT(*) AS num_prest, SUM(p.mto_prest) AS mto_total FROM prest p JOIN emp e ON e.emp_id = p.emp_id JOIN suc s ON s.suc_id = e.suc_id GROUP BY s.suc_id, s.nom_suc",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas transacciones hubo cada año y cuánto sumaron? Devuelve: anio, num_trx, mto_total, ordenado por año.",
+    "sql": "SELECT YEAR(fec_trx) AS anio, COUNT(*) AS num_trx, SUM(mto) AS mto_total FROM trx GROUP BY YEAR(fec_trx) ORDER BY anio",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué clientes tienen cuentas en dólares? Devuelve: nom_cli, ape_cli, num_cta, sdo.",
+    "sql": "SELECT c.nom_cli, c.ape_cli, t.num_cta, t.sdo FROM cli c JOIN cta t ON t.cli_id = c.cli_id WHERE t.mon = 'USD'",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué sucursales tienen al menos 5 empleados? Devuelve: nom_suc, num_emp.",
+    "sql": "SELECT s.nom_suc, COUNT(*) AS num_emp FROM suc s JOIN emp e ON e.suc_id = s.suc_id GROUP BY s.suc_id, s.nom_suc HAVING COUNT(*) >= 5",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada combinación de tipo de cuenta y moneda, ¿cuántas cuentas hay y cuál es su saldo promedio? Devuelve: tipo_cta, mon, num_ctas, saldo_promedio (2 decimales).",
+    "sql": "SELECT tipo_cta, mon, COUNT(*) AS num_ctas, ROUND(AVG(sdo), 2) AS saldo_promedio FROM cta GROUP BY tipo_cta, mon",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para los tipos de préstamo con al menos 3 préstamos, ¿cuál es la tasa promedio y el plazo promedio en meses? Devuelve: tipo_prest, tasa_promedio, plazo_promedio (ambos con 2 decimales).",
+    "sql": "SELECT tipo_prest, ROUND(AVG(tasa), 2) AS tasa_promedio, ROUND(AVG(plazo_mes), 2) AS plazo_promedio FROM prest GROUP BY tipo_prest HAVING COUNT(*) >= 3",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Lista los préstamos vigentes con el cliente y el asesor que los gestionó. Devuelve: nom_cli, ape_cli, nom_asesor, ape_asesor, mto_prest.",
+    "sql": "SELECT c.nom_cli, c.ape_cli, e.nom_emp AS nom_asesor, e.ape_emp AS ape_asesor, p.mto_prest FROM prest p JOIN cli c ON c.cli_id = p.cli_id JOIN emp e ON e.emp_id = p.emp_id WHERE p.est_prest = 'vigente'",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuánto se abonó a préstamos en cada mes de 2025? Devuelve: mes (número), total_pagado, ordenado por mes.",
+    "sql": "SELECT MONTH(fec_pag) AS mes, SUM(mto_pag) AS total_pagado FROM pag_prest WHERE YEAR(fec_pag) = 2025 GROUP BY MONTH(fec_pag) ORDER BY mes",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas tarjetas tiene cada cuenta activa? Incluye las cuentas sin tarjetas con 0. Devuelve: num_cta, num_tarjetas.",
+    "sql": "SELECT t.num_cta, COUNT(k.tarj_id) AS num_tarjetas FROM cta t LEFT JOIN tarj k ON k.cta_id = t.cta_id WHERE t.act = 1 GROUP BY t.cta_id, t.num_cta",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué clientes han retirado en total más de 3000 sumando todos sus retiros? Devuelve: nom_cli, ape_cli, total_retiros.",
+    "sql": "SELECT c.nom_cli, c.ape_cli, SUM(x.mto) AS total_retiros FROM trx x JOIN cta t ON t.cta_id = x.cta_id JOIN cli c ON c.cli_id = t.cli_id WHERE x.tipo_trx = 'ret' GROUP BY c.cli_id, c.nom_cli, c.ape_cli HAVING SUM(x.mto) > 3000",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada transferencia interna, muestra el número de la cuenta de origen y el de la cuenta destino. Devuelve: trx_id, cta_origen, cta_destino, mto.",
+    "sql": "SELECT x.trx_id, o.num_cta AS cta_origen, d.num_cta AS cta_destino, x.mto FROM trx x JOIN cta o ON o.cta_id = x.cta_id JOIN cta d ON d.cta_id = x.cta_dest_id",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Quiénes son los 3 clientes con mayor saldo total en cuentas activas en quetzales? Usa RANK. Devuelve: nombre_cliente (nombre y apellido), saldo_total, posicion.",
+    "sql": "WITH s AS (SELECT c.cli_id, CONCAT(c.nom_cli, ' ', c.ape_cli) AS nombre_cliente, SUM(t.sdo) AS saldo_total FROM cli c JOIN cta t ON t.cli_id = c.cli_id WHERE t.act = 1 AND t.mon = 'GTQ' GROUP BY c.cli_id, c.nom_cli, c.ape_cli), r AS (SELECT nombre_cliente, saldo_total, RANK() OVER (ORDER BY saldo_total DESC) AS posicion FROM s) SELECT nombre_cliente, saldo_total, posicion FROM r WHERE posicion <= 3 ORDER BY posicion, nombre_cliente",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Quién es el empleado mejor pagado de cada sucursal? En empate, el de menor emp_id. Devuelve: nom_suc, nom_emp, ape_emp, sal.",
+    "sql": "WITH r AS (SELECT s.nom_suc, e.nom_emp, e.ape_emp, e.sal, ROW_NUMBER() OVER (PARTITION BY e.suc_id ORDER BY e.sal DESC, e.emp_id) AS rn FROM emp e JOIN suc s ON s.suc_id = e.suc_id) SELECT nom_suc, nom_emp, ape_emp, sal FROM r WHERE rn = 1",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada transacción, calcula el monto acumulado de las transacciones de su misma cuenta en orden cronológico. Devuelve: cta_id, trx_id, fec_trx, mto, mto_acumulado.",
+    "sql": "SELECT cta_id, trx_id, fec_trx, mto, SUM(mto) OVER (PARTITION BY cta_id ORDER BY fec_trx, trx_id) AS mto_acumulado FROM trx",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada pago de préstamo que no sea el primero de su préstamo, ¿cuántos días pasaron desde el pago anterior del mismo préstamo? Devuelve: prest_id, fec_pag, dias_desde_anterior.",
+    "sql": "WITH s AS (SELECT prest_id, fec_pag, LAG(fec_pag) OVER (PARTITION BY prest_id ORDER BY fec_pag, pag_id) AS anterior FROM pag_prest) SELECT prest_id, fec_pag, DATEDIFF(fec_pag, anterior) AS dias_desde_anterior FROM s WHERE anterior IS NOT NULL",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué empleados ganan más que el promedio de salario de su propia sucursal? Devuelve: nom_emp, ape_emp, sal, suc_id.",
+    "sql": "SELECT e.nom_emp, e.ape_emp, e.sal, e.suc_id FROM emp e WHERE e.sal > (SELECT AVG(e2.sal) FROM emp e2 WHERE e2.suc_id = e.suc_id)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué clientes no tienen ninguna cuenta abierta en el banco? Devuelve: nom_cli, ape_cli.",
+    "sql": "SELECT c.nom_cli, c.ape_cli FROM cli c WHERE NOT EXISTS (SELECT 1 FROM cta t WHERE t.cli_id = c.cli_id)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué clientes tienen al menos una cuenta pero nunca han recibido un préstamo? Devuelve: nom_cli, ape_cli.",
+    "sql": "SELECT c.nom_cli, c.ape_cli FROM cli c WHERE EXISTS (SELECT 1 FROM cta t WHERE t.cli_id = c.cli_id) AND NOT EXISTS (SELECT 1 FROM prest p WHERE p.cli_id = c.cli_id)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué clientes hicieron alguna transacción por la app durante 2025? Devuelve: nom_cli, ape_cli.",
+    "sql": "SELECT c.nom_cli, c.ape_cli FROM cli c WHERE EXISTS (SELECT 1 FROM cta t JOIN trx x ON x.cta_id = t.cta_id WHERE t.cli_id = c.cli_id AND x.canal = 'app' AND YEAR(x.fec_trx) = 2025)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué clientes tenían menos de 25 años cumplidos cuando se dieron de alta en el banco? Devuelve: nom_cli, ape_cli, edad_alta.",
+    "sql": "SELECT nom_cli, ape_cli, TIMESTAMPDIFF(YEAR, fec_nac, fec_alta) AS edad_alta FROM cli WHERE TIMESTAMPDIFF(YEAR, fec_nac, fec_alta) < 25",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué clientes tendrán 60 años o más al 31 de diciembre de 2025? Devuelve: nom_cli, ape_cli, edad (años cumplidos a esa fecha).",
+    "sql": "SELECT nom_cli, ape_cli, TIMESTAMPDIFF(YEAR, fec_nac, '2025-12-31') AS edad FROM cli WHERE TIMESTAMPDIFF(YEAR, fec_nac, '2025-12-31') >= 60",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué tarjetas no bloqueadas ya estaban vencidas al 31 de octubre de 2025? Devuelve: tarj_id, num_tarj, fec_venc.",
+    "sql": "SELECT tarj_id, num_tarj, fec_venc FROM tarj WHERE bloq = 0 AND fec_venc < '2025-10-31'",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Calcula la fecha de finalización de cada préstamo (desembolso más el plazo en meses) y muestra los que terminan antes de 2028. Devuelve: prest_id, fec_desemb, fec_fin.",
+    "sql": "SELECT prest_id, fec_desemb, DATE_ADD(fec_desemb, INTERVAL plazo_mes MONTH) AS fec_fin FROM prest WHERE DATE_ADD(fec_desemb, INTERVAL plazo_mes MONTH) < '2028-01-01'",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿En qué préstamos el primer pago se hizo más de 35 días después del desembolso? Devuelve: prest_id, fec_desemb, primer_pago, dias.",
+    "sql": "WITH pp AS (SELECT prest_id, MIN(fec_pag) AS primer_pago FROM pag_prest GROUP BY prest_id) SELECT p.prest_id, p.fec_desemb, pp.primer_pago, DATEDIFF(pp.primer_pago, p.fec_desemb) AS dias FROM prest p JOIN pp ON pp.prest_id = p.prest_id WHERE DATEDIFF(pp.primer_pago, p.fec_desemb) > 35",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué porcentaje del total de transacciones se hizo por cada canal? Devuelve: canal, num_trx, porcentaje (2 decimales).",
+    "sql": "SELECT canal, COUNT(*) AS num_trx, ROUND(100 * COUNT(*) / SUM(COUNT(*)) OVER (), 2) AS porcentaje FROM trx GROUP BY canal",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿En qué mes de cada año se depositó más dinero? Devuelve: anio, mes, total_dep.",
+    "sql": "WITH m AS (SELECT YEAR(fec_trx) AS anio, MONTH(fec_trx) AS mes, SUM(mto) AS total_dep FROM trx WHERE tipo_trx = 'dep' GROUP BY YEAR(fec_trx), MONTH(fec_trx)), r AS (SELECT anio, mes, total_dep, ROW_NUMBER() OVER (PARTITION BY anio ORDER BY total_dep DESC, mes) AS rn FROM m) SELECT anio, mes, total_dep FROM r WHERE rn = 1",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Clasifica las sucursales por el monto total prestado a través de sus asesores usando DENSE_RANK (1 = mayor monto). Devuelve: nom_suc, mto_total, ranking.",
+    "sql": "WITH m AS (SELECT s.nom_suc, SUM(p.mto_prest) AS mto_total FROM prest p JOIN emp e ON e.emp_id = p.emp_id JOIN suc s ON s.suc_id = e.suc_id GROUP BY s.suc_id, s.nom_suc) SELECT nom_suc, mto_total, DENSE_RANK() OVER (ORDER BY mto_total DESC) AS ranking FROM m",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué transacciones tienen un monto mayor que el promedio de las transacciones de su misma cuenta? Devuelve: trx_id, cta_id, mto.",
+    "sql": "SELECT x.trx_id, x.cta_id, x.mto FROM trx x WHERE x.mto > (SELECT AVG(x2.mto) FROM trx x2 WHERE x2.cta_id = x.cta_id)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada mes de 2023 con depósitos, muestra el total depositado y el del mes anterior con depósitos. Devuelve: mes (AAAA-MM), total_dep, total_mes_anterior, ordenado por mes.",
+    "sql": "WITH m AS (SELECT DATE_FORMAT(fec_trx, '%Y-%m') AS mes, SUM(mto) AS total_dep FROM trx WHERE tipo_trx = 'dep' AND YEAR(fec_trx) = 2023 GROUP BY DATE_FORMAT(fec_trx, '%Y-%m')) SELECT mes, total_dep, LAG(total_dep) OVER (ORDER BY mes) AS total_mes_anterior FROM m ORDER BY mes",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué clientes tienen un saldo total en cuentas activas en quetzales mayor al promedio de ese saldo entre todos los clientes con este tipo de cuentas? Devuelve: nom_cli, ape_cli, saldo_total.",
+    "sql": "WITH s AS (SELECT c.cli_id, c.nom_cli, c.ape_cli, SUM(t.sdo) AS saldo_total FROM cli c JOIN cta t ON t.cli_id = c.cli_id WHERE t.act = 1 AND t.mon = 'GTQ' GROUP BY c.cli_id, c.nom_cli, c.ape_cli) SELECT nom_cli, ape_cli, saldo_total FROM s WHERE saldo_total > (SELECT AVG(saldo_total) FROM s)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué transacciones se hicieron en los 120 días anteriores al 31 de octubre de 2025 (incluido ese día)? Devuelve: trx_id, fec_trx, tipo_trx, mto.",
+    "sql": "SELECT trx_id, fec_trx, tipo_trx, mto FROM trx WHERE DATE(fec_trx) BETWEEN DATE_SUB('2025-10-31', INTERVAL 120 DAY) AND '2025-10-31'",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Calcula la antigüedad en años completos de cada empleado al 31 de octubre de 2025 y su posición dentro de su sucursal (RANK, 1 = el más antiguo). Devuelve: nom_suc, nom_emp, ape_emp, anios_antiguedad, posicion.",
+    "sql": "SELECT s.nom_suc, e.nom_emp, e.ape_emp, TIMESTAMPDIFF(YEAR, e.fec_ing, '2025-10-31') AS anios_antiguedad, RANK() OVER (PARTITION BY e.suc_id ORDER BY e.fec_ing) AS posicion FROM emp e JOIN suc s ON s.suc_id = e.suc_id",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Cuál fue la primera transacción de cada cliente (en cualquiera de sus cuentas)? Devuelve: nom_cli, ape_cli, fec_trx, tipo_trx.",
+    "sql": "WITH r AS (SELECT t.cli_id, x.fec_trx, x.tipo_trx, ROW_NUMBER() OVER (PARTITION BY t.cli_id ORDER BY x.fec_trx, x.trx_id) AS rn FROM trx x JOIN cta t ON t.cta_id = x.cta_id) SELECT c.nom_cli, c.ape_cli, r.fec_trx, r.tipo_trx FROM r JOIN cli c ON c.cli_id = r.cli_id WHERE r.rn = 1",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada tipo de préstamo, ¿cuál es el préstamo de mayor monto y a qué cliente pertenece? En empate, el de menor prest_id. Devuelve: tipo_prest, nom_cli, ape_cli, mto_prest.",
+    "sql": "WITH r AS (SELECT p.tipo_prest, c.nom_cli, c.ape_cli, p.mto_prest, ROW_NUMBER() OVER (PARTITION BY p.tipo_prest ORDER BY p.mto_prest DESC, p.prest_id) AS rn FROM prest p JOIN cli c ON c.cli_id = p.cli_id) SELECT tipo_prest, nom_cli, ape_cli, mto_prest FROM r WHERE rn = 1",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para los clientes con más de una cuenta, ¿cuántos días pasaron entre la apertura de su primera y su segunda cuenta? Devuelve: nom_cli, ape_cli, dias_entre_cuentas.",
+    "sql": "WITH o AS (SELECT cli_id, fec_aper, LEAD(fec_aper) OVER (PARTITION BY cli_id ORDER BY fec_aper, cta_id) AS siguiente, ROW_NUMBER() OVER (PARTITION BY cli_id ORDER BY fec_aper, cta_id) AS rn FROM cta) SELECT c.nom_cli, c.ape_cli, DATEDIFF(o.siguiente, o.fec_aper) AS dias_entre_cuentas FROM o JOIN cli c ON c.cli_id = o.cli_id WHERE o.rn = 1 AND o.siguiente IS NOT NULL",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para los préstamos morosos, muestra cada pago con el total abonado acumulado hasta esa fecha. Devuelve: prest_id, fec_pag, mto_pag, pagado_acumulado.",
+    "sql": "SELECT g.prest_id, g.fec_pag, g.mto_pag, SUM(g.mto_pag) OVER (PARTITION BY g.prest_id ORDER BY g.fec_pag, g.pag_id) AS pagado_acumulado FROM pag_prest g JOIN prest p ON p.prest_id = g.prest_id WHERE p.est_prest = 'moroso'",
+    "nivel": "dificil"
+  }
+]

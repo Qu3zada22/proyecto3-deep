@@ -1,0 +1,402 @@
+[
+  {
+    "pregunta": "¿Cuál es el nombre, el apellido y el correo de los clientes que viven en Guatemala?",
+    "sql": "SELECT nombre, apellido, correo FROM clientes WHERE pais = 'Guatemala'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista el nombre y el precio de los productos que cuestan más de 500 dólares.",
+    "sql": "SELECT nombre_producto, precio FROM productos WHERE precio > 500",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos clientes tienen membresía premium? Devuelve: total_premium.",
+    "sql": "SELECT COUNT(*) AS total_premium FROM clientes WHERE es_premium = 1",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra el nombre y el apellido de los clientes que no registraron un número de teléfono.",
+    "sql": "SELECT nombre, apellido FROM clientes WHERE telefono IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es el precio promedio de los productos que siguen a la venta? Devuelve: precio_promedio, redondeado a 2 decimales.",
+    "sql": "SELECT ROUND(AVG(precio), 2) AS precio_promedio FROM productos WHERE activo = 1",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Dame el nombre y las existencias de los productos que no tienen marca registrada.",
+    "sql": "SELECT nombre_producto, existencias FROM productos WHERE marca IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos pedidos hay en cada estado? Devuelve: estado, cantidad_pedidos.",
+    "sql": "SELECT estado, COUNT(*) AS cantidad_pedidos FROM pedidos GROUP BY estado",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra el id, la fecha y el total de los pedidos en los que se usó el cupón 'BLACKFRIDAY'.",
+    "sql": "SELECT pedido_id, fecha_pedido, total FROM pedidos WHERE codigo_cupon = 'BLACKFRIDAY'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuáles son los 5 productos más caros? Devuelve nombre_producto y precio, de mayor a menor precio (en empate, por producto_id).",
+    "sql": "SELECT nombre_producto, precio FROM productos ORDER BY precio DESC, producto_id ASC LIMIT 5",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos clientes se registraron durante 2024? Devuelve: clientes_2024.",
+    "sql": "SELECT COUNT(*) AS clientes_2024 FROM clientes WHERE YEAR(fecha_registro) = 2024",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuáles son los nombres de las categorías principales, es decir, las que no tienen categoría padre?",
+    "sql": "SELECT nombre_categoria FROM categorias WHERE categoria_padre_id IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista el nombre de los productos agotados (sin existencias).",
+    "sql": "SELECT nombre_producto FROM productos WHERE existencias = 0",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuánto dinero suman todos los pagos aprobados? Devuelve: monto_total.",
+    "sql": "SELECT SUM(monto) AS monto_total FROM pagos WHERE aprobado = 1",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista sin repetir las ciudades donde viven clientes, en orden alfabético.",
+    "sql": "SELECT DISTINCT ciudad FROM clientes ORDER BY ciudad",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es la calificación promedio de todas las reseñas? Devuelve: calificacion_promedio con 2 decimales.",
+    "sql": "SELECT ROUND(AVG(calificacion), 2) AS calificacion_promedio FROM resenas",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra el id del envío, el transportista y la fecha de envío de los paquetes que todavía no se han entregado.",
+    "sql": "SELECT envio_id, transportista, fecha_envio FROM envios WHERE fecha_entrega IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos pedidos fueron cancelados? Devuelve: pedidos_cancelados.",
+    "sql": "SELECT COUNT(*) AS pedidos_cancelados FROM pedidos WHERE estado = 'cancelado'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Para cada producto devuelve: nombre_producto, precio, costo y ganancia_unitaria (precio menos costo).",
+    "sql": "SELECT nombre_producto, precio, costo, precio - costo AS ganancia_unitaria FROM productos",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué pedido tiene el total más alto? Devuelve su pedido_id y su total.",
+    "sql": "SELECT pedido_id, total FROM pedidos ORDER BY total DESC, pedido_id ASC LIMIT 1",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Indica el id y el nombre de los productos descontinuados.",
+    "sql": "SELECT producto_id, nombre_producto FROM productos WHERE activo = 0",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos envíos ha hecho cada transportista? Devuelve: transportista, numero_envios.",
+    "sql": "SELECT transportista, COUNT(*) AS numero_envios FROM envios GROUP BY transportista",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra el id, la calificación y el comentario de las reseñas de 1 o 2 estrellas.",
+    "sql": "SELECT resena_id, calificacion, comentario FROM resenas WHERE calificacion IN (1, 2)",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál fue el costo de envío más alto y el más bajo? Devuelve: costo_maximo, costo_minimo.",
+    "sql": "SELECT MAX(costo_envio) AS costo_maximo, MIN(costo_envio) AS costo_minimo FROM envios",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué clientes usan un correo de Gmail? Devuelve su nombre y su correo.",
+    "sql": "SELECT nombre, correo FROM clientes WHERE correo LIKE '%@gmail.com'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos pedidos se hicieron en el primer semestre de 2025? Devuelve: total_pedidos.",
+    "sql": "SELECT COUNT(*) AS total_pedidos FROM pedidos WHERE fecha_pedido >= '2025-01-01' AND fecha_pedido < '2025-07-01'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Para cada cliente muestra su nombre, su apellido y cuántos pedidos ha hecho, incluyendo a los que no tienen ninguno (con 0). Devuelve: nombre, apellido, num_pedidos.",
+    "sql": "SELECT c.nombre, c.apellido, COUNT(p.pedido_id) AS num_pedidos FROM clientes c LEFT JOIN pedidos p ON p.cliente_id = c.cliente_id GROUP BY c.cliente_id, c.nombre, c.apellido",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué clientes han gastado más de 1500 dólares en pedidos no cancelados? Devuelve: nombre_cliente (nombre y apellido juntos), total_gastado, de mayor a menor gasto.",
+    "sql": "SELECT CONCAT(c.nombre, ' ', c.apellido) AS nombre_cliente, SUM(p.total) AS total_gastado FROM clientes c JOIN pedidos p ON p.cliente_id = c.cliente_id WHERE p.estado <> 'cancelado' GROUP BY c.cliente_id, c.nombre, c.apellido HAVING SUM(p.total) > 1500 ORDER BY total_gastado DESC",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos productos tiene cada categoría? Incluye las categorías sin productos con 0. Devuelve: nombre_categoria, numero_productos.",
+    "sql": "SELECT cat.nombre_categoria, COUNT(pr.producto_id) AS numero_productos FROM categorias cat LEFT JOIN productos pr ON pr.categoria_id = cat.categoria_id GROUP BY cat.categoria_id, cat.nombre_categoria",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuáles son los 5 productos con más unidades vendidas en pedidos no cancelados? Devuelve: nombre_producto, unidades_vendidas (en empate, por producto_id).",
+    "sql": "SELECT pr.nombre_producto, SUM(d.cantidad) AS unidades_vendidas FROM detalle_pedido d JOIN productos pr ON pr.producto_id = d.producto_id JOIN pedidos p ON p.pedido_id = d.pedido_id WHERE p.estado <> 'cancelado' GROUP BY pr.producto_id, pr.nombre_producto ORDER BY unidades_vendidas DESC, pr.producto_id ASC LIMIT 5",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para los productos con al menos 2 reseñas, muestra el nombre, la calificación promedio (2 decimales) y el número de reseñas. Devuelve: nombre_producto, calificacion_promedio, num_resenas.",
+    "sql": "SELECT pr.nombre_producto, ROUND(AVG(r.calificacion), 2) AS calificacion_promedio, COUNT(*) AS num_resenas FROM resenas r JOIN productos pr ON pr.producto_id = r.producto_id GROUP BY pr.producto_id, pr.nombre_producto HAVING COUNT(*) >= 2",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Muestra el id del pedido, el nombre y apellido del cliente y el total de los pedidos entregados que se hicieron en 2024.",
+    "sql": "SELECT p.pedido_id, c.nombre, c.apellido, p.total FROM pedidos p JOIN clientes c ON c.cliente_id = p.cliente_id WHERE p.estado = 'entregado' AND YEAR(p.fecha_pedido) = 2024",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuánto se ha cobrado con cada método de pago, contando solo pagos aprobados? Devuelve: metodo_pago, monto_total, num_pagos.",
+    "sql": "SELECT metodo_pago, SUM(monto) AS monto_total, COUNT(*) AS num_pagos FROM pagos WHERE aprobado = 1 GROUP BY metodo_pago",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué productos nunca se han vendido? Devuelve el producto_id y el nombre_producto.",
+    "sql": "SELECT pr.producto_id, pr.nombre_producto FROM productos pr LEFT JOIN detalle_pedido d ON d.producto_id = pr.producto_id WHERE d.detalle_id IS NULL",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Calcula los ingresos de cada categoría (cantidad por precio unitario menos descuento) en pedidos no cancelados, de mayor a menor. Devuelve: nombre_categoria, ingresos.",
+    "sql": "SELECT cat.nombre_categoria, ROUND(SUM(d.cantidad * d.precio_unitario - d.descuento), 2) AS ingresos FROM detalle_pedido d JOIN pedidos p ON p.pedido_id = d.pedido_id JOIN productos pr ON pr.producto_id = d.producto_id JOIN categorias cat ON cat.categoria_id = pr.categoria_id WHERE p.estado <> 'cancelado' GROUP BY cat.categoria_id, cat.nombre_categoria ORDER BY ingresos DESC",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿En qué países hay al menos 3 clientes registrados? Devuelve: pais, num_clientes.",
+    "sql": "SELECT pais, COUNT(*) AS num_clientes FROM clientes GROUP BY pais HAVING COUNT(*) >= 3",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "En promedio, ¿cuántos días tarda cada transportista en entregar un paquete (desde la fecha de envío)? Considera solo envíos entregados. Devuelve: transportista, dias_promedio con 2 decimales.",
+    "sql": "SELECT transportista, ROUND(AVG(DATEDIFF(fecha_entrega, fecha_envio)), 2) AS dias_promedio FROM envios WHERE fecha_entrega IS NOT NULL GROUP BY transportista",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Muestra el nombre, el apellido y el número de pedidos de los clientes premium que han hecho al menos un pedido.",
+    "sql": "SELECT c.nombre, c.apellido, COUNT(*) AS num_pedidos FROM clientes c JOIN pedidos p ON p.cliente_id = c.cliente_id WHERE c.es_premium = 1 GROUP BY c.cliente_id, c.nombre, c.apellido",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Lista cada producto con el nombre de su categoría y el de la categoría padre (NULL si la categoría es principal). Devuelve: nombre_producto, nombre_categoria, categoria_padre.",
+    "sql": "SELECT pr.nombre_producto, cat.nombre_categoria, padre.nombre_categoria AS categoria_padre FROM productos pr JOIN categorias cat ON cat.categoria_id = pr.categoria_id LEFT JOIN categorias padre ON padre.categoria_id = cat.categoria_padre_id",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué pedidos incluyen más de 2 productos distintos? Devuelve: pedido_id, num_productos.",
+    "sql": "SELECT pedido_id, COUNT(DISTINCT producto_id) AS num_productos FROM detalle_pedido GROUP BY pedido_id HAVING COUNT(DISTINCT producto_id) > 2",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Por ciudad de destino, ¿cuántos envíos hubo y cuánto sumó su costo? Devuelve: ciudad_destino, num_envios, costo_total.",
+    "sql": "SELECT ciudad_destino, COUNT(*) AS num_envios, SUM(costo_envio) AS costo_total FROM envios GROUP BY ciudad_destino",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada cliente que ha escrito reseñas, devuelve: nombre, apellido, num_resenas y calificacion_promedio (redondeada a 2 decimales).",
+    "sql": "SELECT c.nombre, c.apellido, COUNT(*) AS num_resenas, ROUND(AVG(r.calificacion), 2) AS calificacion_promedio FROM clientes c JOIN resenas r ON r.cliente_id = c.cliente_id GROUP BY c.cliente_id, c.nombre, c.apellido",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué pedidos tuvieron al menos un pago rechazado y de qué cliente son? Devuelve: pedido_id, nombre, apellido, pagos_rechazados.",
+    "sql": "SELECT p.pedido_id, c.nombre, c.apellido, COUNT(*) AS pagos_rechazados FROM pagos pg JOIN pedidos p ON p.pedido_id = pg.pedido_id JOIN clientes c ON c.cliente_id = p.cliente_id WHERE pg.aprobado = 0 GROUP BY p.pedido_id, c.nombre, c.apellido",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para las marcas con más de un producto en el catálogo, devuelve: marca, num_productos, precio_promedio (2 decimales).",
+    "sql": "SELECT marca, COUNT(*) AS num_productos, ROUND(AVG(precio), 2) AS precio_promedio FROM productos WHERE marca IS NOT NULL GROUP BY marca HAVING COUNT(*) > 1",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuánto descuento total se ha otorgado en cada producto? Incluye solo los productos con algún descuento. Devuelve: nombre_producto, descuento_total.",
+    "sql": "SELECT pr.nombre_producto, SUM(d.descuento) AS descuento_total FROM detalle_pedido d JOIN productos pr ON pr.producto_id = d.producto_id GROUP BY pr.producto_id, pr.nombre_producto HAVING SUM(d.descuento) > 0",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Por país del cliente, ¿cuántos pedidos entregados hay y cuánto suman? Devuelve: pais, num_pedidos, ventas_totales.",
+    "sql": "SELECT c.pais, COUNT(*) AS num_pedidos, SUM(p.total) AS ventas_totales FROM pedidos p JOIN clientes c ON c.cliente_id = p.cliente_id WHERE p.estado = 'entregado' GROUP BY c.pais",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada código de cupón usado, ¿cuántas veces se aplicó y cuál fue el total promedio de esos pedidos? Devuelve: codigo_cupon, veces_usado, total_promedio (2 decimales).",
+    "sql": "SELECT codigo_cupon, COUNT(*) AS veces_usado, ROUND(AVG(total), 2) AS total_promedio FROM pedidos WHERE codigo_cupon IS NOT NULL GROUP BY codigo_cupon",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué productos con menos de 10 unidades en existencia han vendido más de 3 unidades en total? Devuelve: nombre_producto, existencias, unidades_vendidas.",
+    "sql": "SELECT pr.nombre_producto, pr.existencias, SUM(d.cantidad) AS unidades_vendidas FROM productos pr JOIN detalle_pedido d ON d.producto_id = pr.producto_id WHERE pr.existencias < 10 GROUP BY pr.producto_id, pr.nombre_producto, pr.existencias HAVING SUM(d.cantidad) > 3",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Muestra los pedidos entregados en 2025 con el nombre del cliente, el transportista y la fecha de entrega. Devuelve: pedido_id, nombre, apellido, transportista, fecha_entrega.",
+    "sql": "SELECT p.pedido_id, c.nombre, c.apellido, e.transportista, e.fecha_entrega FROM pedidos p JOIN clientes c ON c.cliente_id = p.cliente_id JOIN envios e ON e.pedido_id = p.pedido_id WHERE YEAR(e.fecha_entrega) = 2025",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué clientes han pagado alguna vez con PayPal (pago aprobado)? Devuelve sin repetir su nombre, apellido y correo.",
+    "sql": "SELECT DISTINCT c.nombre, c.apellido, c.correo FROM clientes c JOIN pedidos p ON p.cliente_id = c.cliente_id JOIN pagos pg ON pg.pedido_id = p.pedido_id WHERE pg.metodo_pago = 'paypal' AND pg.aprobado = 1",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos pedidos se hicieron en cada mes de 2025? Devuelve: mes (número) y num_pedidos, ordenado por mes.",
+    "sql": "SELECT MONTH(fecha_pedido) AS mes, COUNT(*) AS num_pedidos FROM pedidos WHERE YEAR(fecha_pedido) = 2025 GROUP BY MONTH(fecha_pedido) ORDER BY mes",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada cliente con pedidos, ¿cuál fue el total de su pedido más caro? Devuelve: nombre, apellido, total_maximo.",
+    "sql": "SELECT c.nombre, c.apellido, MAX(p.total) AS total_maximo FROM clientes c JOIN pedidos p ON p.cliente_id = c.cliente_id GROUP BY c.cliente_id, c.nombre, c.apellido",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Lista los productos de la categoría Electrónica, incluidos los de sus subcategorías. Devuelve: nombre_producto, nombre_categoria.",
+    "sql": "SELECT pr.nombre_producto, cat.nombre_categoria FROM productos pr JOIN categorias cat ON cat.categoria_id = pr.categoria_id LEFT JOIN categorias padre ON padre.categoria_id = cat.categoria_padre_id WHERE cat.nombre_categoria = 'Electrónica' OR padre.nombre_categoria = 'Electrónica'",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuáles son los 5 productos que más ganancia han dejado en pedidos no cancelados? La ganancia es (precio_unitario − costo) × cantidad − descuento. Devuelve: nombre_producto, ganancia (2 decimales), en empate por producto_id.",
+    "sql": "SELECT pr.nombre_producto, ROUND(SUM((d.precio_unitario - pr.costo) * d.cantidad - d.descuento), 2) AS ganancia FROM detalle_pedido d JOIN productos pr ON pr.producto_id = d.producto_id JOIN pedidos p ON p.pedido_id = d.pedido_id WHERE p.estado <> 'cancelado' GROUP BY pr.producto_id, pr.nombre_producto ORDER BY ganancia DESC, pr.producto_id ASC LIMIT 5",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué productos reseñados tienen una calificación promedio menor que 4? Devuelve: nombre_producto, calificacion_promedio (2 decimales).",
+    "sql": "SELECT pr.nombre_producto, ROUND(AVG(r.calificacion), 2) AS calificacion_promedio FROM productos pr JOIN resenas r ON r.producto_id = pr.producto_id GROUP BY pr.producto_id, pr.nombre_producto HAVING AVG(r.calificacion) < 4",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué clientes tienen pedidos pendientes y cuántos? Devuelve: nombre, apellido, pedidos_pendientes.",
+    "sql": "SELECT c.nombre, c.apellido, COUNT(*) AS pedidos_pendientes FROM clientes c JOIN pedidos p ON p.cliente_id = c.cliente_id WHERE p.estado = 'pendiente' GROUP BY c.cliente_id, c.nombre, c.apellido",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Quiénes son los 3 clientes que más han gastado en pedidos no cancelados? Usa RANK para la posición. Devuelve: nombre_cliente, total_gastado, posicion.",
+    "sql": "WITH gasto AS (SELECT c.cliente_id, CONCAT(c.nombre, ' ', c.apellido) AS nombre_cliente, SUM(p.total) AS total_gastado FROM clientes c JOIN pedidos p ON p.cliente_id = c.cliente_id WHERE p.estado <> 'cancelado' GROUP BY c.cliente_id, c.nombre, c.apellido), ranking AS (SELECT nombre_cliente, total_gastado, RANK() OVER (ORDER BY total_gastado DESC) AS posicion FROM gasto) SELECT nombre_cliente, total_gastado, posicion FROM ranking WHERE posicion <= 3 ORDER BY posicion, nombre_cliente",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Cuál es el producto más caro de cada categoría? Si hay empate, elige el de menor producto_id. Devuelve: nombre_categoria, nombre_producto, precio.",
+    "sql": "WITH r AS (SELECT cat.nombre_categoria, pr.nombre_producto, pr.precio, ROW_NUMBER() OVER (PARTITION BY pr.categoria_id ORDER BY pr.precio DESC, pr.producto_id) AS rn FROM productos pr JOIN categorias cat ON cat.categoria_id = pr.categoria_id) SELECT nombre_categoria, nombre_producto, precio FROM r WHERE rn = 1",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada mes de 2024, muestra las ventas (suma del total de pedidos no cancelados) y las del mes anterior. Devuelve: mes (formato AAAA-MM), ventas, ventas_mes_anterior, ordenado por mes.",
+    "sql": "WITH m AS (SELECT DATE_FORMAT(fecha_pedido, '%Y-%m') AS mes, SUM(total) AS ventas FROM pedidos WHERE estado <> 'cancelado' AND YEAR(fecha_pedido) = 2024 GROUP BY DATE_FORMAT(fecha_pedido, '%Y-%m')) SELECT mes, ventas, LAG(ventas) OVER (ORDER BY mes) AS ventas_mes_anterior FROM m ORDER BY mes",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Muestra las ventas mensuales de 2025 (pedidos no cancelados) y su acumulado a lo largo del año. Devuelve: mes (AAAA-MM), ventas, ventas_acumuladas, ordenado por mes.",
+    "sql": "WITH m AS (SELECT DATE_FORMAT(fecha_pedido, '%Y-%m') AS mes, SUM(total) AS ventas FROM pedidos WHERE estado <> 'cancelado' AND YEAR(fecha_pedido) = 2025 GROUP BY DATE_FORMAT(fecha_pedido, '%Y-%m')) SELECT mes, ventas, SUM(ventas) OVER (ORDER BY mes) AS ventas_acumuladas FROM m ORDER BY mes",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué productos cuestan más que el precio promedio de su propia categoría? Devuelve: nombre_producto, precio, categoria_id.",
+    "sql": "SELECT pr.nombre_producto, pr.precio, pr.categoria_id FROM productos pr WHERE pr.precio > (SELECT AVG(p2.precio) FROM productos p2 WHERE p2.categoria_id = pr.categoria_id)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué clientes registrados nunca han realizado un pedido? Devuelve: nombre, apellido, fecha_registro.",
+    "sql": "SELECT c.nombre, c.apellido, c.fecha_registro FROM clientes c WHERE NOT EXISTS (SELECT 1 FROM pedidos p WHERE p.cliente_id = c.cliente_id)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué clientes han comprado al menos un libro (producto de la categoría Libros)? Devuelve: nombre, apellido.",
+    "sql": "SELECT c.nombre, c.apellido FROM clientes c WHERE EXISTS (SELECT 1 FROM pedidos p JOIN detalle_pedido d ON d.pedido_id = p.pedido_id JOIN productos pr ON pr.producto_id = d.producto_id JOIN categorias cat ON cat.categoria_id = pr.categoria_id WHERE p.cliente_id = c.cliente_id AND cat.nombre_categoria = 'Libros')",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué envíos entregados tardaron más de 7 días desde que salieron del almacén? Devuelve: pedido_id, transportista, dias_entrega.",
+    "sql": "SELECT pedido_id, transportista, DATEDIFF(fecha_entrega, fecha_envio) AS dias_entrega FROM envios WHERE fecha_entrega IS NOT NULL AND DATEDIFF(fecha_entrega, fecha_envio) > 7",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada pedido con un pago aprobado, ¿cuántas horas pasaron entre el pedido y su primer pago aprobado? Devuelve: pedido_id, horas_hasta_pago.",
+    "sql": "SELECT p.pedido_id, TIMESTAMPDIFF(HOUR, p.fecha_pedido, MIN(pg.fecha_pago)) AS horas_hasta_pago FROM pedidos p JOIN pagos pg ON pg.pedido_id = p.pedido_id WHERE pg.aprobado = 1 GROUP BY p.pedido_id, p.fecha_pedido",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué clientes hicieron su primer pedido dentro de los 30 días siguientes a su registro? Devuelve: nombre, apellido, fecha_registro, primer_pedido.",
+    "sql": "WITH primero AS (SELECT cliente_id, MIN(fecha_pedido) AS primer_pedido FROM pedidos GROUP BY cliente_id) SELECT c.nombre, c.apellido, c.fecha_registro, pr.primer_pedido FROM clientes c JOIN primero pr ON pr.cliente_id = c.cliente_id WHERE DATEDIFF(pr.primer_pedido, c.fecha_registro) <= 30",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Clasifica los productos reseñados según su calificación promedio usando DENSE_RANK (1 = mejor). Devuelve: nombre_producto, calificacion_promedio (2 decimales), ranking, ordenado por ranking y nombre.",
+    "sql": "WITH prom AS (SELECT pr.nombre_producto, ROUND(AVG(r.calificacion), 2) AS calificacion_promedio FROM resenas r JOIN productos pr ON pr.producto_id = r.producto_id GROUP BY pr.producto_id, pr.nombre_producto) SELECT nombre_producto, calificacion_promedio, DENSE_RANK() OVER (ORDER BY calificacion_promedio DESC) AS ranking FROM prom ORDER BY ranking, nombre_producto",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué pedidos tienen un total mayor que el promedio de los pedidos del mismo cliente? Devuelve: pedido_id, cliente_id, total.",
+    "sql": "SELECT p.pedido_id, p.cliente_id, p.total FROM pedidos p WHERE p.total > (SELECT AVG(p2.total) FROM pedidos p2 WHERE p2.cliente_id = p.cliente_id)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Por año, ¿cuántos pedidos hubo, cuántos se cancelaron y qué porcentaje representan los cancelados? Devuelve: anio, total_pedidos, cancelados, porcentaje_cancelados (2 decimales), ordenado por año.",
+    "sql": "SELECT YEAR(fecha_pedido) AS anio, COUNT(*) AS total_pedidos, SUM(estado = 'cancelado') AS cancelados, ROUND(100 * SUM(estado = 'cancelado') / COUNT(*), 2) AS porcentaje_cancelados FROM pedidos GROUP BY YEAR(fecha_pedido) ORDER BY anio",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada pedido que no sea el primero de su cliente, ¿cuántos días pasaron desde el pedido anterior del mismo cliente? Devuelve: cliente_id, pedido_id, fecha_pedido, dias_desde_anterior.",
+    "sql": "WITH s AS (SELECT cliente_id, pedido_id, fecha_pedido, LAG(fecha_pedido) OVER (PARTITION BY cliente_id ORDER BY fecha_pedido, pedido_id) AS anterior FROM pedidos) SELECT cliente_id, pedido_id, fecha_pedido, DATEDIFF(fecha_pedido, anterior) AS dias_desde_anterior FROM s WHERE anterior IS NOT NULL",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué porcentaje de los ingresos totales (cantidad × precio unitario − descuento, pedidos no cancelados) aporta cada categoría? Devuelve: nombre_categoria, ingresos, porcentaje (ambos con 2 decimales).",
+    "sql": "WITH v AS (SELECT cat.nombre_categoria, SUM(d.cantidad * d.precio_unitario - d.descuento) AS ingresos FROM detalle_pedido d JOIN pedidos p ON p.pedido_id = d.pedido_id JOIN productos pr ON pr.producto_id = d.producto_id JOIN categorias cat ON cat.categoria_id = pr.categoria_id WHERE p.estado <> 'cancelado' GROUP BY cat.categoria_id, cat.nombre_categoria) SELECT nombre_categoria, ROUND(ingresos, 2) AS ingresos, ROUND(100 * ingresos / SUM(ingresos) OVER (), 2) AS porcentaje FROM v",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué productos se vendieron en 2024 pero no se han vuelto a vender en 2025? Devuelve: producto_id, nombre_producto.",
+    "sql": "SELECT pr.producto_id, pr.nombre_producto FROM productos pr WHERE EXISTS (SELECT 1 FROM detalle_pedido d JOIN pedidos p ON p.pedido_id = d.pedido_id WHERE d.producto_id = pr.producto_id AND YEAR(p.fecha_pedido) = 2024) AND NOT EXISTS (SELECT 1 FROM detalle_pedido d JOIN pedidos p ON p.pedido_id = d.pedido_id WHERE d.producto_id = pr.producto_id AND YEAR(p.fecha_pedido) = 2025)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Agrupa a los clientes por año de registro y muestra cuántos son y cuánto gastaron en promedio por cliente en pedidos no cancelados (los que no compraron cuentan como 0). Devuelve: anio_registro, num_clientes, gasto_promedio (2 decimales), ordenado por año.",
+    "sql": "WITH g AS (SELECT c.cliente_id, YEAR(c.fecha_registro) AS anio_registro, COALESCE(SUM(p.total), 0) AS gasto FROM clientes c LEFT JOIN pedidos p ON p.cliente_id = c.cliente_id AND p.estado <> 'cancelado' GROUP BY c.cliente_id, YEAR(c.fecha_registro)) SELECT anio_registro, COUNT(*) AS num_clientes, ROUND(AVG(gasto), 2) AS gasto_promedio FROM g GROUP BY anio_registro ORDER BY anio_registro",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué pedidos se hicieron en los 90 días previos al 31 de octubre de 2025 (incluido ese día)? Devuelve: pedido_id, fecha_pedido, total.",
+    "sql": "SELECT pedido_id, fecha_pedido, total FROM pedidos WHERE DATE(fecha_pedido) BETWEEN DATE_SUB('2025-10-31', INTERVAL 90 DAY) AND '2025-10-31'",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada cliente con al menos dos pedidos, ¿cuál fue su segundo pedido en orden cronológico? Devuelve: cliente_id, pedido_id, fecha_pedido.",
+    "sql": "WITH r AS (SELECT cliente_id, pedido_id, fecha_pedido, ROW_NUMBER() OVER (PARTITION BY cliente_id ORDER BY fecha_pedido, pedido_id) AS rn FROM pedidos) SELECT cliente_id, pedido_id, fecha_pedido FROM r WHERE rn = 2",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué productos tienen una calificación promedio superior al promedio general de todas las reseñas? Devuelve: nombre_producto, calificacion_promedio (2 decimales).",
+    "sql": "SELECT pr.nombre_producto, ROUND(AVG(r.calificacion), 2) AS calificacion_promedio FROM resenas r JOIN productos pr ON pr.producto_id = r.producto_id GROUP BY pr.producto_id, pr.nombre_producto HAVING AVG(r.calificacion) > (SELECT AVG(calificacion) FROM resenas)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué clientes han hecho pedidos en al menos 3 meses distintos (contando mes y año)? Devuelve: nombre, apellido, meses_activos.",
+    "sql": "SELECT c.nombre, c.apellido, COUNT(DISTINCT DATE_FORMAT(p.fecha_pedido, '%Y-%m')) AS meses_activos FROM clientes c JOIN pedidos p ON p.cliente_id = c.cliente_id GROUP BY c.cliente_id, c.nombre, c.apellido HAVING COUNT(DISTINCT DATE_FORMAT(p.fecha_pedido, '%Y-%m')) >= 3",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿En qué pedidos entregados el pago aprobado se registró más de 24 horas después del pedido? Devuelve: pedido_id, fecha_pedido, fecha_pago.",
+    "sql": "SELECT p.pedido_id, p.fecha_pedido, pg.fecha_pago FROM pedidos p JOIN pagos pg ON pg.pedido_id = p.pedido_id WHERE p.estado = 'entregado' AND pg.aprobado = 1 AND TIMESTAMPDIFF(HOUR, p.fecha_pedido, pg.fecha_pago) > 24",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Cuál fue el mes con más ventas (total de pedidos no cancelados) de cada año? Devuelve: anio, mes, ventas.",
+    "sql": "WITH m AS (SELECT YEAR(fecha_pedido) AS anio, MONTH(fecha_pedido) AS mes, SUM(total) AS ventas FROM pedidos WHERE estado <> 'cancelado' GROUP BY YEAR(fecha_pedido), MONTH(fecha_pedido)), r AS (SELECT anio, mes, ventas, ROW_NUMBER() OVER (PARTITION BY anio ORDER BY ventas DESC, mes) AS rn FROM m) SELECT anio, mes, ventas FROM r WHERE rn = 1",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Compara el precio de cada producto con el promedio de su categoría. Devuelve: nombre_producto, precio, promedio_categoria y diferencia (precio menos promedio), ambos con 2 decimales.",
+    "sql": "SELECT nombre_producto, precio, ROUND(AVG(precio) OVER (PARTITION BY categoria_id), 2) AS promedio_categoria, ROUND(precio - AVG(precio) OVER (PARTITION BY categoria_id), 2) AS diferencia FROM productos",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Si la entrega estimada es 5 días después del envío, ¿qué envíos llegaron después de esa fecha? Devuelve: envio_id, fecha_envio, fecha_estimada, fecha_entrega.",
+    "sql": "SELECT envio_id, fecha_envio, DATE_ADD(fecha_envio, INTERVAL 5 DAY) AS fecha_estimada, fecha_entrega FROM envios WHERE fecha_entrega > DATE_ADD(fecha_envio, INTERVAL 5 DAY)",
+    "nivel": "dificil"
+  }
+]

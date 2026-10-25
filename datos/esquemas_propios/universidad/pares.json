@@ -1,0 +1,402 @@
+[
+  {
+    "pregunta": "¿Cuáles son el nombre y el apellido de los estudiantes que tienen beca?",
+    "sql": "SELECT nom_est, ape_est FROM est WHERE beca = 1",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista el código, el nombre y los créditos de los cursos que no tienen prerrequisito.",
+    "sql": "SELECT cod_cur, nom_cur, cred FROM cur WHERE prereq IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos estudiantes hay registrados en total? Devuelve: total_est.",
+    "sql": "SELECT COUNT(*) AS total_est FROM est",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra el nombre, el apellido y el salario mensual de los profesores con doctorado (PhD), del salario más alto al más bajo; en caso de empate, ordena por apellido.",
+    "sql": "SELECT nom_prof, ape_prof, sal_men FROM prof WHERE grado = 'PhD' ORDER BY sal_men DESC, ape_prof",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es el salario mensual promedio de los profesores? Devuelve: sal_prom, redondeado a 2 decimales.",
+    "sql": "SELECT ROUND(AVG(sal_men), 2) AS sal_prom FROM prof",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Dame el nombre y la cuota semestral de las carreras cuya cuota por semestre es mayor a 6000 quetzales.",
+    "sql": "SELECT nom_carr, cuota_sem FROM carr WHERE cuota_sem > 6000",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué profesores no tienen correo electrónico registrado? Devuelve su nombre y apellido.",
+    "sql": "SELECT nom_prof, ape_prof FROM prof WHERE email_prof IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista el carné, el nombre, el apellido y la fecha de ingreso de los estudiantes que ingresaron a la universidad en el año 2023.",
+    "sql": "SELECT est_id, nom_est, ape_est, fec_ing FROM est WHERE YEAR(fec_ing) = 2023",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántas secciones se abrieron en cada semestre? Devuelve: sem, num_sec.",
+    "sql": "SELECT sem, COUNT(*) AS num_sec FROM sec GROUP BY sem",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es la nota final más alta y la más baja que se han registrado? Devuelve: nota_max, nota_min.",
+    "sql": "SELECT MAX(nota_fin) AS nota_max, MIN(nota_fin) AS nota_min FROM insc",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué facultades fueron fundadas antes de 1970? Muestra el nombre de la facultad y su año de fundación.",
+    "sql": "SELECT nom_fac, anio_fund FROM fac WHERE anio_fund < 1970",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es el nombre de las facultades que no tienen decano registrado?",
+    "sql": "SELECT nom_fac FROM fac WHERE dec_fac IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra los 5 pagos de mayor monto con su identificador, el carné del estudiante y el monto; si hay empate en el monto, ordena por identificador de pago ascendente.",
+    "sql": "SELECT pag_id, est_id, monto FROM pag ORDER BY monto DESC, pag_id LIMIT 5",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos pagos se han hecho con cada método de pago? Devuelve: met_pag, num_pagos.",
+    "sql": "SELECT met_pag, COUNT(*) AS num_pagos FROM pag GROUP BY met_pag",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es el monto total pagado por transferencia? Devuelve: total_transf.",
+    "sql": "SELECT SUM(monto) AS total_transf FROM pag WHERE met_pag = 'transferencia'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista el identificador de sección, el código de curso y el semestre de las secciones que no tienen aula asignada.",
+    "sql": "SELECT sec_id, cod_cur, sem FROM sec WHERE aula IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué cursos tienen 5 créditos o más? Devuelve el nombre del curso y sus créditos.",
+    "sql": "SELECT nom_cur, cred FROM cur WHERE cred >= 5",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra el nombre, el apellido y la fecha de nacimiento de las estudiantes de género femenino nacidas a partir del 1 de enero de 2003.",
+    "sql": "SELECT nom_est, ape_est, fec_nac FROM est WHERE gen = 'F' AND fec_nac >= '2003-01-01'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos profesores hay por grado académico? Devuelve: grado, num_prof.",
+    "sql": "SELECT grado, COUNT(*) AS num_prof FROM prof GROUP BY grado",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Dame el identificador de inscripción, el carné del estudiante y la sección de todas las inscripciones en estado retirada.",
+    "sql": "SELECT insc_id, est_id, sec_id FROM insc WHERE est_insc = 'retirada'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué carreras duran exactamente 8 semestres? Devuelve solo el nombre de la carrera.",
+    "sql": "SELECT nom_carr FROM carr WHERE dur_sem = 8",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista el identificador, el monto y la fecha de los pagos realizados en enero de 2024.",
+    "sql": "SELECT pag_id, monto, fec_pag FROM pag WHERE fec_pag BETWEEN '2024-01-01' AND '2024-01-31'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es la nota final promedio de las inscripciones aprobadas? Devuelve: prom_aprob (2 decimales).",
+    "sql": "SELECT ROUND(AVG(nota_fin), 2) AS prom_aprob FROM insc WHERE est_insc = 'aprobada'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra el nombre, el apellido y la fecha de contratación de los profesores contratados entre 2015 y 2019 (ambos años incluidos), ordenados por fecha de contratación.",
+    "sql": "SELECT nom_prof, ape_prof, fec_contr FROM prof WHERE YEAR(fec_contr) BETWEEN 2015 AND 2019 ORDER BY fec_contr",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos estudiantes no tienen correo registrado? Devuelve: num_sin_correo.",
+    "sql": "SELECT COUNT(*) AS num_sin_correo FROM est WHERE email_est IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra el nombre de cada carrera junto con el nombre de la facultad a la que pertenece.",
+    "sql": "SELECT c.nom_carr, f.nom_fac FROM carr c JOIN fac f ON f.fac_id = c.fac_id",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos estudiantes tiene cada carrera? Devuelve: nom_carr, num_est.",
+    "sql": "SELECT c.nom_carr, COUNT(e.est_id) AS num_est FROM carr c LEFT JOIN est e ON e.carr_id = c.carr_id GROUP BY c.carr_id, c.nom_carr",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos profesores hay en cada facultad? Devuelve: nom_fac, num_prof.",
+    "sql": "SELECT f.nom_fac, COUNT(p.prof_id) AS num_prof FROM fac f LEFT JOIN prof p ON p.fac_id = f.fac_id GROUP BY f.fac_id, f.nom_fac",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada curso, ¿cuántas secciones se han abierto? Incluye los cursos que nunca se han abierto con 0. Devuelve: cod_cur, nom_cur, num_sec.",
+    "sql": "SELECT c.cod_cur, c.nom_cur, COUNT(s.sec_id) AS num_sec FROM cur c LEFT JOIN sec s ON s.cod_cur = c.cod_cur GROUP BY c.cod_cur, c.nom_cur",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada estudiante, muestra su carné, nombre, apellido y cuántas inscripciones tiene, incluyendo a quienes no tienen ninguna (con 0). Devuelve: est_id, nom_est, ape_est, num_insc.",
+    "sql": "SELECT e.est_id, e.nom_est, e.ape_est, COUNT(i.insc_id) AS num_insc FROM est e LEFT JOIN insc i ON i.est_id = e.est_id GROUP BY e.est_id, e.nom_est, e.ape_est",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuál es la nota final promedio de cada curso, considerando solo las inscripciones con nota? Devuelve: nom_cur, prom_nota con 2 decimales.",
+    "sql": "SELECT c.nom_cur, ROUND(AVG(i.nota_fin), 2) AS prom_nota FROM insc i JOIN sec s ON s.sec_id = i.sec_id JOIN cur c ON c.cod_cur = s.cod_cur WHERE i.nota_fin IS NOT NULL GROUP BY c.cod_cur, c.nom_cur",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué profesores han impartido más de 2 secciones? Devuelve: nom_prof, ape_prof, num_sec.",
+    "sql": "SELECT p.nom_prof, p.ape_prof, COUNT(*) AS num_sec FROM prof p JOIN sec s ON s.prof_id = p.prof_id GROUP BY p.prof_id, p.nom_prof, p.ape_prof HAVING COUNT(*) > 2",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Quiénes son los 5 estudiantes que más dinero han pagado en total? Devuelve: est_id, nom_est, ape_est, total_pagado, de mayor a menor y con desempate por carné.",
+    "sql": "SELECT e.est_id, e.nom_est, e.ape_est, SUM(p.monto) AS total_pagado FROM est e JOIN pag p ON p.est_id = e.est_id GROUP BY e.est_id, e.nom_est, e.ape_est ORDER BY total_pagado DESC, e.est_id LIMIT 5",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué carreras tienen una nota final promedio de sus estudiantes superior a 70? Devuelve: nom_carr, prom_nota (2 decimales).",
+    "sql": "SELECT c.nom_carr, ROUND(AVG(i.nota_fin), 2) AS prom_nota FROM carr c JOIN est e ON e.carr_id = c.carr_id JOIN insc i ON i.est_id = e.est_id GROUP BY c.carr_id, c.nom_carr HAVING AVG(i.nota_fin) > 70",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para las secciones del semestre 2024-1, muestra el identificador de sección, el nombre del curso y el nombre y apellido del profesor que la imparte.",
+    "sql": "SELECT s.sec_id, c.nom_cur, p.nom_prof, p.ape_prof FROM sec s JOIN cur c ON c.cod_cur = s.cod_cur JOIN prof p ON p.prof_id = s.prof_id WHERE s.sem = '2024-1'",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas inscripciones hay de cada estado en cada semestre? Devuelve: sem, est_insc, num_insc.",
+    "sql": "SELECT s.sem, i.est_insc, COUNT(*) AS num_insc FROM insc i JOIN sec s ON s.sec_id = i.sec_id GROUP BY s.sem, i.est_insc",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué facultades pagan a sus profesores un salario mensual promedio mayor a 13000? Devuelve: nom_fac, sal_prom con 2 decimales.",
+    "sql": "SELECT f.nom_fac, ROUND(AVG(p.sal_men), 2) AS sal_prom FROM fac f JOIN prof p ON p.fac_id = f.fac_id GROUP BY f.fac_id, f.nom_fac HAVING AVG(p.sal_men) > 13000",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué estudiantes han reprobado al menos 2 cursos? Muestra el carné, el nombre y la cantidad de cursos reprobados como num_reprob.",
+    "sql": "SELECT e.est_id, e.nom_est, COUNT(*) AS num_reprob FROM est e JOIN insc i ON i.est_id = e.est_id WHERE i.est_insc = 'reprobada' GROUP BY e.est_id, e.nom_est HAVING COUNT(*) >= 2",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Lista los cursos que tienen prerrequisito con su código, su nombre y el nombre del curso prerrequisito. Devuelve: cod_cur, nom_cur, nom_prereq.",
+    "sql": "SELECT c.cod_cur, c.nom_cur, p.nom_cur AS nom_prereq FROM cur c JOIN cur p ON p.cod_cur = c.prereq",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas carreras ofrece cada facultad? Devuelve: nom_fac, num_carr.",
+    "sql": "SELECT f.nom_fac, COUNT(c.carr_id) AS num_carr FROM fac f LEFT JOIN carr c ON c.fac_id = f.fac_id GROUP BY f.fac_id, f.nom_fac",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuánto se ha pagado en total por los estudiantes de cada carrera? Devuelve: nom_carr, total_pagado.",
+    "sql": "SELECT c.nom_carr, SUM(p.monto) AS total_pagado FROM pag p JOIN est e ON e.est_id = p.est_id JOIN carr c ON c.carr_id = e.carr_id GROUP BY c.carr_id, c.nom_carr",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué estudiantes con beca se inscribieron en alguna sección del año 2025? Devuelve el nombre y apellido sin repetir.",
+    "sql": "SELECT DISTINCT e.nom_est, e.ape_est FROM est e JOIN insc i ON i.est_id = e.est_id JOIN sec s ON s.sec_id = i.sec_id WHERE e.beca = 1 AND s.anio = 2025",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿A cuántos estudiantes distintos les ha dado clase cada profesor? Devuelve: nom_prof, ape_prof, num_est.",
+    "sql": "SELECT p.nom_prof, p.ape_prof, COUNT(DISTINCT i.est_id) AS num_est FROM prof p JOIN sec s ON s.prof_id = p.prof_id JOIN insc i ON i.sec_id = s.sec_id GROUP BY p.prof_id, p.nom_prof, p.ape_prof",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada profesor, muestra cuántas secciones ha impartido, incluyendo a los que no han impartido ninguna con 0. Devuelve: prof_id, nom_prof, ape_prof, num_sec.",
+    "sql": "SELECT p.prof_id, p.nom_prof, p.ape_prof, COUNT(s.sec_id) AS num_sec FROM prof p LEFT JOIN sec s ON s.prof_id = p.prof_id GROUP BY p.prof_id, p.nom_prof, p.ape_prof",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos créditos ha aprobado cada estudiante? Considera solo a quienes tienen al menos un curso aprobado. Devuelve: est_id, nom_est, cred_aprob.",
+    "sql": "SELECT e.est_id, e.nom_est, SUM(c.cred) AS cred_aprob FROM est e JOIN insc i ON i.est_id = e.est_id JOIN sec s ON s.sec_id = i.sec_id JOIN cur c ON c.cod_cur = s.cod_cur WHERE i.est_insc = 'aprobada' GROUP BY e.est_id, e.nom_est",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada carrera, ¿cuántos pagos han hecho sus estudiantes? Incluye las carreras sin pagos con 0. Devuelve: nom_carr, num_pagos.",
+    "sql": "SELECT c.nom_carr, COUNT(p.pag_id) AS num_pagos FROM carr c LEFT JOIN est e ON e.carr_id = c.carr_id LEFT JOIN pag p ON p.est_id = e.est_id GROUP BY c.carr_id, c.nom_carr",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuál es la nota final promedio según el grado académico del profesor que imparte la sección? Devuelve: grado, prom_nota (2 decimales).",
+    "sql": "SELECT p.grado, ROUND(AVG(i.nota_fin), 2) AS prom_nota FROM insc i JOIN sec s ON s.sec_id = i.sec_id JOIN prof p ON p.prof_id = s.prof_id GROUP BY p.grado",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué cursos acumulan más de 3 inscripciones en total? Devuelve: nom_cur, num_insc.",
+    "sql": "SELECT c.nom_cur, COUNT(*) AS num_insc FROM cur c JOIN sec s ON s.cod_cur = c.cod_cur JOIN insc i ON i.sec_id = s.sec_id GROUP BY c.cod_cur, c.nom_cur HAVING COUNT(*) > 3",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada curso con inscripciones, cuenta cuántas fueron aprobadas y cuántas reprobadas. Devuelve: nom_cur, aprobados, reprobados.",
+    "sql": "SELECT c.nom_cur, SUM(i.est_insc = 'aprobada') AS aprobados, SUM(i.est_insc = 'reprobada') AS reprobados FROM cur c JOIN sec s ON s.cod_cur = c.cod_cur JOIN insc i ON i.sec_id = s.sec_id GROUP BY c.cod_cur, c.nom_cur",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Lista el nombre y apellido de los estudiantes de la facultad de Ingeniería junto con el nombre de su carrera.",
+    "sql": "SELECT e.nom_est, e.ape_est, c.nom_carr FROM est e JOIN carr c ON c.carr_id = e.carr_id JOIN fac f ON f.fac_id = c.fac_id WHERE f.nom_fac = 'Ingeniería'",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿En qué semestres el monto total pagado superó los 20000 quetzales? Devuelve: sem, total_sem.",
+    "sql": "SELECT sem, SUM(monto) AS total_sem FROM pag GROUP BY sem HAVING SUM(monto) > 20000",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué aulas se han usado en al menos 5 secciones? Devuelve: aula, num_sec.",
+    "sql": "SELECT aula, COUNT(*) AS num_sec FROM sec WHERE aula IS NOT NULL GROUP BY aula HAVING COUNT(*) >= 5",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿En qué cursos se ha retirado algún estudiante? Muestra el nombre del curso y el número de retiros como num_retiros.",
+    "sql": "SELECT c.nom_cur, COUNT(*) AS num_retiros FROM insc i JOIN sec s ON s.sec_id = i.sec_id JOIN cur c ON c.cod_cur = s.cod_cur WHERE i.est_insc = 'retirada' GROUP BY c.cod_cur, c.nom_cur",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada carrera, ¿cuántos estudiantes tienen beca y cuántos estudiantes hay en total? Devuelve: nom_carr, num_becados, num_total.",
+    "sql": "SELECT c.nom_carr, SUM(e.beca) AS num_becados, COUNT(*) AS num_total FROM carr c JOIN est e ON e.carr_id = c.carr_id GROUP BY c.carr_id, c.nom_carr",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Muestra los pagos mayores a 6000 quetzales con el identificador del pago, el nombre del estudiante, el nombre de su carrera y el monto.",
+    "sql": "SELECT p.pag_id, e.nom_est, c.nom_carr, p.monto FROM pag p JOIN est e ON e.est_id = p.est_id JOIN carr c ON c.carr_id = e.carr_id WHERE p.monto > 6000",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Usando una CTE, calcula la nota final promedio de cada estudiante y devuelve solo a los que superan el promedio general de todas las notas. Devuelve: est_id, nom_est, prom_est (2 decimales).",
+    "sql": "WITH prom AS (SELECT est_id, AVG(nota_fin) AS p FROM insc WHERE nota_fin IS NOT NULL GROUP BY est_id) SELECT e.est_id, e.nom_est, ROUND(pr.p, 2) AS prom_est FROM prom pr JOIN est e ON e.est_id = pr.est_id WHERE pr.p > (SELECT AVG(nota_fin) FROM insc)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada semestre, ¿qué estudiante obtuvo la nota final más alta? Si hay empate, toma la inscripción con menor identificador. Devuelve: sem, est_id, nota_fin.",
+    "sql": "WITH r AS (SELECT s.sem, i.est_id, i.nota_fin, ROW_NUMBER() OVER (PARTITION BY s.sem ORDER BY i.nota_fin DESC, i.insc_id) AS rn FROM insc i JOIN sec s ON s.sec_id = i.sec_id WHERE i.nota_fin IS NOT NULL) SELECT sem, est_id, nota_fin FROM r WHERE rn = 1",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Clasifica a los profesores por salario mensual dentro de su facultad usando RANK (1 = mejor pagado). Devuelve: nom_fac, nom_prof, ape_prof, sal_men, rango.",
+    "sql": "SELECT f.nom_fac, p.nom_prof, p.ape_prof, p.sal_men, RANK() OVER (PARTITION BY p.fac_id ORDER BY p.sal_men DESC) AS rango FROM prof p JOIN fac f ON f.fac_id = p.fac_id",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Asigna una posición a cada carrera según su cuota semestral de mayor a menor usando DENSE_RANK. Devuelve: nom_carr, cuota_sem, posicion.",
+    "sql": "SELECT nom_carr, cuota_sem, DENSE_RANK() OVER (ORDER BY cuota_sem DESC) AS posicion FROM carr",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Calcula el monto total pagado en cada semestre y, junto a él, el total del semestre anterior (NULL para el primero), ordenado por semestre. Devuelve: sem, total_sem, total_anterior.",
+    "sql": "WITH t AS (SELECT sem, SUM(monto) AS total_sem FROM pag GROUP BY sem) SELECT sem, total_sem, LAG(total_sem) OVER (ORDER BY sem) AS total_anterior FROM t ORDER BY sem",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada pago, muestra el carné del estudiante, la fecha, el monto y el acumulado pagado por ese estudiante hasta ese pago, ordenado por estudiante y fecha. Devuelve: est_id, fec_pag, monto, acumulado.",
+    "sql": "SELECT est_id, fec_pag, monto, SUM(monto) OVER (PARTITION BY est_id ORDER BY fec_pag, pag_id) AS acumulado FROM pag ORDER BY est_id, fec_pag, pag_id",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué inscripciones tienen una nota final mayor que el promedio de su propia sección? Devuelve: est_id, sec_id, nota_fin.",
+    "sql": "SELECT i.est_id, i.sec_id, i.nota_fin FROM insc i WHERE i.nota_fin > (SELECT AVG(i2.nota_fin) FROM insc i2 WHERE i2.sec_id = i.sec_id)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué estudiantes nunca se han inscrito en ninguna sección? Devuelve: est_id, nom_est, ape_est.",
+    "sql": "SELECT e.est_id, e.nom_est, e.ape_est FROM est e WHERE NOT EXISTS (SELECT 1 FROM insc i WHERE i.est_id = e.est_id)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué profesores impartieron al menos una sección durante el año 2025? Devuelve el nombre y el apellido.",
+    "sql": "SELECT p.nom_prof, p.ape_prof FROM prof p WHERE EXISTS (SELECT 1 FROM sec s WHERE s.prof_id = p.prof_id AND s.anio = 2025)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué cursos del plan de estudios nunca se han abierto en ninguna sección? Devuelve: cod_cur, nom_cur.",
+    "sql": "SELECT c.cod_cur, c.nom_cur FROM cur c WHERE NOT EXISTS (SELECT 1 FROM sec s WHERE s.cod_cur = c.cod_cur)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué edad en años cumplidos tenía cada estudiante al momento de ingresar a la universidad? Devuelve: est_id, nom_est, edad_ingreso.",
+    "sql": "SELECT est_id, nom_est, TIMESTAMPDIFF(YEAR, fec_nac, fec_ing) AS edad_ingreso FROM est",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada mes del año 2024, ¿cuántos pagos se hicieron y cuánto se pagó en total? Usa el formato AAAA-MM para el mes y ordena cronológicamente. Devuelve: mes, num_pagos, total_mes.",
+    "sql": "SELECT DATE_FORMAT(fec_pag, '%Y-%m') AS mes, COUNT(*) AS num_pagos, SUM(monto) AS total_mes FROM pag WHERE YEAR(fec_pag) = 2024 GROUP BY DATE_FORMAT(fec_pag, '%Y-%m') ORDER BY mes",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué profesores tendrán más de 10 años de antigüedad al 31 de diciembre de 2025? Devuelve: nom_prof, ape_prof, antig_anios (años completos).",
+    "sql": "SELECT nom_prof, ape_prof, TIMESTAMPDIFF(YEAR, fec_contr, '2025-12-31') AS antig_anios FROM prof WHERE TIMESTAMPDIFF(YEAR, fec_contr, '2025-12-31') > 10",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué carrera tiene el mayor número de inscripciones aprobadas? Si hay empate, elige la de nombre alfabéticamente menor. Devuelve: nom_carr, num_aprob.",
+    "sql": "WITH a AS (SELECT e.carr_id, COUNT(*) AS num_aprob FROM insc i JOIN est e ON e.est_id = i.est_id WHERE i.est_insc = 'aprobada' GROUP BY e.carr_id) SELECT c.nom_carr, a.num_aprob FROM a JOIN carr c ON c.carr_id = a.carr_id ORDER BY a.num_aprob DESC, c.nom_carr LIMIT 1",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué profesores ganan más que el salario promedio de los profesores de su misma facultad? Devuelve: nom_prof, ape_prof, sal_men.",
+    "sql": "SELECT p.nom_prof, p.ape_prof, p.sal_men FROM prof p WHERE p.sal_men > (SELECT AVG(p2.sal_men) FROM prof p2 WHERE p2.fac_id = p.fac_id)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Lista los pagos realizados en los 30 días anteriores al 15 de julio de 2024 (incluido ese día). Devuelve: pag_id, est_id, monto, fec_pag.",
+    "sql": "SELECT pag_id, est_id, monto, fec_pag FROM pag WHERE fec_pag BETWEEN DATE_SUB('2024-07-15', INTERVAL 30 DAY) AND '2024-07-15'",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada inscripción, muestra el carné del estudiante, la fecha de inscripción y cuántos días pasaron hasta su siguiente inscripción (NULL si no hay otra). Devuelve: est_id, fec_insc, dias_hasta_sig.",
+    "sql": "SELECT est_id, fec_insc, DATEDIFF(LEAD(fec_insc) OVER (PARTITION BY est_id ORDER BY fec_insc, insc_id), fec_insc) AS dias_hasta_sig FROM insc",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Dentro de cada carrera, ¿cuáles son los 2 cursos con mayor nota final promedio? Desempata por nombre del curso. Devuelve: nom_carr, nom_cur, prom_nota (2 decimales).",
+    "sql": "WITH p AS (SELECT c.carr_id, c.nom_cur, AVG(i.nota_fin) AS prom FROM cur c JOIN sec s ON s.cod_cur = c.cod_cur JOIN insc i ON i.sec_id = s.sec_id WHERE i.nota_fin IS NOT NULL GROUP BY c.cod_cur, c.carr_id, c.nom_cur), r AS (SELECT carr_id, nom_cur, prom, ROW_NUMBER() OVER (PARTITION BY carr_id ORDER BY prom DESC, nom_cur) AS rn FROM p) SELECT ca.nom_carr, r.nom_cur, ROUND(r.prom, 2) AS prom_nota FROM r JOIN carr ca ON ca.carr_id = r.carr_id WHERE r.rn <= 2",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Calcula el porcentaje de aprobación de cada curso considerando solo inscripciones aprobadas o reprobadas. Devuelve: nom_cur, pct_aprob (2 decimales).",
+    "sql": "WITH t AS (SELECT s.cod_cur, SUM(i.est_insc = 'aprobada') AS aprob, COUNT(*) AS total FROM insc i JOIN sec s ON s.sec_id = i.sec_id WHERE i.est_insc IN ('aprobada', 'reprobada') GROUP BY s.cod_cur) SELECT c.nom_cur, ROUND(100 * t.aprob / t.total, 2) AS pct_aprob FROM t JOIN cur c ON c.cod_cur = t.cod_cur",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué estudiantes se han inscrito tanto en un curso como en su prerrequisito? Devuelve: est_id, cod_cur, prereq (sin repetir).",
+    "sql": "SELECT DISTINCT i.est_id, c.cod_cur, c.prereq FROM insc i JOIN sec s ON s.sec_id = i.sec_id JOIN cur c ON c.cod_cur = s.cod_cur WHERE c.prereq IS NOT NULL AND EXISTS (SELECT 1 FROM insc i2 JOIN sec s2 ON s2.sec_id = i2.sec_id WHERE i2.est_id = i.est_id AND s2.cod_cur = c.prereq)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué estudiante tiene el promedio de nota final más alto de su carrera? Incluye empates. Devuelve: nom_carr, est_id, nom_est, prom_est (2 decimales).",
+    "sql": "WITH p AS (SELECT e.est_id, e.nom_est, e.carr_id, AVG(i.nota_fin) AS prom FROM est e JOIN insc i ON i.est_id = e.est_id WHERE i.nota_fin IS NOT NULL GROUP BY e.est_id, e.nom_est, e.carr_id), m AS (SELECT p.*, MAX(prom) OVER (PARTITION BY carr_id) AS mx FROM p) SELECT c.nom_carr, m.est_id, m.nom_est, ROUND(m.prom, 2) AS prom_est FROM m JOIN carr c ON c.carr_id = m.carr_id WHERE m.prom = m.mx",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué estudiantes pagaron en algún semestre al menos la cuota completa de su carrera? Devuelve: est_id, sem, total_pagado, cuota_sem.",
+    "sql": "WITH t AS (SELECT est_id, sem, SUM(monto) AS total_pagado FROM pag GROUP BY est_id, sem) SELECT t.est_id, t.sem, t.total_pagado, c.cuota_sem FROM t JOIN est e ON e.est_id = t.est_id JOIN carr c ON c.carr_id = e.carr_id WHERE t.total_pagado >= c.cuota_sem",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué pagos se hicieron durante el primer año del estudiante en la universidad, es decir, antes de cumplirse un año desde su fecha de ingreso? Devuelve: pag_id, est_id, fec_ing, fec_pag.",
+    "sql": "SELECT p.pag_id, p.est_id, e.fec_ing, p.fec_pag FROM pag p JOIN est e ON e.est_id = p.est_id WHERE p.fec_pag < DATE_ADD(e.fec_ing, INTERVAL 1 YEAR)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada profesor que ha impartido secciones, muestra cuántas ha impartido y qué porcentaje representan del total de secciones. Devuelve: nom_prof, ape_prof, num_sec, pct_total (2 decimales).",
+    "sql": "SELECT p.nom_prof, p.ape_prof, COUNT(*) AS num_sec, ROUND(100 * COUNT(*) / SUM(COUNT(*)) OVER (), 2) AS pct_total FROM prof p JOIN sec s ON s.prof_id = p.prof_id GROUP BY p.prof_id, p.nom_prof, p.ape_prof",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Cuál es la edad promedio en años cumplidos al 1 de enero de 2025 de los estudiantes de cada carrera? Devuelve: nom_carr, edad_prom (2 decimales).",
+    "sql": "SELECT c.nom_carr, ROUND(AVG(TIMESTAMPDIFF(YEAR, e.fec_nac, '2025-01-01')), 2) AS edad_prom FROM est e JOIN carr c ON c.carr_id = e.carr_id GROUP BY c.carr_id, c.nom_carr",
+    "nivel": "dificil"
+  }
+]

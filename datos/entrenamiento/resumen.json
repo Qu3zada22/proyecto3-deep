@@ -1,0 +1,37 @@
+{
+  "pares_unicos_train": 6960,
+  "ejemplos_train": 7920,
+  "ejemplos_dev_interno": 302,
+  "spider_train": 6000,
+  "propios_train": 960,
+  "repetir_propios": 2,
+  "esquemas_train": 169,
+  "bases_dev_interno": [
+    "company_office",
+    "cre_Doc_Control_Systems",
+    "election_representative",
+    "insurance_policies",
+    "school_player",
+    "ship_mission",
+    "tvshow",
+    "wine_1"
+  ],
+  "descartados_por_largo": 63,
+  "tokens_mediana": 704,
+  "tokens_p95": 2290,
+  "tokens_total": 8100198,
+  "propios_por_esquema": {
+    "banco": 80,
+    "hospital": 80,
+    "hotel": 80,
+    "hr_company": 80,
+    "inventario": 80,
+    "liga_futbol": 80,
+    "logistica": 80,
+    "restaurante": 80,
+    "sales_crm": 80,
+    "streaming": 80,
+    "tienda_linea": 80,
+    "universidad": 80
+  }
+}

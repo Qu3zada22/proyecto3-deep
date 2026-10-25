@@ -1,0 +1,402 @@
+[
+  {
+    "pregunta": "¿Cuál es el nombre y el apellido de los pacientes que no tienen aseguradora?",
+    "sql": "SELECT nombre, apellido FROM pacientes WHERE aseguradora IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos médicos siguen activos en el hospital? Devuelve: num_activos.",
+    "sql": "SELECT COUNT(*) AS num_activos FROM medicos WHERE activo = 1",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista el nombre comercial y el precio unitario de los medicamentos que requieren receta, del más caro al más barato; en caso de empate, por nombre comercial.",
+    "sql": "SELECT nombre_comercial, precio_unitario FROM medicamentos WHERE requiere_receta = 1 ORDER BY precio_unitario DESC, nombre_comercial",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra el nombre, el apellido y el teléfono de los pacientes que viven en Quetzaltenango.",
+    "sql": "SELECT nombre, apellido, telefono FROM pacientes WHERE ciudad = 'Quetzaltenango'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es el costo promedio de las citas completadas? Devuelve: costo_prom, redondeado a 2 decimales.",
+    "sql": "SELECT ROUND(AVG(costo), 2) AS costo_prom FROM citas WHERE estado = 'completada'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántas citas hay en cada estado? Devuelve: estado, num_citas.",
+    "sql": "SELECT estado, COUNT(*) AS num_citas FROM citas GROUP BY estado",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Dame el número, el piso y el costo diario de las habitaciones de cuidados intensivos (UCI).",
+    "sql": "SELECT numero, piso, costo_diario FROM habitaciones WHERE tipo = 'uci'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué médicos fueron contratados a partir de 2022? Devuelve su nombre, apellido y fecha de contratación.",
+    "sql": "SELECT nombre, apellido, fecha_contratacion FROM medicos WHERE fecha_contratacion >= '2022-01-01'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista el nombre, el apellido y la fecha de nacimiento de los pacientes nacidos antes de 1960.",
+    "sql": "SELECT nombre, apellido, fecha_nacimiento FROM pacientes WHERE fecha_nacimiento < '1960-01-01'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es el medicamento más caro? Devuelve: nombre_comercial, precio_unitario. Si hay empate, toma el de menor identificador.",
+    "sql": "SELECT nombre_comercial, precio_unitario FROM medicamentos ORDER BY precio_unitario DESC, id_medicamento LIMIT 1",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué especialidades se encuentran en el tercer piso? Devuelve el nombre de la especialidad.",
+    "sql": "SELECT nombre_especialidad FROM especialidades WHERE piso = 3",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista el identificador, la fecha y hora y el motivo de las citas que están programadas.",
+    "sql": "SELECT id_cita, fecha_hora, motivo FROM citas WHERE estado = 'programada'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué ingresos todavía no tienen fecha de alta? Devuelve: id_ingreso, id_paciente, fecha_ingreso.",
+    "sql": "SELECT id_ingreso, id_paciente, fecha_ingreso FROM ingresos WHERE fecha_alta IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos pacientes hay registrados por ciudad? Devuelve: ciudad, num_pacientes.",
+    "sql": "SELECT ciudad, COUNT(*) AS num_pacientes FROM pacientes GROUP BY ciudad",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es el salario mensual más alto y el más bajo entre los médicos? Devuelve: sal_max, sal_min.",
+    "sql": "SELECT MAX(salario_mensual) AS sal_max, MIN(salario_mensual) AS sal_min FROM medicos",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra el identificador, el código CIE y la descripción de los diagnósticos de gravedad grave.",
+    "sql": "SELECT id_diagnostico, codigo_cie, descripcion FROM diagnosticos WHERE gravedad = 'grave'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué pacientes no registraron teléfono? Devuelve nombre y apellido.",
+    "sql": "SELECT nombre, apellido FROM pacientes WHERE telefono IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista el nombre comercial y el principio activo de los medicamentos en tabletas que son de venta libre.",
+    "sql": "SELECT nombre_comercial, principio_activo FROM medicamentos WHERE presentacion = 'tabletas' AND requiere_receta = 0",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuánto se facturó en total por citas completadas durante 2024? Devuelve: total_2024.",
+    "sql": "SELECT SUM(costo) AS total_2024 FROM citas WHERE estado = 'completada' AND YEAR(fecha_hora) = 2024",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra el identificador de la cita, el paciente y la fecha y hora de todas las citas de marzo de 2025.",
+    "sql": "SELECT id_cita, id_paciente, fecha_hora FROM citas WHERE fecha_hora >= '2025-03-01' AND fecha_hora < '2025-04-01'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué recetas tienen un tratamiento de 30 días? Devuelve: id_receta, id_cita, id_medicamento, dosis.",
+    "sql": "SELECT id_receta, id_cita, id_medicamento, dosis FROM recetas WHERE duracion_dias = 30",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántas habitaciones hay de cada tipo? Devuelve: tipo, num_habitaciones.",
+    "sql": "SELECT tipo, COUNT(*) AS num_habitaciones FROM habitaciones GROUP BY tipo",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué médicos no tienen correo registrado? Devuelve nombre y apellido.",
+    "sql": "SELECT nombre, apellido FROM medicos WHERE correo IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es el costo diario promedio de las habitaciones dobles? Devuelve: costo_prom (2 decimales).",
+    "sql": "SELECT ROUND(AVG(costo_diario), 2) AS costo_prom FROM habitaciones WHERE tipo = 'doble'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Quiénes son los 3 médicos con mayor salario mensual? Devuelve: nombre, apellido, salario_mensual; desempata por identificador del médico.",
+    "sql": "SELECT nombre, apellido, salario_mensual FROM medicos ORDER BY salario_mensual DESC, id_medico LIMIT 3",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra el nombre y el apellido de cada médico junto con el nombre de su especialidad.",
+    "sql": "SELECT m.nombre, m.apellido, e.nombre_especialidad FROM medicos m JOIN especialidades e ON e.id_especialidad = m.id_especialidad",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos médicos tiene cada especialidad? Incluye las especialidades sin médicos con 0. Devuelve: nombre_especialidad, num_medicos.",
+    "sql": "SELECT e.nombre_especialidad, COUNT(m.id_medico) AS num_medicos FROM especialidades e LEFT JOIN medicos m ON m.id_especialidad = e.id_especialidad GROUP BY e.id_especialidad, e.nombre_especialidad",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada médico, ¿cuántas citas tiene asignadas? Incluye a los médicos sin citas con 0. Devuelve: id_medico, nombre, apellido, num_citas.",
+    "sql": "SELECT m.id_medico, m.nombre, m.apellido, COUNT(c.id_cita) AS num_citas FROM medicos m LEFT JOIN citas c ON c.id_medico = m.id_medico GROUP BY m.id_medico, m.nombre, m.apellido",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué pacientes han tenido más de 2 citas? Devuelve: nombre, apellido, num_citas.",
+    "sql": "SELECT p.nombre, p.apellido, COUNT(*) AS num_citas FROM pacientes p JOIN citas c ON c.id_paciente = p.id_paciente GROUP BY p.id_paciente, p.nombre, p.apellido HAVING COUNT(*) > 2",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuánto ha facturado cada especialidad por citas completadas? Devuelve: nombre_especialidad, total_facturado.",
+    "sql": "SELECT e.nombre_especialidad, SUM(c.costo) AS total_facturado FROM citas c JOIN medicos m ON m.id_medico = c.id_medico JOIN especialidades e ON e.id_especialidad = m.id_especialidad WHERE c.estado = 'completada' GROUP BY e.id_especialidad, e.nombre_especialidad",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Lista las citas completadas durante 2025 con el identificador de la cita, el nombre del paciente y el nombre del médico. Devuelve: id_cita, nombre_paciente, nombre_medico.",
+    "sql": "SELECT c.id_cita, p.nombre AS nombre_paciente, m.nombre AS nombre_medico FROM citas c JOIN pacientes p ON p.id_paciente = c.id_paciente JOIN medicos m ON m.id_medico = c.id_medico WHERE c.estado = 'completada' AND YEAR(c.fecha_hora) = 2025",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas veces se ha emitido cada diagnóstico? Devuelve: codigo_cie, descripcion, num_veces.",
+    "sql": "SELECT codigo_cie, descripcion, COUNT(*) AS num_veces FROM diagnosticos GROUP BY codigo_cie, descripcion",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué medicamentos se han recetado más de 3 veces? Devuelve: nombre_comercial, num_recetas.",
+    "sql": "SELECT md.nombre_comercial, COUNT(*) AS num_recetas FROM medicamentos md JOIN recetas r ON r.id_medicamento = md.id_medicamento GROUP BY md.id_medicamento, md.nombre_comercial HAVING COUNT(*) > 3",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada medicamento, ¿cuántas veces ha sido recetado? Incluye los que nunca se han recetado con 0. Devuelve: nombre_comercial, veces_recetado.",
+    "sql": "SELECT md.nombre_comercial, COUNT(r.id_receta) AS veces_recetado FROM medicamentos md LEFT JOIN recetas r ON r.id_medicamento = md.id_medicamento GROUP BY md.id_medicamento, md.nombre_comercial",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuál es el costo promedio de una cita en cada especialidad? Devuelve: nombre_especialidad, costo_prom (2 decimales).",
+    "sql": "SELECT e.nombre_especialidad, ROUND(AVG(c.costo), 2) AS costo_prom FROM citas c JOIN medicos m ON m.id_medico = c.id_medico JOIN especialidades e ON e.id_especialidad = m.id_especialidad GROUP BY e.id_especialidad, e.nombre_especialidad",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos ingresos hospitalarios ha habido por tipo de habitación? Devuelve: tipo, num_ingresos.",
+    "sql": "SELECT h.tipo, COUNT(*) AS num_ingresos FROM ingresos i JOIN habitaciones h ON h.id_habitacion = i.id_habitacion GROUP BY h.tipo",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Muestra el nombre y apellido de los pacientes que han estado en una habitación de UCI, junto con el número de habitación y la fecha de ingreso.",
+    "sql": "SELECT p.nombre, p.apellido, h.numero, i.fecha_ingreso FROM ingresos i JOIN pacientes p ON p.id_paciente = i.id_paciente JOIN habitaciones h ON h.id_habitacion = i.id_habitacion WHERE h.tipo = 'uci'",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué médicos han atendido citas de pacientes que viven en Mixco? Devuelve el nombre y apellido del médico sin repetir.",
+    "sql": "SELECT DISTINCT m.nombre, m.apellido FROM medicos m JOIN citas c ON c.id_medico = m.id_medico JOIN pacientes p ON p.id_paciente = c.id_paciente WHERE p.ciudad = 'Mixco'",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos diagnósticos de cada gravedad ha emitido cada especialidad? Devuelve: nombre_especialidad, gravedad, num_diagnosticos.",
+    "sql": "SELECT e.nombre_especialidad, d.gravedad, COUNT(*) AS num_diagnosticos FROM diagnosticos d JOIN citas c ON c.id_cita = d.id_cita JOIN medicos m ON m.id_medico = c.id_medico JOIN especialidades e ON e.id_especialidad = m.id_especialidad GROUP BY e.id_especialidad, e.nombre_especialidad, d.gravedad",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué especialidades tienen más de 5 citas registradas? Devuelve: nombre_especialidad, num_citas.",
+    "sql": "SELECT e.nombre_especialidad, COUNT(*) AS num_citas FROM citas c JOIN medicos m ON m.id_medico = c.id_medico JOIN especialidades e ON e.id_especialidad = m.id_especialidad GROUP BY e.id_especialidad, e.nombre_especialidad HAVING COUNT(*) > 5",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada aseguradora, ¿cuántas citas han tenido sus pacientes asegurados? Excluye a los pacientes sin seguro. Devuelve: aseguradora, num_citas.",
+    "sql": "SELECT p.aseguradora, COUNT(*) AS num_citas FROM pacientes p JOIN citas c ON c.id_paciente = p.id_paciente WHERE p.aseguradora IS NOT NULL GROUP BY p.aseguradora",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada paciente, ¿cuántas veces ha sido hospitalizado? Incluye a los que nunca han sido hospitalizados con 0. Devuelve: id_paciente, nombre, apellido, num_ingresos.",
+    "sql": "SELECT p.id_paciente, p.nombre, p.apellido, COUNT(i.id_ingreso) AS num_ingresos FROM pacientes p LEFT JOIN ingresos i ON i.id_paciente = p.id_paciente GROUP BY p.id_paciente, p.nombre, p.apellido",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuánto cuestan en total los medicamentos recetados en cada cita (cantidad por precio unitario)? Devuelve: id_cita, costo_medicamentos (2 decimales).",
+    "sql": "SELECT r.id_cita, ROUND(SUM(r.cantidad * md.precio_unitario), 2) AS costo_medicamentos FROM recetas r JOIN medicamentos md ON md.id_medicamento = r.id_medicamento GROUP BY r.id_cita",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿De cuántos ingresos hospitalarios ha sido responsable cada médico que tiene al menos uno? Devuelve: nombre, apellido, num_ingresos.",
+    "sql": "SELECT m.nombre, m.apellido, COUNT(*) AS num_ingresos FROM medicos m JOIN ingresos i ON i.id_medico = m.id_medico GROUP BY m.id_medico, m.nombre, m.apellido",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuál es la duración promedio del tratamiento, en días, de cada medicamento recetado? Devuelve: nombre_comercial, duracion_prom (2 decimales).",
+    "sql": "SELECT md.nombre_comercial, ROUND(AVG(r.duracion_dias), 2) AS duracion_prom FROM recetas r JOIN medicamentos md ON md.id_medicamento = r.id_medicamento GROUP BY md.id_medicamento, md.nombre_comercial",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Lista las citas canceladas o a las que el paciente no asistió, con el identificador de la cita, el nombre y apellido del paciente y el estado.",
+    "sql": "SELECT c.id_cita, p.nombre, p.apellido, c.estado FROM citas c JOIN pacientes p ON p.id_paciente = c.id_paciente WHERE c.estado IN ('cancelada', 'no_asistio')",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos pacientes distintos ha atendido cada especialidad? Devuelve: nombre_especialidad, num_pacientes.",
+    "sql": "SELECT e.nombre_especialidad, COUNT(DISTINCT c.id_paciente) AS num_pacientes FROM citas c JOIN medicos m ON m.id_medico = c.id_medico JOIN especialidades e ON e.id_especialidad = m.id_especialidad GROUP BY e.id_especialidad, e.nombre_especialidad",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué ciudades tienen más de 5 pacientes registrados? Devuelve: ciudad, num_pacientes.",
+    "sql": "SELECT ciudad, COUNT(*) AS num_pacientes FROM pacientes GROUP BY ciudad HAVING COUNT(*) > 5",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué medicamentos han recetado los médicos de Cardiología? Devuelve el nombre comercial sin repetir.",
+    "sql": "SELECT DISTINCT md.nombre_comercial FROM recetas r JOIN medicamentos md ON md.id_medicamento = r.id_medicamento JOIN citas c ON c.id_cita = r.id_cita JOIN medicos m ON m.id_medico = c.id_medico JOIN especialidades e ON e.id_especialidad = m.id_especialidad WHERE e.nombre_especialidad = 'Cardiología'",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas citas completadas han tenido los pacientes de cada género? Devuelve: genero, num_citas.",
+    "sql": "SELECT p.genero, COUNT(*) AS num_citas FROM pacientes p JOIN citas c ON c.id_paciente = p.id_paciente WHERE c.estado = 'completada' GROUP BY p.genero",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada piso, ¿cuántas habitaciones hay y cuál es su costo diario promedio? Devuelve: piso, num_habitaciones, costo_prom (2 decimales).",
+    "sql": "SELECT piso, COUNT(*) AS num_habitaciones, ROUND(AVG(costo_diario), 2) AS costo_prom FROM habitaciones GROUP BY piso",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿En qué especialidades el salario mensual promedio de sus médicos es mayor a 26000? Devuelve: nombre_especialidad, sal_prom (2 decimales).",
+    "sql": "SELECT e.nombre_especialidad, ROUND(AVG(m.salario_mensual), 2) AS sal_prom FROM especialidades e JOIN medicos m ON m.id_especialidad = e.id_especialidad GROUP BY e.id_especialidad, e.nombre_especialidad HAVING AVG(m.salario_mensual) > 26000",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué pacientes han recibido un diagnóstico grave? Muestra su nombre, apellido y la descripción del diagnóstico.",
+    "sql": "SELECT p.nombre, p.apellido, d.descripcion FROM diagnosticos d JOIN citas c ON c.id_cita = d.id_cita JOIN pacientes p ON p.id_paciente = c.id_paciente WHERE d.gravedad = 'grave'",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada habitación, ¿cuántos ingresos ha tenido? Incluye las que nunca se han usado con 0. Devuelve: numero, tipo, num_ingresos.",
+    "sql": "SELECT h.numero, h.tipo, COUNT(i.id_ingreso) AS num_ingresos FROM habitaciones h LEFT JOIN ingresos i ON i.id_habitacion = h.id_habitacion GROUP BY h.id_habitacion, h.numero, h.tipo",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas unidades de medicamento en total se le han recetado a cada paciente? Devuelve: nombre, apellido, total_unidades.",
+    "sql": "SELECT p.nombre, p.apellido, SUM(r.cantidad) AS total_unidades FROM pacientes p JOIN citas c ON c.id_paciente = p.id_paciente JOIN recetas r ON r.id_cita = c.id_cita GROUP BY p.id_paciente, p.nombre, p.apellido",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Con una CTE, encuentra a los médicos cuyo número de citas completadas es mayor que el promedio de citas completadas por médico (entre los médicos que tienen alguna). Devuelve: nombre, apellido, num_completadas.",
+    "sql": "WITH t AS (SELECT id_medico, COUNT(*) AS n FROM citas WHERE estado = 'completada' GROUP BY id_medico) SELECT m.nombre, m.apellido, t.n AS num_completadas FROM t JOIN medicos m ON m.id_medico = t.id_medico WHERE t.n > (SELECT AVG(n) FROM t)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Cuál es la cita más reciente de cada paciente? Devuelve: id_paciente, id_cita, fecha_hora.",
+    "sql": "WITH r AS (SELECT id_paciente, id_cita, fecha_hora, ROW_NUMBER() OVER (PARTITION BY id_paciente ORDER BY fecha_hora DESC, id_cita DESC) AS rn FROM citas) SELECT id_paciente, id_cita, fecha_hora FROM r WHERE rn = 1",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Dentro de cada especialidad, clasifica a los médicos con RANK según lo que han facturado en citas completadas (1 = mayor facturación). Devuelve: nombre_especialidad, nombre, apellido, total_facturado, rango.",
+    "sql": "WITH f AS (SELECT c.id_medico, SUM(c.costo) AS total_facturado FROM citas c WHERE c.estado = 'completada' GROUP BY c.id_medico) SELECT e.nombre_especialidad, m.nombre, m.apellido, f.total_facturado, RANK() OVER (PARTITION BY m.id_especialidad ORDER BY f.total_facturado DESC) AS rango FROM f JOIN medicos m ON m.id_medico = f.id_medico JOIN especialidades e ON e.id_especialidad = m.id_especialidad",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Asigna a cada medicamento una posición según su precio unitario, del más caro al más barato, usando DENSE_RANK. Devuelve: nombre_comercial, precio_unitario, posicion.",
+    "sql": "SELECT nombre_comercial, precio_unitario, DENSE_RANK() OVER (ORDER BY precio_unitario DESC) AS posicion FROM medicamentos",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada cita, ¿cuántos días pasaron desde la cita anterior del mismo paciente? Devuelve: id_paciente, id_cita, fecha_hora, dias_desde_anterior (NULL si es la primera).",
+    "sql": "SELECT id_paciente, id_cita, fecha_hora, DATEDIFF(fecha_hora, LAG(fecha_hora) OVER (PARTITION BY id_paciente ORDER BY fecha_hora, id_cita)) AS dias_desde_anterior FROM citas",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada mes de 2024, muestra lo facturado por citas completadas y el acumulado del año hasta ese mes, en orden cronológico. Devuelve: mes (formato AAAA-MM), total_mes, acumulado.",
+    "sql": "WITH t AS (SELECT DATE_FORMAT(fecha_hora, '%Y-%m') AS mes, SUM(costo) AS total_mes FROM citas WHERE estado = 'completada' AND YEAR(fecha_hora) = 2024 GROUP BY DATE_FORMAT(fecha_hora, '%Y-%m')) SELECT mes, total_mes, SUM(total_mes) OVER (ORDER BY mes) AS acumulado FROM t ORDER BY mes",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué citas tienen un costo mayor que el costo promedio de las citas de su mismo médico? Devuelve: id_cita, id_medico, costo.",
+    "sql": "SELECT c.id_cita, c.id_medico, c.costo FROM citas c WHERE c.costo > (SELECT AVG(c2.costo) FROM citas c2 WHERE c2.id_medico = c.id_medico)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué pacientes nunca han tenido una cita? Devuelve: id_paciente, nombre, apellido.",
+    "sql": "SELECT p.id_paciente, p.nombre, p.apellido FROM pacientes p WHERE NOT EXISTS (SELECT 1 FROM citas c WHERE c.id_paciente = p.id_paciente)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué pacientes han tenido al menos una cita y también al menos un ingreso hospitalario? Devuelve nombre y apellido.",
+    "sql": "SELECT p.nombre, p.apellido FROM pacientes p WHERE EXISTS (SELECT 1 FROM citas c WHERE c.id_paciente = p.id_paciente) AND EXISTS (SELECT 1 FROM ingresos i WHERE i.id_paciente = p.id_paciente)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué medicamentos del catálogo nunca han sido recetados? Devuelve: nombre_comercial, principio_activo.",
+    "sql": "SELECT md.nombre_comercial, md.principio_activo FROM medicamentos md WHERE NOT EXISTS (SELECT 1 FROM recetas r WHERE r.id_medicamento = md.id_medicamento)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Cuántos días de calendario duró cada hospitalización que ya tiene alta? Devuelve: id_ingreso, id_paciente, dias_estancia.",
+    "sql": "SELECT id_ingreso, id_paciente, DATEDIFF(fecha_alta, fecha_ingreso) AS dias_estancia FROM ingresos WHERE fecha_alta IS NOT NULL",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Calcula el costo de habitación de cada ingreso con alta como días de estancia (diferencia de fechas) por el costo diario. Devuelve: id_ingreso, numero, dias_estancia, costo_total (2 decimales).",
+    "sql": "SELECT i.id_ingreso, h.numero, DATEDIFF(i.fecha_alta, i.fecha_ingreso) AS dias_estancia, ROUND(DATEDIFF(i.fecha_alta, i.fecha_ingreso) * h.costo_diario, 2) AS costo_total FROM ingresos i JOIN habitaciones h ON h.id_habitacion = i.id_habitacion WHERE i.fecha_alta IS NOT NULL",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué edad en años cumplidos tenía el paciente en cada cita completada de 2025? Devuelve: id_cita, id_paciente, edad_en_cita.",
+    "sql": "SELECT c.id_cita, c.id_paciente, TIMESTAMPDIFF(YEAR, p.fecha_nacimiento, c.fecha_hora) AS edad_en_cita FROM citas c JOIN pacientes p ON p.id_paciente = c.id_paciente WHERE c.estado = 'completada' AND YEAR(c.fecha_hora) = 2025",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Cuántas citas hubo en cada mes de 2024? Muestra el mes con formato AAAA-MM y ordena cronológicamente. Devuelve: mes, num_citas.",
+    "sql": "SELECT DATE_FORMAT(fecha_hora, '%Y-%m') AS mes, COUNT(*) AS num_citas FROM citas WHERE YEAR(fecha_hora) = 2024 GROUP BY DATE_FORMAT(fecha_hora, '%Y-%m') ORDER BY mes",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué pacientes tuvieron una cita en los 90 días posteriores a su alta hospitalaria? Devuelve: id_paciente, id_ingreso, fecha_alta, id_cita, fecha_hora.",
+    "sql": "SELECT i.id_paciente, i.id_ingreso, i.fecha_alta, c.id_cita, c.fecha_hora FROM ingresos i JOIN citas c ON c.id_paciente = i.id_paciente WHERE i.fecha_alta IS NOT NULL AND c.fecha_hora > i.fecha_alta AND c.fecha_hora <= DATE_ADD(i.fecha_alta, INTERVAL 90 DAY)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada paciente con citas, ¿cuántos días pasaron entre su fecha de registro y su primera cita? Devuelve: id_paciente, fecha_registro, primera_cita, dias_espera.",
+    "sql": "WITH pc AS (SELECT id_paciente, MIN(fecha_hora) AS primera_cita FROM citas GROUP BY id_paciente) SELECT p.id_paciente, p.fecha_registro, pc.primera_cita, DATEDIFF(pc.primera_cita, p.fecha_registro) AS dias_espera FROM pacientes p JOIN pc ON pc.id_paciente = p.id_paciente",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Cuál es el diagnóstico más frecuente en cada especialidad? Si hay empate, elige la descripción alfabéticamente menor. Devuelve: nombre_especialidad, descripcion, num_veces.",
+    "sql": "WITH t AS (SELECT m.id_especialidad, d.descripcion, COUNT(*) AS num_veces FROM diagnosticos d JOIN citas c ON c.id_cita = d.id_cita JOIN medicos m ON m.id_medico = c.id_medico GROUP BY m.id_especialidad, d.descripcion), r AS (SELECT t.*, ROW_NUMBER() OVER (PARTITION BY id_especialidad ORDER BY num_veces DESC, descripcion) AS rn FROM t) SELECT e.nombre_especialidad, r.descripcion, r.num_veces FROM r JOIN especialidades e ON e.id_especialidad = r.id_especialidad WHERE r.rn = 1",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada médico con citas, calcula el porcentaje de sus citas que fueron canceladas o a las que el paciente no asistió. Devuelve: nombre, apellido, pct_perdidas (2 decimales).",
+    "sql": "WITH t AS (SELECT id_medico, SUM(estado IN ('cancelada', 'no_asistio')) AS perdidas, COUNT(*) AS total FROM citas GROUP BY id_medico) SELECT m.nombre, m.apellido, ROUND(100 * t.perdidas / t.total, 2) AS pct_perdidas FROM t JOIN medicos m ON m.id_medico = t.id_medico",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada ingreso hospitalario, muestra la fecha del siguiente ingreso del mismo paciente (NULL si no volvió a ingresar). Devuelve: id_paciente, id_ingreso, fecha_ingreso, siguiente_ingreso.",
+    "sql": "SELECT id_paciente, id_ingreso, fecha_ingreso, LEAD(fecha_ingreso) OVER (PARTITION BY id_paciente ORDER BY fecha_ingreso) AS siguiente_ingreso FROM ingresos",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué médicos tienen un salario mensual mayor que el promedio de los médicos de su misma especialidad? Devuelve: nombre, apellido, salario_mensual.",
+    "sql": "SELECT m.nombre, m.apellido, m.salario_mensual FROM medicos m WHERE m.salario_mensual > (SELECT AVG(m2.salario_mensual) FROM medicos m2 WHERE m2.id_especialidad = m.id_especialidad)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué pacientes tenían al menos 50 años cumplidos al 1 de enero de 2025 y han sido diagnosticados con hipertensión esencial (código I10)? Devuelve: nombre, apellido, edad.",
+    "sql": "SELECT p.nombre, p.apellido, TIMESTAMPDIFF(YEAR, p.fecha_nacimiento, '2025-01-01') AS edad FROM pacientes p WHERE TIMESTAMPDIFF(YEAR, p.fecha_nacimiento, '2025-01-01') >= 50 AND EXISTS (SELECT 1 FROM citas c JOIN diagnosticos d ON d.id_cita = c.id_cita WHERE c.id_paciente = p.id_paciente AND d.codigo_cie = 'I10')",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué hospitalizaciones que comenzaron en 2024 duraron más de 5 días completos? Devuelve: id_ingreso, id_paciente, dias_completos.",
+    "sql": "SELECT id_ingreso, id_paciente, TIMESTAMPDIFF(DAY, fecha_ingreso, fecha_alta) AS dias_completos FROM ingresos WHERE YEAR(fecha_ingreso) = 2024 AND TIMESTAMPDIFF(DAY, fecha_ingreso, fecha_alta) > 5",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Cuántas citas tuvo cada especialidad en el segundo semestre de 2024 (del 1 de julio al 31 de diciembre)? Devuelve: nombre_especialidad, num_citas.",
+    "sql": "SELECT e.nombre_especialidad, COUNT(*) AS num_citas FROM citas c JOIN medicos m ON m.id_medico = c.id_medico JOIN especialidades e ON e.id_especialidad = m.id_especialidad WHERE c.fecha_hora BETWEEN '2024-07-01 00:00:00' AND '2024-12-31 23:59:59' GROUP BY e.id_especialidad, e.nombre_especialidad",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué porcentaje de la facturación total por citas completadas aporta cada especialidad? Devuelve: nombre_especialidad, total_facturado, pct_total (2 decimales).",
+    "sql": "SELECT e.nombre_especialidad, SUM(c.costo) AS total_facturado, ROUND(100 * SUM(c.costo) / SUM(SUM(c.costo)) OVER (), 2) AS pct_total FROM citas c JOIN medicos m ON m.id_medico = c.id_medico JOIN especialidades e ON e.id_especialidad = m.id_especialidad WHERE c.estado = 'completada' GROUP BY e.id_especialidad, e.nombre_especialidad",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para los pacientes que siguen hospitalizados (sin alta), ¿cuántos días llevarán internados al 31 de diciembre de 2025? Devuelve: nombre, apellido, numero, dias_internado.",
+    "sql": "SELECT p.nombre, p.apellido, h.numero, DATEDIFF('2025-12-31', i.fecha_ingreso) AS dias_internado FROM ingresos i JOIN pacientes p ON p.id_paciente = i.id_paciente JOIN habitaciones h ON h.id_habitacion = i.id_habitacion WHERE i.fecha_alta IS NULL",
+    "nivel": "dificil"
+  }
+]

@@ -1,0 +1,402 @@
+[
+  {
+    "pregunta": "¿Cuál es el nombre y la región de cada territorio de ventas?",
+    "sql": "SELECT terr_nm, rgn FROM terr",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué representantes ya no están activos? Devuelve: first_nm, last_nm, email.",
+    "sql": "SELECT first_nm, last_nm, email FROM rep WHERE is_actv = 0",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántas cuentas son de tier A? Devuelve: total_cuentas_a.",
+    "sql": "SELECT COUNT(*) AS total_cuentas_a FROM acct WHERE tier = 'A'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra el nombre y el número de empleados de las cuentas de la industria Healthcare.",
+    "sql": "SELECT acct_nm, emp_cnt FROM acct WHERE ind = 'Healthcare'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué contactos no tienen correo electrónico registrado? Devuelve su nombre y apellido.",
+    "sql": "SELECT first_nm, last_nm FROM cntct WHERE email IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es el monto promedio de las oportunidades de venta? Devuelve: monto_promedio.",
+    "sql": "SELECT ROUND(AVG(amt), 2) AS monto_promedio FROM opp",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista las etapas del embudo en su orden de secuencia, con su nombre y probabilidad de ganar. Devuelve: stage_nm, win_prob_pct.",
+    "sql": "SELECT stage_nm, win_prob_pct FROM opp_stage ORDER BY seq_no",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué oportunidades siguen abiertas (sin fecha de cierre)? Devuelve: opp_id, opp_nm, amt.",
+    "sql": "SELECT opp_id, opp_nm, amt FROM opp WHERE close_dt IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántas cotizaciones hay en cada estado? Devuelve: sts, total.",
+    "sql": "SELECT sts, COUNT(*) AS total FROM qte GROUP BY sts",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuáles son las 5 cuentas con mayores ingresos anuales? Devuelve acct_nm y ann_rev_amt; desempata por acct_id ascendente.",
+    "sql": "SELECT acct_nm, ann_rev_amt FROM acct WHERE ann_rev_amt IS NOT NULL ORDER BY ann_rev_amt DESC, acct_id ASC LIMIT 5",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué representantes fueron contratados a partir de 2022? Devuelve: first_nm, last_nm, hire_dt.",
+    "sql": "SELECT first_nm, last_nm, hire_dt FROM rep WHERE hire_dt >= '2022-01-01'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuánto suman las cuotas anuales de los territorios de la región NA? Devuelve: total_cuota_na.",
+    "sql": "SELECT SUM(ann_quota_amt) AS total_cuota_na FROM terr WHERE rgn = 'NA'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Dame el id y la fecha de los pedidos cancelados.",
+    "sql": "SELECT ord_id, ord_dt FROM ord_hdr WHERE sts = 'cancelled'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista las líneas de pedido de la categoría services. Devuelve: prod_nm, qty, unit_prc.",
+    "sql": "SELECT prod_nm, qty, unit_prc FROM ord_ln WHERE prod_cat = 'services'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántas cuentas hay por industria? Devuelve: ind, num_cuentas.",
+    "sql": "SELECT ind, COUNT(*) AS num_cuentas FROM acct GROUP BY ind",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué oportunidades tienen un monto mayor a 100,000 dólares? Devuelve: opp_nm, amt.",
+    "sql": "SELECT opp_nm, amt FROM opp WHERE amt > 100000",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos contactos están marcados como contacto principal? Devuelve: total_principales.",
+    "sql": "SELECT COUNT(*) AS total_principales FROM cntct WHERE is_prim = 1",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué cotizaciones ofrecieron un descuento del 10% o más? Devuelve: qte_id, disc_pct, qte_amt.",
+    "sql": "SELECT qte_id, disc_pct, qte_amt FROM qte WHERE disc_pct >= 10",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué pedidos todavía no tienen fecha de envío? Devuelve el ord_id y su estado (sts).",
+    "sql": "SELECT ord_id, sts FROM ord_hdr WHERE ship_dt IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué productos distintos se han vendido? Devuelve prod_cd y prod_nm sin repetir.",
+    "sql": "SELECT DISTINCT prod_cd, prod_nm FROM ord_ln",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántas oportunidades vienen de cada origen de lead? Devuelve: src, total_opps.",
+    "sql": "SELECT src, COUNT(*) AS total_opps FROM opp GROUP BY src",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es la cuenta con más empleados? Devuelve acct_nm y emp_cnt; si hay empate, la de menor acct_id.",
+    "sql": "SELECT acct_nm, emp_cnt FROM acct WHERE emp_cnt IS NOT NULL ORDER BY emp_cnt DESC, acct_id ASC LIMIT 1",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué representantes no reportan a ningún jefe? Devuelve: rep_id, first_nm, last_nm.",
+    "sql": "SELECT rep_id, first_nm, last_nm FROM rep WHERE mgr_id IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es el monto cotizado más alto y el más bajo? Devuelve: cotizacion_max, cotizacion_min.",
+    "sql": "SELECT MAX(qte_amt) AS cotizacion_max, MIN(qte_amt) AS cotizacion_min FROM qte",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué cuentas se dieron de alta en el CRM durante 2023? Devuelve: acct_nm, crt_dt.",
+    "sql": "SELECT acct_nm, crt_dt FROM acct WHERE YEAR(crt_dt) = 2023",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos representantes tiene cada territorio? Devuelve: terr_nm, num_reps.",
+    "sql": "SELECT t.terr_nm, COUNT(r.rep_id) AS num_reps FROM terr t LEFT JOIN rep r ON r.terr_id = t.terr_id GROUP BY t.terr_id, t.terr_nm",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas oportunidades tiene asignadas cada representante? Incluye a los que no tienen ninguna con 0. Devuelve: first_nm, last_nm, num_opps.",
+    "sql": "SELECT r.first_nm, r.last_nm, COUNT(o.opp_id) AS num_opps FROM rep r LEFT JOIN opp o ON o.rep_id = r.rep_id GROUP BY r.rep_id, r.first_nm, r.last_nm",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuánto monto ha ganado cada representante en oportunidades cerradas como ganadas? Devuelve: first_nm, last_nm, monto_ganado.",
+    "sql": "SELECT r.first_nm, r.last_nm, ROUND(SUM(o.amt), 2) AS monto_ganado FROM rep r JOIN opp o ON o.rep_id = r.rep_id JOIN opp_stage s ON s.stage_id = o.stage_id WHERE s.is_won = 1 GROUP BY r.rep_id, r.first_nm, r.last_nm",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada etapa del embudo, ¿cuántas oportunidades hay y cuál es su monto total? Incluye las etapas sin oportunidades con 0. Devuelve: stage_nm, num_opps, monto_total.",
+    "sql": "SELECT s.stage_nm, COUNT(o.opp_id) AS num_opps, ROUND(COALESCE(SUM(o.amt), 0), 2) AS monto_total FROM opp_stage s LEFT JOIN opp o ON o.stage_id = s.stage_id GROUP BY s.stage_id, s.stage_nm",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué cuentas tienen más de 2 contactos registrados? Devuelve: acct_nm, num_contactos.",
+    "sql": "SELECT a.acct_nm, COUNT(*) AS num_contactos FROM acct a JOIN cntct c ON c.acct_id = a.acct_id GROUP BY a.acct_id, a.acct_nm HAVING COUNT(*) > 2",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué cuentas no tienen ningún contacto registrado? Devuelve: acct_nm.",
+    "sql": "SELECT a.acct_nm FROM acct a LEFT JOIN cntct c ON c.acct_id = a.acct_id WHERE c.cntct_id IS NULL",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Muestra el contacto principal de cada cuenta con su cargo. Devuelve: acct_nm, first_nm, last_nm, job_ttl.",
+    "sql": "SELECT a.acct_nm, c.first_nm, c.last_nm, c.job_ttl FROM acct a JOIN cntct c ON c.acct_id = a.acct_id WHERE c.is_prim = 1",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Lista cada representante que tiene jefe junto con el nombre de su jefe. Devuelve: nombre_rep, nombre_jefe (nombre y apellido concatenados con un espacio).",
+    "sql": "SELECT CONCAT(r.first_nm, ' ', r.last_nm) AS nombre_rep, CONCAT(m.first_nm, ' ', m.last_nm) AS nombre_jefe FROM rep r JOIN rep m ON m.rep_id = r.mgr_id",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuál es el importe neto de cada pedido sumando sus líneas (cantidad por precio unitario menos el descuento de línea)? Devuelve: ord_id, total_pedido.",
+    "sql": "SELECT ol.ord_id, ROUND(SUM(ol.qty * ol.unit_prc * (1 - ol.disc_pct / 100)), 2) AS total_pedido FROM ord_ln ol GROUP BY ol.ord_id",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuánto ingreso neto genera cada categoría de producto en pedidos que no están cancelados? Devuelve: prod_cat, ingreso_total.",
+    "sql": "SELECT ol.prod_cat, ROUND(SUM(ol.qty * ol.unit_prc * (1 - ol.disc_pct / 100)), 2) AS ingreso_total FROM ord_ln ol JOIN ord_hdr oh ON oh.ord_id = ol.ord_id WHERE oh.sts <> 'cancelled' GROUP BY ol.prod_cat",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas cuentas hay en cada región comercial? Devuelve: rgn, num_cuentas.",
+    "sql": "SELECT t.rgn, COUNT(a.acct_id) AS num_cuentas FROM terr t JOIN acct a ON a.terr_id = t.terr_id GROUP BY t.rgn",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para las cuentas de tier A, muestra el representante dueño y el territorio. Devuelve: acct_nm, first_nm, last_nm, terr_nm.",
+    "sql": "SELECT a.acct_nm, r.first_nm, r.last_nm, t.terr_nm FROM acct a JOIN rep r ON r.rep_id = a.ownr_rep_id JOIN terr t ON t.terr_id = a.terr_id WHERE a.tier = 'A'",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuál es el monto promedio de las oportunidades por origen, considerando solo los orígenes con al menos 8 oportunidades? Devuelve: src, num_opps, monto_promedio.",
+    "sql": "SELECT src, COUNT(*) AS num_opps, ROUND(AVG(amt), 2) AS monto_promedio FROM opp GROUP BY src HAVING COUNT(*) >= 8",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué industrias suman más de 200,000 dólares en oportunidades ganadas? Devuelve: ind, monto_ganado.",
+    "sql": "SELECT a.ind, ROUND(SUM(o.amt), 2) AS monto_ganado FROM acct a JOIN opp o ON o.acct_id = a.acct_id JOIN opp_stage s ON s.stage_id = o.stage_id WHERE s.is_won = 1 GROUP BY a.ind HAVING SUM(o.amt) > 200000",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Lista las cotizaciones aceptadas con el nombre de la oportunidad y de la cuenta. Devuelve: qte_id, opp_nm, acct_nm, qte_amt.",
+    "sql": "SELECT q.qte_id, o.opp_nm, a.acct_nm, q.qte_amt FROM qte q JOIN opp o ON o.opp_id = q.opp_id JOIN acct a ON a.acct_id = o.acct_id WHERE q.sts = 'accepted'",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos pedidos ha hecho cada cuenta? Incluye las cuentas sin pedidos con 0. Devuelve: acct_nm, num_pedidos.",
+    "sql": "SELECT a.acct_nm, COUNT(oh.ord_id) AS num_pedidos FROM acct a LEFT JOIN ord_hdr oh ON oh.acct_id = a.acct_id GROUP BY a.acct_id, a.acct_nm",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuáles son los 5 productos con más unidades vendidas? Devuelve prod_nm y unidades; en caso de empate ordena por prod_nm.",
+    "sql": "SELECT prod_nm, SUM(qty) AS unidades FROM ord_ln GROUP BY prod_nm ORDER BY unidades DESC, prod_nm ASC LIMIT 5",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Cuenta los pedidos por estado y condición de pago. Devuelve: sts, pmt_terms, num_pedidos.",
+    "sql": "SELECT sts, pmt_terms, COUNT(*) AS num_pedidos FROM ord_hdr GROUP BY sts, pmt_terms",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas oportunidades perdidas tiene cada territorio (según el territorio de la cuenta)? Devuelve: terr_nm, opps_perdidas.",
+    "sql": "SELECT t.terr_nm, COUNT(*) AS opps_perdidas FROM opp o JOIN opp_stage s ON s.stage_id = o.stage_id JOIN acct a ON a.acct_id = o.acct_id JOIN terr t ON t.terr_id = a.terr_id WHERE s.is_clsd = 1 AND s.is_won = 0 GROUP BY t.terr_id, t.terr_nm",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué representantes son dueños de 3 o más cuentas? Devuelve: first_nm, last_nm, num_cuentas.",
+    "sql": "SELECT r.first_nm, r.last_nm, COUNT(*) AS num_cuentas FROM rep r JOIN acct a ON a.ownr_rep_id = r.rep_id GROUP BY r.rep_id, r.first_nm, r.last_nm HAVING COUNT(*) >= 3",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuál es el descuento promedio de las cotizaciones según su estado? Devuelve: sts, descuento_promedio.",
+    "sql": "SELECT sts, ROUND(AVG(disc_pct), 2) AS descuento_promedio FROM qte GROUP BY sts",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuánto ha comprado en total cada cuenta, sumando el importe neto de las líneas de sus pedidos no cancelados? Devuelve: acct_nm, total_comprado.",
+    "sql": "SELECT a.acct_nm, ROUND(SUM(ol.qty * ol.unit_prc * (1 - ol.disc_pct / 100)), 2) AS total_comprado FROM acct a JOIN ord_hdr oh ON oh.acct_id = a.acct_id JOIN ord_ln ol ON ol.ord_id = oh.ord_id WHERE oh.sts <> 'cancelled' GROUP BY a.acct_id, a.acct_nm",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Lista las oportunidades de las cuentas de tier C. Devuelve: opp_nm, acct_nm, amt.",
+    "sql": "SELECT o.opp_nm, a.acct_nm, o.amt FROM opp o JOIN acct a ON a.acct_id = o.acct_id WHERE a.tier = 'C'",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué pedidos tienen más de 2 líneas? Devuelve: ord_id, num_lineas.",
+    "sql": "SELECT ord_id, COUNT(*) AS num_lineas FROM ord_ln GROUP BY ord_id HAVING COUNT(*) > 2",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos pedidos directos (sin cotización) registró cada representante? Muestra solo a quienes tienen al menos uno. Devuelve: first_nm, last_nm, pedidos_directos.",
+    "sql": "SELECT r.first_nm, r.last_nm, COUNT(*) AS pedidos_directos FROM rep r JOIN ord_hdr oh ON oh.rep_id = r.rep_id WHERE oh.qte_id IS NULL GROUP BY r.rep_id, r.first_nm, r.last_nm",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué cuentas no tienen ninguna oportunidad registrada? Devuelve: acct_nm.",
+    "sql": "SELECT a.acct_nm FROM acct a LEFT JOIN opp o ON o.acct_id = a.acct_id WHERE o.opp_id IS NULL",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos contactos hay por industria de la cuenta? Devuelve: ind, num_contactos.",
+    "sql": "SELECT a.ind, COUNT(c.cntct_id) AS num_contactos FROM acct a JOIN cntct c ON c.acct_id = a.acct_id GROUP BY a.ind",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuál es el monto total de las oportunidades abiertas en cada etapa no cerrada? Devuelve: stage_nm, monto_abierto.",
+    "sql": "SELECT s.stage_nm, ROUND(SUM(o.amt), 2) AS monto_abierto FROM opp o JOIN opp_stage s ON s.stage_id = o.stage_id WHERE s.is_clsd = 0 GROUP BY s.stage_id, s.stage_nm",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para los representantes activos, ¿cuántos pedidos ha registrado cada uno? Incluye a los que no tienen pedidos con 0. Devuelve: first_nm, last_nm, num_pedidos.",
+    "sql": "SELECT r.first_nm, r.last_nm, COUNT(oh.ord_id) AS num_pedidos FROM rep r LEFT JOIN ord_hdr oh ON oh.rep_id = r.rep_id WHERE r.is_actv = 1 GROUP BY r.rep_id, r.first_nm, r.last_nm",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuáles son las 3 cuentas con mayor monto en oportunidades ganadas? Devuelve acct_nm y monto_ganado; desempata por acct_nm.",
+    "sql": "SELECT a.acct_nm, ROUND(SUM(o.amt), 2) AS monto_ganado FROM acct a JOIN opp o ON o.acct_id = a.acct_id JOIN opp_stage s ON s.stage_id = o.stage_id WHERE s.is_won = 1 GROUP BY a.acct_id, a.acct_nm ORDER BY monto_ganado DESC, a.acct_nm ASC LIMIT 3",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Calcula la tasa de éxito de cada representante sobre sus oportunidades cerradas: ganadas entre cerradas, en porcentaje. Devuelve: first_nm, last_nm, ganadas, cerradas, tasa_exito.",
+    "sql": "WITH c AS (SELECT o.rep_id, SUM(s.is_won) AS ganadas, COUNT(*) AS cerradas FROM opp o JOIN opp_stage s ON s.stage_id = o.stage_id WHERE s.is_clsd = 1 GROUP BY o.rep_id) SELECT r.first_nm, r.last_nm, c.ganadas, c.cerradas, ROUND(100 * c.ganadas / c.cerradas, 2) AS tasa_exito FROM c JOIN rep r ON r.rep_id = c.rep_id",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Dentro de cada región, clasifica a los representantes por el monto que han ganado usando RANK (1 = mayor monto). Devuelve: rgn, first_nm, last_nm, monto_ganado, rango.",
+    "sql": "WITH g AS (SELECT r.rep_id, t.rgn, r.first_nm, r.last_nm, SUM(o.amt) AS monto FROM rep r JOIN terr t ON t.terr_id = r.terr_id JOIN opp o ON o.rep_id = r.rep_id JOIN opp_stage s ON s.stage_id = o.stage_id WHERE s.is_won = 1 GROUP BY r.rep_id, t.rgn, r.first_nm, r.last_nm) SELECT rgn, first_nm, last_nm, ROUND(monto, 2) AS monto_ganado, RANK() OVER (PARTITION BY rgn ORDER BY monto DESC) AS rango FROM g",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Muestra el ingreso neto mensual de 2024 (pedidos no cancelados, por fecha de pedido) junto con el del mes anterior, ordenado por mes. Devuelve: mes (AAAA-MM), ingreso_mes, ingreso_mes_anterior.",
+    "sql": "WITH m AS (SELECT DATE_FORMAT(oh.ord_dt, '%Y-%m') AS mes, SUM(ol.qty * ol.unit_prc * (1 - ol.disc_pct / 100)) AS ingreso FROM ord_hdr oh JOIN ord_ln ol ON ol.ord_id = oh.ord_id WHERE oh.sts <> 'cancelled' AND YEAR(oh.ord_dt) = 2024 GROUP BY DATE_FORMAT(oh.ord_dt, '%Y-%m')) SELECT mes, ROUND(ingreso, 2) AS ingreso_mes, ROUND(LAG(ingreso) OVER (ORDER BY mes), 2) AS ingreso_mes_anterior FROM m ORDER BY mes",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada oportunidad ganada, muestra el monto acumulado ganado por su representante hasta esa fecha de cierre (orden por close_dt y opp_id). Devuelve: rep_id, opp_id, close_dt, amt, monto_acumulado.",
+    "sql": "SELECT o.rep_id, o.opp_id, o.close_dt, o.amt, SUM(o.amt) OVER (PARTITION BY o.rep_id ORDER BY o.close_dt, o.opp_id) AS monto_acumulado FROM opp o JOIN opp_stage s ON s.stage_id = o.stage_id WHERE s.is_won = 1",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué oportunidades tienen un monto superior al promedio de las oportunidades de su mismo origen (src)? Devuelve: opp_nm, src, amt.",
+    "sql": "SELECT o.opp_nm, o.src, o.amt FROM opp o WHERE o.amt > (SELECT AVG(o2.amt) FROM opp o2 WHERE o2.src = o.src)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué cuentas tienen al menos una oportunidad ganada pero ningún pedido registrado? Devuelve: acct_nm.",
+    "sql": "SELECT a.acct_nm FROM acct a WHERE EXISTS (SELECT 1 FROM opp o JOIN opp_stage s ON s.stage_id = o.stage_id WHERE o.acct_id = a.acct_id AND s.is_won = 1) AND NOT EXISTS (SELECT 1 FROM ord_hdr oh WHERE oh.acct_id = a.acct_id)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué cuentas han recibido al menos una cotización rechazada? Devuelve: acct_nm.",
+    "sql": "SELECT a.acct_nm FROM acct a WHERE EXISTS (SELECT 1 FROM opp o JOIN qte q ON q.opp_id = o.opp_id WHERE o.acct_id = a.acct_id AND q.sts = 'rejected')",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Cuántos días dura en promedio el ciclo de venta (de la creación al cierre) de las oportunidades ganadas, por origen? Devuelve: src, dias_promedio.",
+    "sql": "SELECT o.src, ROUND(AVG(DATEDIFF(o.close_dt, o.crt_dt)), 2) AS dias_promedio FROM opp o JOIN opp_stage s ON s.stage_id = o.stage_id WHERE s.is_won = 1 GROUP BY o.src",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para los pedidos ya enviados, ¿cuántos días pasan en promedio entre el pedido y el envío según la condición de pago? Devuelve: pmt_terms, dias_promedio_envio.",
+    "sql": "SELECT pmt_terms, ROUND(AVG(DATEDIFF(ship_dt, DATE(ord_dt))), 2) AS dias_promedio_envio FROM ord_hdr WHERE ship_dt IS NOT NULL GROUP BY pmt_terms",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Cuántos meses completos de antigüedad tenía cada representante activo al 31 de diciembre de 2025? Devuelve: first_nm, last_nm, meses_antiguedad.",
+    "sql": "SELECT first_nm, last_nm, TIMESTAMPDIFF(MONTH, hire_dt, '2025-12-31') AS meses_antiguedad FROM rep WHERE is_actv = 1",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Lista las oportunidades que se cerraron entre el 1 de enero y el 30 de junio de 2024, con su cuenta y etapa final. Devuelve: opp_nm, acct_nm, stage_nm, close_dt.",
+    "sql": "SELECT o.opp_nm, a.acct_nm, s.stage_nm, o.close_dt FROM opp o JOIN acct a ON a.acct_id = o.acct_id JOIN opp_stage s ON s.stage_id = o.stage_id WHERE o.close_dt BETWEEN '2024-01-01' AND '2024-06-30'",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Dentro de cada categoría de producto, ¿cuáles son los dos productos con mayor ingreso neto según DENSE_RANK? Devuelve: prod_cat, prod_nm, ingreso, rango.",
+    "sql": "WITH p AS (SELECT ol.prod_cat, ol.prod_nm, SUM(ol.qty * ol.unit_prc * (1 - ol.disc_pct / 100)) AS ing FROM ord_ln ol GROUP BY ol.prod_cat, ol.prod_nm), r AS (SELECT prod_cat, prod_nm, ing, DENSE_RANK() OVER (PARTITION BY prod_cat ORDER BY ing DESC) AS rango FROM p) SELECT prod_cat, prod_nm, ROUND(ing, 2) AS ingreso, rango FROM r WHERE rango <= 2",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué oportunidades se crearon en los 120 días anteriores al 31 de octubre de 2025 (inclusive)? Devuelve: opp_nm, crt_dt, amt.",
+    "sql": "SELECT opp_nm, crt_dt, amt FROM opp WHERE crt_dt BETWEEN DATE_SUB('2025-10-31', INTERVAL 120 DAY) AND '2025-10-31'",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada cuenta, ¿cuál es su oportunidad de mayor monto? Si hay empate, la de menor opp_id. Devuelve: acct_nm, opp_nm, amt.",
+    "sql": "WITH r AS (SELECT a.acct_nm, o.opp_nm, o.amt, ROW_NUMBER() OVER (PARTITION BY o.acct_id ORDER BY o.amt DESC, o.opp_id ASC) AS rn FROM opp o JOIN acct a ON a.acct_id = o.acct_id) SELECT acct_nm, opp_nm, amt FROM r WHERE rn = 1",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué porcentaje de su cuota anual alcanzó cada territorio con las oportunidades ganadas cerradas en 2024 (según el territorio de la cuenta)? Incluye los territorios sin ventas con 0. Devuelve: terr_nm, ventas_2024, ann_quota_amt, pct_cuota.",
+    "sql": "WITH v AS (SELECT a.terr_id, SUM(o.amt) AS ventas FROM opp o JOIN opp_stage s ON s.stage_id = o.stage_id JOIN acct a ON a.acct_id = o.acct_id WHERE s.is_won = 1 AND YEAR(o.close_dt) = 2024 GROUP BY a.terr_id) SELECT t.terr_nm, ROUND(COALESCE(v.ventas, 0), 2) AS ventas_2024, t.ann_quota_amt, ROUND(100 * COALESCE(v.ventas, 0) / t.ann_quota_amt, 2) AS pct_cuota FROM terr t LEFT JOIN v ON v.terr_id = t.terr_id",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué representantes tienen más oportunidades que el promedio de oportunidades por representante (contando solo a quienes tienen alguna)? Devuelve: first_nm, last_nm, num_opps.",
+    "sql": "SELECT r.first_nm, r.last_nm, COUNT(*) AS num_opps FROM rep r JOIN opp o ON o.rep_id = r.rep_id GROUP BY r.rep_id, r.first_nm, r.last_nm HAVING COUNT(*) > (SELECT AVG(n) FROM (SELECT COUNT(*) AS n FROM opp GROUP BY rep_id) t)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué porcentaje del ingreso neto total representa cada categoría de producto? Devuelve: prod_cat, ingreso, porcentaje.",
+    "sql": "SELECT ol.prod_cat, ROUND(SUM(ol.qty * ol.unit_prc * (1 - ol.disc_pct / 100)), 2) AS ingreso, ROUND(100 * SUM(ol.qty * ol.unit_prc * (1 - ol.disc_pct / 100)) / SUM(SUM(ol.qty * ol.unit_prc * (1 - ol.disc_pct / 100))) OVER (), 2) AS porcentaje FROM ord_ln ol GROUP BY ol.prod_cat",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada cuenta con más de un pedido, ¿cuántos días pasan entre un pedido y el siguiente? Muestra solo los pedidos que tienen uno posterior. Devuelve: acct_id, ord_id, ord_dt, siguiente_pedido, dias_entre.",
+    "sql": "WITH s AS (SELECT acct_id, ord_id, ord_dt, LEAD(ord_dt) OVER (PARTITION BY acct_id ORDER BY ord_dt, ord_id) AS siguiente_pedido FROM ord_hdr) SELECT acct_id, ord_id, ord_dt, siguiente_pedido, DATEDIFF(siguiente_pedido, ord_dt) AS dias_entre FROM s WHERE siguiente_pedido IS NOT NULL",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Cuánto monto se ganó en cada trimestre según la fecha de cierre? Ordena por año y trimestre. Devuelve: anio, trimestre, monto_ganado.",
+    "sql": "SELECT YEAR(o.close_dt) AS anio, QUARTER(o.close_dt) AS trimestre, ROUND(SUM(o.amt), 2) AS monto_ganado FROM opp o JOIN opp_stage s ON s.stage_id = o.stage_id WHERE s.is_won = 1 GROUP BY YEAR(o.close_dt), QUARTER(o.close_dt) ORDER BY anio, trimestre",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué cuentas hicieron su primer pedido en 2024? Devuelve: acct_nm, primer_pedido.",
+    "sql": "SELECT a.acct_nm, MIN(oh.ord_dt) AS primer_pedido FROM acct a JOIN ord_hdr oh ON oh.acct_id = a.acct_id GROUP BY a.acct_id, a.acct_nm HAVING YEAR(MIN(oh.ord_dt)) = 2024",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué cuentas hicieron pedidos tanto en 2023 como en 2024? Devuelve: acct_nm.",
+    "sql": "SELECT a.acct_nm FROM acct a WHERE EXISTS (SELECT 1 FROM ord_hdr oh WHERE oh.acct_id = a.acct_id AND YEAR(oh.ord_dt) = 2023) AND EXISTS (SELECT 1 FROM ord_hdr oh WHERE oh.acct_id = a.acct_id AND YEAR(oh.ord_dt) = 2024)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué cuentas han comprado (importe neto de pedidos no cancelados) más que el promedio de las cuentas compradoras de su misma industria? Devuelve: acct_nm, ind, total_comprado.",
+    "sql": "WITH t AS (SELECT a.acct_id, a.acct_nm, a.ind, SUM(ol.qty * ol.unit_prc * (1 - ol.disc_pct / 100)) AS total FROM acct a JOIN ord_hdr oh ON oh.acct_id = a.acct_id JOIN ord_ln ol ON ol.ord_id = oh.ord_id WHERE oh.sts <> 'cancelled' GROUP BY a.acct_id, a.acct_nm, a.ind) SELECT t.acct_nm, t.ind, ROUND(t.total, 2) AS total_comprado FROM t WHERE t.total > (SELECT AVG(t2.total) FROM t t2 WHERE t2.ind = t.ind)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Cuál es el pipeline ponderado de cada representante, es decir, la suma del monto de sus oportunidades abiertas multiplicado por la probabilidad de su etapa? Devuelve: first_nm, last_nm, pipeline_ponderado.",
+    "sql": "SELECT r.first_nm, r.last_nm, ROUND(SUM(o.amt * s.win_prob_pct / 100), 2) AS pipeline_ponderado FROM rep r JOIN opp o ON o.rep_id = r.rep_id JOIN opp_stage s ON s.stage_id = o.stage_id WHERE s.is_clsd = 0 GROUP BY r.rep_id, r.first_nm, r.last_nm",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿En qué mes de 2024 se registraron más pedidos? Devuelve mes (AAAA-MM) y num_pedidos; si hay empate, el mes más antiguo.",
+    "sql": "SELECT DATE_FORMAT(ord_dt, '%Y-%m') AS mes, COUNT(*) AS num_pedidos FROM ord_hdr WHERE ord_dt >= '2024-01-01' AND ord_dt < '2025-01-01' GROUP BY DATE_FORMAT(ord_dt, '%Y-%m') ORDER BY num_pedidos DESC, mes ASC LIMIT 1",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué representantes tienen al menos una oportunidad ganada y nunca han perdido ninguna? Devuelve: first_nm, last_nm.",
+    "sql": "SELECT r.first_nm, r.last_nm FROM rep r WHERE EXISTS (SELECT 1 FROM opp o JOIN opp_stage s ON s.stage_id = o.stage_id WHERE o.rep_id = r.rep_id AND s.is_won = 1) AND NOT EXISTS (SELECT 1 FROM opp o JOIN opp_stage s ON s.stage_id = o.stage_id WHERE o.rep_id = r.rep_id AND s.is_clsd = 1 AND s.is_won = 0)",
+    "nivel": "dificil"
+  }
+]

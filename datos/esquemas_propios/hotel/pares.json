@@ -1,0 +1,402 @@
+[
+  {
+    "pregunta": "¿Cuál es el nombre, la ciudad y el número de estrellas de cada hotel?",
+    "sql": "SELECT nombre, ciudad, estrellas FROM hoteles",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista el nombre y la ciudad de los hoteles de 5 estrellas.",
+    "sql": "SELECT nombre, ciudad FROM hoteles WHERE estrellas = 5",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos huéspedes pertenecen al programa VIP? Devuelve: total_vip.",
+    "sql": "SELECT COUNT(*) AS total_vip FROM huespedes WHERE es_vip = 1",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra el nombre y el apellido de los huéspedes que no registraron correo electrónico.",
+    "sql": "SELECT nombre, apellido FROM huespedes WHERE correo IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Dame el nombre de cada tipo de habitación con su precio base, del más caro al más barato.",
+    "sql": "SELECT nombre_tipo, precio_base FROM tipos_habitacion ORDER BY precio_base DESC",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es el precio base promedio de los tipos de habitación? Devuelve: precio_promedio, redondeado a 2 decimales.",
+    "sql": "SELECT ROUND(AVG(precio_base), 2) AS precio_promedio FROM tipos_habitacion",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué servicios pertenecen a la categoría spa? Devuelve: nombre_servicio, precio_unitario.",
+    "sql": "SELECT nombre_servicio, precio_unitario FROM servicios WHERE categoria = 'spa'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántas habitaciones están actualmente en mantenimiento? Devuelve: total.",
+    "sql": "SELECT COUNT(*) AS total FROM habitaciones WHERE estado = 'mantenimiento'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Cuenta los huéspedes por país de origen. Devuelve: pais_origen, total_huespedes.",
+    "sql": "SELECT pais_origen, COUNT(*) AS total_huespedes FROM huespedes GROUP BY pais_origen",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué hoteles no tienen teléfono registrado? Muestra solo su nombre.",
+    "sql": "SELECT nombre FROM hoteles WHERE telefono IS NULL",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuál es el salario mensual más alto y el más bajo entre todos los empleados? Devuelve: salario_maximo, salario_minimo.",
+    "sql": "SELECT MAX(salario_mensual) AS salario_maximo, MIN(salario_mensual) AS salario_minimo FROM empleados",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra el id, la fecha de entrada y la fecha de salida de las reservas canceladas.",
+    "sql": "SELECT id_reserva, fecha_entrada, fecha_salida FROM reservas WHERE estado = 'cancelada'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuáles son los 5 servicios más caros? Devuelve nombre_servicio y precio_unitario; en caso de empate ordena por nombre_servicio alfabéticamente.",
+    "sql": "SELECT nombre_servicio, precio_unitario FROM servicios ORDER BY precio_unitario DESC, nombre_servicio ASC LIMIT 5",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántas reservas se hicieron por la web? Devuelve: total_web.",
+    "sql": "SELECT COUNT(*) AS total_web FROM reservas WHERE canal = 'web'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Dame el nombre completo y el salario mensual de los empleados que trabajan como chef.",
+    "sql": "SELECT nombre_completo, salario_mensual FROM empleados WHERE puesto = 'chef'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué facturas siguen sin pagarse? Devuelve: id_factura, total.",
+    "sql": "SELECT id_factura, total FROM facturas WHERE pagada = 0",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuánto se ha facturado en total entre todas las facturas? Devuelve: total_facturado.",
+    "sql": "SELECT ROUND(SUM(total), 2) AS total_facturado FROM facturas",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista el nombre y la fecha de apertura de los hoteles que abrieron antes de 2015.",
+    "sql": "SELECT nombre, fecha_apertura FROM hoteles WHERE fecha_apertura < '2015-01-01'",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué huéspedes se registraron durante 2024? Devuelve: nombre, apellido, fecha_registro.",
+    "sql": "SELECT nombre, apellido, fecha_registro FROM huespedes WHERE YEAR(fecha_registro) = 2024",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Qué categorías distintas de servicios existen? Devuelve solo la columna categoria.",
+    "sql": "SELECT DISTINCT categoria FROM servicios",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Muestra el nombre y la capacidad de los tipos de habitación que admiten al menos 3 personas.",
+    "sql": "SELECT nombre_tipo, capacidad FROM tipos_habitacion WHERE capacidad >= 3",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántos empleados hay en cada puesto? Devuelve: puesto, total_empleados.",
+    "sql": "SELECT puesto, COUNT(*) AS total_empleados FROM empleados GROUP BY puesto",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Lista el id de reserva y la tarifa por noche de las reservas con una tarifa mayor a 200 dólares.",
+    "sql": "SELECT id_reserva, tarifa_noche FROM reservas WHERE tarifa_noche > 200",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Quién es el huésped más joven según su fecha de nacimiento? Devuelve nombre, apellido y fecha_nacimiento (si hay empate, el de menor id_huesped).",
+    "sql": "SELECT nombre, apellido, fecha_nacimiento FROM huespedes WHERE fecha_nacimiento IS NOT NULL ORDER BY fecha_nacimiento DESC, id_huesped ASC LIMIT 1",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "¿Cuántas reservas hay en cada estado? Devuelve: estado, total.",
+    "sql": "SELECT estado, COUNT(*) AS total FROM reservas GROUP BY estado",
+    "nivel": "facil"
+  },
+  {
+    "pregunta": "Para cada hotel, ¿cuántas habitaciones tiene? Devuelve: nombre, total_habitaciones.",
+    "sql": "SELECT ho.nombre, COUNT(ha.id_habitacion) AS total_habitaciones FROM hoteles ho JOIN habitaciones ha ON ha.id_hotel = ho.id_hotel GROUP BY ho.id_hotel, ho.nombre",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas habitaciones hay de cada tipo? Incluye los tipos que no tengan habitaciones con 0. Devuelve: nombre_tipo, total_habitaciones.",
+    "sql": "SELECT t.nombre_tipo, COUNT(h.id_habitacion) AS total_habitaciones FROM tipos_habitacion t LEFT JOIN habitaciones h ON h.id_tipo = t.id_tipo GROUP BY t.id_tipo, t.nombre_tipo",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Número de reservas por hotel, incluyendo los hoteles sin reservas con 0. Devuelve: nombre, total_reservas.",
+    "sql": "SELECT ho.nombre, COUNT(r.id_reserva) AS total_reservas FROM hoteles ho LEFT JOIN habitaciones ha ON ha.id_hotel = ho.id_hotel LEFT JOIN reservas r ON r.id_habitacion = ha.id_habitacion GROUP BY ho.id_hotel, ho.nombre",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué huéspedes tienen más de 2 reservas? Devuelve: nombre, apellido, total_reservas.",
+    "sql": "SELECT h.nombre, h.apellido, COUNT(*) AS total_reservas FROM huespedes h JOIN reservas r ON r.id_huesped = h.id_huesped GROUP BY h.id_huesped, h.nombre, h.apellido HAVING COUNT(*) > 2",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuánto ha facturado cada hotel en total? Devuelve: nombre_hotel, total_facturado.",
+    "sql": "SELECT ho.nombre AS nombre_hotel, ROUND(SUM(f.total), 2) AS total_facturado FROM facturas f JOIN reservas r ON r.id_reserva = f.id_reserva JOIN habitaciones ha ON ha.id_habitacion = r.id_habitacion JOIN hoteles ho ON ho.id_hotel = ha.id_hotel GROUP BY ho.id_hotel, ho.nombre",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas veces se ha consumido cada servicio? Incluye los servicios que nunca se han consumido con 0. Devuelve: nombre_servicio, veces_consumido.",
+    "sql": "SELECT s.nombre_servicio, COUNT(c.id_consumo) AS veces_consumido FROM servicios s LEFT JOIN consumos c ON c.id_servicio = s.id_servicio GROUP BY s.id_servicio, s.nombre_servicio",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuál es el monto total consumido por categoría de servicio? Devuelve: categoria, monto_total.",
+    "sql": "SELECT s.categoria, ROUND(SUM(c.monto), 2) AS monto_total FROM consumos c JOIN servicios s ON s.id_servicio = c.id_servicio GROUP BY s.categoria",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué reservas acumulan más de 100 dólares en consumos? Devuelve: id_reserva, total_consumos.",
+    "sql": "SELECT id_reserva, ROUND(SUM(monto), 2) AS total_consumos FROM consumos GROUP BY id_reserva HAVING SUM(monto) > 100",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Calcula la tarifa por noche promedio de las reservas según el canal de reserva. Devuelve: canal, tarifa_promedio.",
+    "sql": "SELECT canal, ROUND(AVG(tarifa_noche), 2) AS tarifa_promedio FROM reservas GROUP BY canal",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué hoteles tienen más de 5 reservas completadas? Devuelve: nombre, reservas_completadas.",
+    "sql": "SELECT ho.nombre, COUNT(*) AS reservas_completadas FROM reservas r JOIN habitaciones ha ON ha.id_habitacion = r.id_habitacion JOIN hoteles ho ON ho.id_hotel = ha.id_hotel WHERE r.estado = 'completada' GROUP BY ho.id_hotel, ho.nombre HAVING COUNT(*) > 5",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Muestra cada empleado que tiene supervisor junto con el nombre de su supervisor. Devuelve: nombre_empleado, nombre_supervisor.",
+    "sql": "SELECT e.nombre_completo AS nombre_empleado, s.nombre_completo AS nombre_supervisor FROM empleados e JOIN empleados s ON s.id_empleado = e.id_supervisor",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuál es el salario mensual promedio de los empleados de cada hotel? Devuelve: nombre, salario_promedio.",
+    "sql": "SELECT ho.nombre, ROUND(AVG(e.salario_mensual), 2) AS salario_promedio FROM hoteles ho JOIN empleados e ON e.id_hotel = ho.id_hotel GROUP BY ho.id_hotel, ho.nombre",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué habitaciones nunca han sido reservadas? Devuelve: nombre_hotel, numero.",
+    "sql": "SELECT ho.nombre AS nombre_hotel, ha.numero FROM habitaciones ha JOIN hoteles ho ON ho.id_hotel = ha.id_hotel LEFT JOIN reservas r ON r.id_habitacion = ha.id_habitacion WHERE r.id_reserva IS NULL",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Desde qué países de origen se han hecho al menos 5 reservas? Devuelve: pais_origen, total_reservas.",
+    "sql": "SELECT h.pais_origen, COUNT(*) AS total_reservas FROM huespedes h JOIN reservas r ON r.id_huesped = h.id_huesped GROUP BY h.pais_origen HAVING COUNT(*) >= 5",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Lista las facturas pendientes de pago con el nombre del huésped. Devuelve: id_factura, nombre, apellido, total.",
+    "sql": "SELECT f.id_factura, h.nombre, h.apellido, f.total FROM facturas f JOIN reservas r ON r.id_reserva = f.id_reserva JOIN huespedes h ON h.id_huesped = r.id_huesped WHERE f.pagada = 0",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para las facturas pagadas, ¿cuántas facturas y cuánto dinero se cobró con cada método de pago? Devuelve: metodo_pago, num_facturas, total_cobrado.",
+    "sql": "SELECT metodo_pago, COUNT(*) AS num_facturas, ROUND(SUM(total), 2) AS total_cobrado FROM facturas WHERE pagada = 1 GROUP BY metodo_pago",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuál es la tarifa por noche promedio cobrada en las reservas de cada tipo de habitación? Devuelve: nombre_tipo, tarifa_promedio.",
+    "sql": "SELECT t.nombre_tipo, ROUND(AVG(r.tarifa_noche), 2) AS tarifa_promedio FROM reservas r JOIN habitaciones h ON h.id_habitacion = r.id_habitacion JOIN tipos_habitacion t ON t.id_tipo = h.id_tipo GROUP BY t.id_tipo, t.nombre_tipo",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántos empleados tiene cada hotel? Devuelve: nombre, ciudad, total_empleados.",
+    "sql": "SELECT ho.nombre, ho.ciudad, COUNT(e.id_empleado) AS total_empleados FROM hoteles ho LEFT JOIN empleados e ON e.id_hotel = ho.id_hotel GROUP BY ho.id_hotel, ho.nombre, ho.ciudad",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué huéspedes han tenido alguna reserva en el hotel 'Resort Riviera Azul'? Devuelve nombre y apellido sin repetir.",
+    "sql": "SELECT DISTINCT hu.nombre, hu.apellido FROM huespedes hu JOIN reservas r ON r.id_huesped = hu.id_huesped JOIN habitaciones ha ON ha.id_habitacion = r.id_habitacion JOIN hoteles ho ON ho.id_hotel = ha.id_hotel WHERE ho.nombre = 'Resort Riviera Azul'",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Para cada huésped con reservas completadas, ¿cuántas noches se ha hospedado en total? Devuelve: nombre, apellido, total_noches.",
+    "sql": "SELECT h.nombre, h.apellido, SUM(DATEDIFF(r.fecha_salida, r.fecha_entrada)) AS total_noches FROM huespedes h JOIN reservas r ON r.id_huesped = h.id_huesped WHERE r.estado = 'completada' GROUP BY h.id_huesped, h.nombre, h.apellido",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas reservas canceladas tiene cada hotel? Muestra solo los hoteles con al menos una cancelación. Devuelve: nombre, total_canceladas.",
+    "sql": "SELECT ho.nombre, COUNT(*) AS total_canceladas FROM reservas r JOIN habitaciones ha ON ha.id_habitacion = r.id_habitacion JOIN hoteles ho ON ho.id_hotel = ha.id_hotel WHERE r.estado = 'cancelada' GROUP BY ho.id_hotel, ho.nombre",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué servicios suman más de 3 unidades consumidas en total? Devuelve: nombre_servicio, unidades.",
+    "sql": "SELECT s.nombre_servicio, SUM(c.cantidad) AS unidades FROM servicios s JOIN consumos c ON c.id_servicio = s.id_servicio GROUP BY s.id_servicio, s.nombre_servicio HAVING SUM(c.cantidad) > 3",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué huéspedes registrados nunca han hecho una reserva? Devuelve: nombre, apellido.",
+    "sql": "SELECT h.nombre, h.apellido FROM huespedes h LEFT JOIN reservas r ON r.id_huesped = h.id_huesped WHERE r.id_reserva IS NULL",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuál es el número promedio de personas por reserva en cada tipo de habitación? Devuelve: nombre_tipo, promedio_personas.",
+    "sql": "SELECT t.nombre_tipo, ROUND(AVG(r.num_personas), 2) AS promedio_personas FROM reservas r JOIN habitaciones h ON h.id_habitacion = r.id_habitacion JOIN tipos_habitacion t ON t.id_tipo = h.id_tipo GROUP BY t.id_tipo, t.nombre_tipo",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuántas habitaciones tiene la cadena en cada país? Devuelve: pais, total_habitaciones.",
+    "sql": "SELECT ho.pais, COUNT(*) AS total_habitaciones FROM hoteles ho JOIN habitaciones ha ON ha.id_hotel = ho.id_hotel GROUP BY ho.pais",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuánto ha gastado en consumos cada huésped VIP? Devuelve: nombre, apellido, total_consumido.",
+    "sql": "SELECT h.nombre, h.apellido, ROUND(SUM(c.monto), 2) AS total_consumido FROM huespedes h JOIN reservas r ON r.id_huesped = h.id_huesped JOIN consumos c ON c.id_reserva = r.id_reserva WHERE h.es_vip = 1 GROUP BY h.id_huesped, h.nombre, h.apellido",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Quién es el gerente de cada hotel? Devuelve: nombre_hotel, nombre_gerente.",
+    "sql": "SELECT ho.nombre AS nombre_hotel, e.nombre_completo AS nombre_gerente FROM hoteles ho JOIN empleados e ON e.id_hotel = ho.id_hotel WHERE e.puesto = 'gerente'",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Cuenta las reservas por combinación de canal y estado. Devuelve: canal, estado, total.",
+    "sql": "SELECT canal, estado, COUNT(*) AS total FROM reservas GROUP BY canal, estado",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Cuáles son los 3 hoteles con más noches vendidas en reservas completadas? Devuelve nombre y total_noches; desempata por nombre en orden alfabético.",
+    "sql": "SELECT ho.nombre, SUM(DATEDIFF(r.fecha_salida, r.fecha_entrada)) AS total_noches FROM reservas r JOIN habitaciones ha ON ha.id_habitacion = r.id_habitacion JOIN hoteles ho ON ho.id_hotel = ha.id_hotel WHERE r.estado = 'completada' GROUP BY ho.id_hotel, ho.nombre ORDER BY total_noches DESC, ho.nombre ASC LIMIT 3",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "¿Qué huéspedes han gastado más de 1000 dólares en facturas? Devuelve: nombre, apellido, num_facturas, gasto_total.",
+    "sql": "SELECT h.nombre, h.apellido, COUNT(f.id_factura) AS num_facturas, ROUND(SUM(f.total), 2) AS gasto_total FROM huespedes h JOIN reservas r ON r.id_huesped = h.id_huesped JOIN facturas f ON f.id_reserva = r.id_reserva GROUP BY h.id_huesped, h.nombre, h.apellido HAVING SUM(f.total) > 1000",
+    "nivel": "media"
+  },
+  {
+    "pregunta": "Clasifica los hoteles según su total facturado, del mayor al menor, usando RANK. Devuelve: nombre, total_facturado, posicion.",
+    "sql": "WITH ingresos AS (SELECT ho.id_hotel, ho.nombre, SUM(f.total) AS total FROM facturas f JOIN reservas r ON r.id_reserva = f.id_reserva JOIN habitaciones ha ON ha.id_habitacion = r.id_habitacion JOIN hoteles ho ON ho.id_hotel = ha.id_hotel GROUP BY ho.id_hotel, ho.nombre) SELECT nombre, ROUND(total, 2) AS total_facturado, RANK() OVER (ORDER BY total DESC) AS posicion FROM ingresos ORDER BY posicion",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada hotel, ¿cuál es la reserva con la tarifa por noche más alta? Si hay empate, toma la de menor id_reserva. Devuelve: nombre_hotel, id_reserva, tarifa_noche.",
+    "sql": "WITH ranking AS (SELECT ho.nombre AS nombre_hotel, r.id_reserva, r.tarifa_noche, ROW_NUMBER() OVER (PARTITION BY ho.id_hotel ORDER BY r.tarifa_noche DESC, r.id_reserva ASC) AS rn FROM reservas r JOIN habitaciones ha ON ha.id_habitacion = r.id_habitacion JOIN hoteles ho ON ho.id_hotel = ha.id_hotel) SELECT nombre_hotel, id_reserva, tarifa_noche FROM ranking WHERE rn = 1",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Muestra el total facturado por mes durante 2024 junto con el total del mes anterior, ordenado por mes. Devuelve: mes (formato AAAA-MM), total_mes, total_mes_anterior.",
+    "sql": "WITH mensual AS (SELECT DATE_FORMAT(fecha_emision, '%Y-%m') AS mes, SUM(total) AS total FROM facturas WHERE YEAR(fecha_emision) = 2024 GROUP BY DATE_FORMAT(fecha_emision, '%Y-%m')) SELECT mes, ROUND(total, 2) AS total_mes, ROUND(LAG(total) OVER (ORDER BY mes), 2) AS total_mes_anterior FROM mensual ORDER BY mes",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada reserva, muestra el huésped, la fecha de entrada, las noches de esa reserva y las noches acumuladas por ese huésped hasta esa reserva (acumulando en orden de fecha de entrada y luego id_reserva). Devuelve: id_huesped, id_reserva, fecha_entrada, noches, noches_acumuladas.",
+    "sql": "SELECT id_huesped, id_reserva, fecha_entrada, DATEDIFF(fecha_salida, fecha_entrada) AS noches, SUM(DATEDIFF(fecha_salida, fecha_entrada)) OVER (PARTITION BY id_huesped ORDER BY fecha_entrada, id_reserva) AS noches_acumuladas FROM reservas",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué reservas tienen una tarifa por noche superior al promedio de tarifas de su mismo hotel? Devuelve: id_reserva, nombre_hotel, tarifa_noche.",
+    "sql": "SELECT r.id_reserva, ho.nombre AS nombre_hotel, r.tarifa_noche FROM reservas r JOIN habitaciones ha ON ha.id_habitacion = r.id_habitacion JOIN hoteles ho ON ho.id_hotel = ha.id_hotel WHERE r.tarifa_noche > (SELECT AVG(r2.tarifa_noche) FROM reservas r2 JOIN habitaciones ha2 ON ha2.id_habitacion = r2.id_habitacion WHERE ha2.id_hotel = ha.id_hotel)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué reservas completadas todavía no tienen factura emitida? Devuelve: id_reserva, fecha_salida.",
+    "sql": "SELECT r.id_reserva, r.fecha_salida FROM reservas r WHERE r.estado = 'completada' AND NOT EXISTS (SELECT 1 FROM facturas f WHERE f.id_reserva = r.id_reserva)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué huéspedes han consumido al menos un servicio de spa? Devuelve: nombre, apellido.",
+    "sql": "SELECT h.nombre, h.apellido FROM huespedes h WHERE EXISTS (SELECT 1 FROM reservas r JOIN consumos c ON c.id_reserva = r.id_reserva JOIN servicios s ON s.id_servicio = c.id_servicio WHERE r.id_huesped = h.id_huesped AND s.categoria = 'spa')",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Cuál es la duración promedio en noches de las estancias completadas en cada hotel? Devuelve: nombre, estancia_promedio.",
+    "sql": "SELECT ho.nombre, ROUND(AVG(DATEDIFF(r.fecha_salida, r.fecha_entrada)), 2) AS estancia_promedio FROM reservas r JOIN habitaciones ha ON ha.id_habitacion = r.id_habitacion JOIN hoteles ho ON ho.id_hotel = ha.id_hotel WHERE r.estado = 'completada' GROUP BY ho.id_hotel, ho.nombre",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Con cuántos días de anticipación, en promedio, se reserva por cada canal (días entre la fecha de la reserva y la fecha de entrada)? Devuelve: canal, anticipacion_promedio.",
+    "sql": "SELECT canal, ROUND(AVG(DATEDIFF(fecha_entrada, DATE(fecha_reserva))), 2) AS anticipacion_promedio FROM reservas GROUP BY canal",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué edad en años cumplidos tenía cada huésped VIP al 1 de enero de 2025? Excluye a quienes no tienen fecha de nacimiento. Devuelve: nombre, apellido, edad.",
+    "sql": "SELECT nombre, apellido, TIMESTAMPDIFF(YEAR, fecha_nacimiento, '2025-01-01') AS edad FROM huespedes WHERE es_vip = 1 AND fecha_nacimiento IS NOT NULL",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Lista las reservas con fecha de entrada entre el 1 de junio y el 31 de agosto de 2024, con el nombre completo del huésped y el hotel. Devuelve: id_reserva, nombre_huesped, nombre_hotel, fecha_entrada.",
+    "sql": "SELECT r.id_reserva, CONCAT(hu.nombre, ' ', hu.apellido) AS nombre_huesped, ho.nombre AS nombre_hotel, r.fecha_entrada FROM reservas r JOIN huespedes hu ON hu.id_huesped = r.id_huesped JOIN habitaciones ha ON ha.id_habitacion = r.id_habitacion JOIN hoteles ho ON ho.id_hotel = ha.id_hotel WHERE r.fecha_entrada BETWEEN '2024-06-01' AND '2024-08-31'",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "En cada hotel, ¿cuáles son los dos niveles salariales más altos (con DENSE_RANK) y qué empleados los tienen? Devuelve: nombre_hotel, nombre_completo, salario_mensual, rango.",
+    "sql": "WITH r AS (SELECT ho.nombre AS nombre_hotel, e.nombre_completo, e.salario_mensual, DENSE_RANK() OVER (PARTITION BY e.id_hotel ORDER BY e.salario_mensual DESC) AS rango FROM empleados e JOIN hoteles ho ON ho.id_hotel = e.id_hotel) SELECT nombre_hotel, nombre_completo, salario_mensual, rango FROM r WHERE rango <= 2",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué empleados tenían al menos 5 años de antigüedad al 31 de diciembre de 2025? Devuelve: nombre_completo, anios_antiguedad.",
+    "sql": "SELECT nombre_completo, TIMESTAMPDIFF(YEAR, fecha_contratacion, '2025-12-31') AS anios_antiguedad FROM empleados WHERE TIMESTAMPDIFF(YEAR, fecha_contratacion, '2025-12-31') >= 5",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué reservas tienen una fecha de salida posterior a 4 días después de su fecha de entrada? Devuelve: id_reserva, fecha_entrada, fecha_salida.",
+    "sql": "SELECT id_reserva, fecha_entrada, fecha_salida FROM reservas WHERE fecha_salida > DATE_ADD(fecha_entrada, INTERVAL 4 DAY)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada país de origen, ¿qué huésped ha gastado más en facturas? Si hay empate, el de menor id_huesped. Devuelve: pais_origen, nombre, apellido, gasto_total.",
+    "sql": "WITH gasto AS (SELECT h.id_huesped, h.pais_origen, h.nombre, h.apellido, SUM(f.total) AS total FROM huespedes h JOIN reservas r ON r.id_huesped = h.id_huesped JOIN facturas f ON f.id_reserva = r.id_reserva GROUP BY h.id_huesped, h.pais_origen, h.nombre, h.apellido), ranking AS (SELECT pais_origen, nombre, apellido, total, ROW_NUMBER() OVER (PARTITION BY pais_origen ORDER BY total DESC, id_huesped ASC) AS rn FROM gasto) SELECT pais_origen, nombre, apellido, ROUND(total, 2) AS gasto_total FROM ranking WHERE rn = 1",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué servicios tienen un precio unitario mayor que el promedio de su propia categoría? Devuelve: nombre_servicio, categoria, precio_unitario.",
+    "sql": "SELECT s.nombre_servicio, s.categoria, s.precio_unitario FROM servicios s WHERE s.precio_unitario > (SELECT AVG(s2.precio_unitario) FROM servicios s2 WHERE s2.categoria = s.categoria)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para 2024, ¿cuántas reservas iniciaron en cada mes y qué porcentaje representan del total del año? Ordena por mes. Devuelve: mes (número), total_reservas, porcentaje.",
+    "sql": "SELECT MONTH(fecha_entrada) AS mes, COUNT(*) AS total_reservas, ROUND(100 * COUNT(*) / SUM(COUNT(*)) OVER (), 2) AS porcentaje FROM reservas WHERE YEAR(fecha_entrada) = 2024 GROUP BY MONTH(fecha_entrada) ORDER BY mes",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para los huéspedes con más de una reserva, ¿cuántos días pasan entre la entrada de una reserva y la entrada de su siguiente reserva? Muestra solo las reservas que tienen una siguiente. Devuelve: id_huesped, id_reserva, fecha_entrada, siguiente_entrada, dias_hasta_siguiente.",
+    "sql": "WITH s AS (SELECT id_huesped, id_reserva, fecha_entrada, LEAD(fecha_entrada) OVER (PARTITION BY id_huesped ORDER BY fecha_entrada, id_reserva) AS siguiente_entrada FROM reservas) SELECT id_huesped, id_reserva, fecha_entrada, siguiente_entrada, DATEDIFF(siguiente_entrada, fecha_entrada) AS dias_hasta_siguiente FROM s WHERE siguiente_entrada IS NOT NULL",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué hoteles facturaron más en 2024 que en 2023 (según la fecha de emisión)? Devuelve: nombre, total_2023, total_2024.",
+    "sql": "WITH t AS (SELECT ho.id_hotel, ho.nombre, SUM(CASE WHEN YEAR(f.fecha_emision) = 2023 THEN f.total ELSE 0 END) AS t23, SUM(CASE WHEN YEAR(f.fecha_emision) = 2024 THEN f.total ELSE 0 END) AS t24 FROM facturas f JOIN reservas r ON r.id_reserva = f.id_reserva JOIN habitaciones ha ON ha.id_habitacion = r.id_habitacion JOIN hoteles ho ON ho.id_hotel = ha.id_hotel GROUP BY ho.id_hotel, ho.nombre) SELECT nombre, ROUND(t23, 2) AS total_2023, ROUND(t24, 2) AS total_2024 FROM t WHERE t24 > t23",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué huéspedes se han hospedado (reservas completadas) en al menos dos hoteles distintos? Devuelve: nombre, apellido, hoteles_distintos.",
+    "sql": "SELECT h.nombre, h.apellido, COUNT(DISTINCT ha.id_hotel) AS hoteles_distintos FROM huespedes h JOIN reservas r ON r.id_huesped = h.id_huesped JOIN habitaciones ha ON ha.id_habitacion = r.id_habitacion WHERE r.estado = 'completada' GROUP BY h.id_huesped, h.nombre, h.apellido HAVING COUNT(DISTINCT ha.id_hotel) >= 2",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Calcula para cada canal el número de reservas, cuántas se cancelaron y el porcentaje de cancelación. Devuelve: canal, total_reservas, canceladas, porcentaje_cancelacion.",
+    "sql": "SELECT canal, COUNT(*) AS total_reservas, SUM(estado = 'cancelada') AS canceladas, ROUND(100 * SUM(estado = 'cancelada') / COUNT(*), 2) AS porcentaje_cancelacion FROM reservas GROUP BY canal",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Cuál fue la primera reserva (según la fecha y hora de reserva) de cada huésped? Devuelve: nombre, apellido, id_reserva, fecha_reserva.",
+    "sql": "SELECT h.nombre, h.apellido, r.id_reserva, r.fecha_reserva FROM reservas r JOIN huespedes h ON h.id_huesped = r.id_huesped WHERE r.fecha_reserva = (SELECT MIN(r2.fecha_reserva) FROM reservas r2 WHERE r2.id_huesped = r.id_huesped)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Muestra el total facturado por trimestre de 2024 y el acumulado del año hasta cada trimestre, en orden de trimestre. Devuelve: trimestre, total_trimestre, total_acumulado.",
+    "sql": "WITH t AS (SELECT QUARTER(fecha_emision) AS trimestre, SUM(total) AS total FROM facturas WHERE fecha_emision BETWEEN '2024-01-01' AND '2024-12-31' GROUP BY QUARTER(fecha_emision)) SELECT trimestre, ROUND(total, 2) AS total_trimestre, ROUND(SUM(total) OVER (ORDER BY trimestre), 2) AS total_acumulado FROM t ORDER BY trimestre",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "¿Qué empleados ganan más que el salario promedio de los empleados con su mismo puesto? Devuelve: nombre_completo, puesto, salario_mensual.",
+    "sql": "SELECT e.nombre_completo, e.puesto, e.salario_mensual FROM empleados e WHERE e.salario_mensual > (SELECT AVG(e2.salario_mensual) FROM empleados e2 WHERE e2.puesto = e.puesto)",
+    "nivel": "dificil"
+  },
+  {
+    "pregunta": "Para cada huésped que tiene reservas, ¿cuántos días pasaron entre su fecha de registro y su primera fecha de entrada? Devuelve: nombre, apellido, dias_hasta_primera_estancia.",
+    "sql": "SELECT h.nombre, h.apellido, DATEDIFF(MIN(r.fecha_entrada), h.fecha_registro) AS dias_hasta_primera_estancia FROM huespedes h JOIN reservas r ON r.id_huesped = h.id_huesped GROUP BY h.id_huesped, h.nombre, h.apellido, h.fecha_registro",
+    "nivel": "dificil"
+  }
+]

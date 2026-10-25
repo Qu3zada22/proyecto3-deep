@@ -1,0 +1,16 @@
+{
+  "total": 9693,
+  "validos": 9516,
+  "descartados": 177,
+  "motivos": {
+    "only_full_group_by": 91,
+    "duplicado": 25,
+    "order_by_fuera_de_distinct": 24,
+    "derivada_sin_alias": 11,
+    "mezcla_agregado_sin_group_by": 10,
+    "no_soportado_mysql": 6,
+    "columna_inexistente": 5,
+    "valor_incorrecto": 4,
+    "tabla_inexistente": 1
+  }
+}

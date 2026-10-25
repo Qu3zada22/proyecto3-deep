@@ -1,0 +1,10 @@
+# MySQL 8.4.10 con configuración por defecto (incluye ONLY_FULL_GROUP_BY),
+# igual que el motor del evaluador. Puerto local 3307 para no chocar con otro MySQL.
+services:
+  mysql:
+    image: mysql:8.4.10
+    container_name: mysql-t2s
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3307:3306"

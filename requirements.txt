@@ -1,0 +1,10 @@
+# Inferencia (solucion.py). torch NO se fija: se usa el que trae Colab (GPU T4).
+transformers==4.56.2
+peft==0.17.1
+accelerate==1.10.1
+sentencepiece
+# Scripts de datos y evaluación (no los necesita solucion.py)
+pymysql==1.2.3
+sqlglot==30.24.0
+tqdm
+matplotlib
