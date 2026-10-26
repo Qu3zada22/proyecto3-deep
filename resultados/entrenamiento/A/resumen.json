@@ -1,0 +1,37 @@
+{
+  "config": "A",
+  "modelo_base": "Qwen/Qwen2.5-Coder-1.5B-Instruct",
+  "lora": {
+    "r": 16,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "target_modules": [
+      "q_proj",
+      "k_proj",
+      "v_proj",
+      "o_proj"
+    ]
+  },
+  "hiperparametros": {
+    "lr": 0.0002,
+    "epocas": 1,
+    "batch": 1,
+    "acumulacion": 16,
+    "max_tokens": 3072,
+    "warmup": 0.03,
+    "max_dev": 300,
+    "eval_cada": 100,
+    "guardar_cada": 50
+  },
+  "parametros_entrenables": 4358144,
+  "parametros_totales": 1548072448,
+  "porcentaje_entrenable": 0.2815,
+  "ejemplos_train": 7920,
+  "ejemplos_dev": 300,
+  "pasos": 495,
+  "minutos_entrenamiento": 36.2,
+  "reanudado_desde": "/content/drive/MyDrive/t2s_checkpoints/A/checkpoint-400",
+  "eval_loss_final": 0.11741859465837479,
+  "perplejidad_dev": 1.125,
+  "gpu": "Tesla T4"
+}
