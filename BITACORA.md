@@ -60,3 +60,31 @@ B 0.0997, con B por debajo de A en todas las evaluaciones desde el paso 100. Se 
 parte de la hipótesis (menor loss con MLP); B tiene 4.2× más parámetros, no 2.5× como estimamos.
 El dev de A se aplana desde el paso 200 y el de B desde el 400. Falta confirmar con la EX en la
 validación propia cuál adapter queda en `adapter/`.
+
+### 2026-10-25 — Iris Ayala
+**Configuración B y esquemas de validación.** Corrimos el entrenamiento de la configuración B
+(atención + MLP) en Colab T4 desde otra cuenta, en paralelo con A, con `CONFIGS = ['B']` en el
+notebook. Para la validación propia creamos dos esquemas de dominios que no están en el
+entrenamiento: `gimnasio` (9 tablas, nombres en español) y `cooperativa_cafe` (9 tablas, nombres
+abreviados como `prod`, `fca`, `lot`, `cat`, `vta_det`), ambos con `COMMENT` en tablas y
+columnas y datos de 2022–2025. `cargar_validacion.py` los carga en MySQL 8.4.10 como
+`val_<nombre>` y crea el usuario de solo lectura `lector`. `verificar_fuga.py`: sin fuga.
+
+### 2026-10-25 — Iris Ayala
+**40 preguntas de validación.** 20 por esquema (7 fáciles, 7 medias, 6 difíciles; pesos
+1/2/3), cada una indica qué columnas devolver y solo dos piden orden. Las preguntas y su SQL de
+referencia se generaron con IA, con autorización del catedrático (ver README). Ejecutamos todo
+el SQL de referencia en MySQL 8.4.10: dos preguntas ("socios sin clases" y "clientes sin
+compras") devolvían 0 filas, lo que haría que cualquier consulta vacía acertara, así que
+agregamos 3 socios y 2 clientes a los datos para que tengan respuesta.
+
+### 2026-10-25 — Iris Ayala
+**Evaluador y notebook de evaluación.** `evaluar.py` imita al evaluador del docente: entrega
+el esquema como `SHOW CREATE TABLE`, ofrece `ejecutar(sql)` con el usuario de solo lectura
+(máximo 10 filas y 3 llamadas), compara por ejecución con números redondeados a 2 decimales,
+filas como multiconjunto (en orden solo si la pregunta lo pide) y permite columnas adicionales,
+y cuenta como error pasar de 30 s o devolver algo que no sea SELECT/WITH. Con `--oraculo`
+(responde con la consulta de referencia) da EX = 1.000, lo que confirma que el comparador
+funciona. Como Colab no tiene Docker, `instalar_mysql_colab.sh` instala el binario de MySQL
+8.4.10 en el puerto 3307; `03_evaluacion.ipynb` evalúa baseline, A y B, y la mejor sin
+`ejecutar` como experimento de inferencia.

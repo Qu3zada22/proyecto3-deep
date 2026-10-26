@@ -1,7 +1,7 @@
 # Proyecto 3 — Text-to-SQL con LoRA
 
 Deep Learning 2026, Universidad del Valle de Guatemala.
-Integrantes: **Anggie Quezada** (`Qu3zada22`) y **Iris Ayala** (`[usuario-github]`).
+Integrantes: **Anggie Quezada** (`Qu3zada22`) y **Iris Ayala** (`AleWWH1104`).
 
 Fine-tuning con LoRA de **Qwen/Qwen2.5-Coder-1.5B-Instruct** para que, dado el esquema de una
 base MySQL (`SHOW CREATE TABLE`, con `COMMENT`) y una pregunta en español, genere una consulta
@@ -90,7 +90,10 @@ paso ~380) y se reanudó desde los checkpoints 250 y 400; el historial de loss q
 | B | atención + MLP (`gate, up, down`) | 18,464,768 (1.182 %) | 495 | ~23 s (189 min en total) | 0.0997 (perplejidad 1.105) |
 
 ### 3. Evaluación
-`T2S_CONFIG=configs/baseline.json python scripts/evaluacion/evaluar.py` (ver `PLAN_TRABAJO.md`).
+En Colab: `notebooks/03_evaluacion.ipynb` (instala MySQL 8.4.10, carga `datos/validacion/` y evalúa
+baseline, A y B). Localmente, con los esquemas cargados (`scripts/evaluacion/cargar_validacion.py`):
+`T2S_CONFIG=configs/baseline.json python scripts/evaluacion/evaluar.py` (`--sin-ejecutar` para el
+experimento sin autocorrección). Los resultados se acumulan en `resultados/validacion_propia.csv`.
 
 ## Dataset
 

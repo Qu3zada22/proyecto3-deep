@@ -1,0 +1,13 @@
+id,nivel,categoria,detalle
+caf_09,media,columna_inexistente,inventa var.lot_id y se salta la tabla intermedia lot (cat -> lot -> var)
+caf_14,media,columna_inexistente,inventa fca.lot_id y se salta la tabla intermedia lot (cat -> lot -> fca)
+caf_16,dificil,columna_inexistente,inventa fca.lot_id y además no calcula el mejor puntaje por departamento
+caf_18,dificil,join,une productores con catación por catador = nombre del productor en vez de prod -> fca -> lot -> cat
+caf_12,media,agregacion,devuelve cada anticipo en lugar de SUM(monto) por productor
+caf_20,dificil,agregacion,promedia todas las cataciones en vez de la primera (MIN) de cada lote
+gim_16,dificil,agregacion,devuelve el salario más alto de toda la cadena (LIMIT 1) en vez del máximo por sede
+gim_18,dificil,agregacion,AVG(SUM(...)) no es válido en MySQL; hacía falta una subconsulta o WITH con el total por socio
+gim_19,dificil,agregacion,toma cada visita en lugar de la primera (MIN) por socio
+caf_19,dificil,filtro,falta WHERE estado = 'pagada'
+gim_20,dificil,filtro,filtra las canceladas en WHERE y divide entre el total de canceladas en vez del total del plan
+gim_14,media,resultado_distinto,usa DATEDIFF (días) en vez de TIMESTAMPDIFF(MINUTE) para una duración en minutos
