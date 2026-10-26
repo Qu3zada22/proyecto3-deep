@@ -1,7 +1,7 @@
 # Plan de trabajo y división de tareas
 
 Entrega: **domingo 25 de octubre de 2026, 23:59**. Integrantes: **Anggie Quezada** (`Qu3zada22`)
-y **Iris Ayala** (`[usuario-github]`).
+y **Iris Ayala** (`AleWWH1104`).
 
 El enunciado exige que cada integrante sea responsable de al menos un área (datos,
 entrenamiento, o validación y errores) y que **ambas hagan commits desde su propia cuenta**.
