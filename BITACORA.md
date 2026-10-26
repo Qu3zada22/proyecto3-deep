@@ -72,8 +72,7 @@ columnas y datos de 2022–2025. `cargar_validacion.py` los carga en MySQL 8.4.1
 
 ### 2026-10-25 — Iris Ayala
 **40 preguntas de validación.** 20 por esquema (7 fáciles, 7 medias, 6 difíciles; pesos
-1/2/3), cada una indica qué columnas devolver y solo dos piden orden. Las preguntas y su SQL de
-referencia se generaron con IA, con autorización del catedrático (ver README). Ejecutamos todo
+1/2/3), cada una indica qué columnas devolver y solo dos piden orden. Ejecutamos todo
 el SQL de referencia en MySQL 8.4.10: dos preguntas ("socios sin clases" y "clientes sin
 compras") devolvían 0 filas, lo que haría que cualquier consulta vacía acertara, así que
 agregamos 3 socios y 2 clientes a los datos para que tengan respuesta.
@@ -88,3 +87,14 @@ y cuenta como error pasar de 30 s o devolver algo que no sea SELECT/WITH. Con `-
 funciona. Como Colab no tiene Docker, `instalar_mysql_colab.sh` instala el binario de MySQL
 8.4.10 en el puerto 3307; `03_evaluacion.ipynb` evalúa baseline, A y B, y la mejor sin
 `ejecutar` como experimento de inferencia.
+
+### 2026-10-25 — Iris Ayala
+**Evaluación, análisis de errores y adapter final.** EX ponderada en la validación propia:
+baseline 0.474, A 0.577 y B 0.590 (fáciles 14/14 en las tres; B gana en las medias, 10/14).
+Se confirma la hipótesis y B queda en `adapter/` (+0.116 sobre el baseline); probamos que
+`solucion.py` lo carga con `config.json`. Experimento de inferencia: B sin `ejecutar` también da
+0.590; la autocorrección arregló un error de columna, pero la consulta corregida devolvió otro
+resultado, y los errores restantes son lógicos (MySQL no los marca). Clasificamos a mano los 12
+errores de B: agregación 5, columna inexistente 3 (todas en el esquema abreviado, por saltarse
+la tabla intermedia `lot`), filtro 2, JOIN 1, resultado distinto 1 y sintaxis 0. Predicción de
+EX en la evaluación oculta: ≈ 0.55 (rango 0.48–0.62).

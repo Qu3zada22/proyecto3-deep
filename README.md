@@ -12,6 +12,7 @@ base MySQL (`SHOW CREATE TABLE`, con `COMMENT`) y una pregunta en español, gene
 ```bash
 pip install -r requirements.txt
 ```
+
 ```python
 from solucion import generar_sql        # carga config.json: modelo base + adapter/
 sql = generar_sql(esquema, "¿Cuántos clientes hay por país? Devuelve país y total.", ejecutar)
@@ -39,7 +40,7 @@ scripts/evaluacion/         verificar_fuga.py, evaluar.py
 datos/esquemas_propios/     12 esquemas propios + pares generados con LLM
 datos/procesados/           pares válidos y esquemas (SHOW CREATE TABLE)
 datos/entrenamiento/        train.jsonl / dev_interno.jsonl en formato chat
-datos/validacion/           2 esquemas no vistos + 40 preguntas propias
+datos/validacion/           2 esquemas no vistos + 40 preguntas
 datos/descartes/            todo par descartado, con su motivo
 notebooks/                  Colab: entrenamiento y evaluación
 resultados/                 curvas de loss, validacion_propia.csv, análisis de errores
@@ -48,12 +49,14 @@ resultados/                 curvas de loss, validacion_propia.csv, análisis de 
 ## Cómo reproducir
 
 ### 0. MySQL 8.4.10
+
 ```bash
 docker compose up -d          # mysql:8.4.10, puerto 3307, root/root, configuración por defecto
 python -m venv .venv && .venv/bin/pip install -r requirements.txt torch
 ```
 
 ### 1. Datos
+
 ```bash
 bash scripts/datos/01_descargar_spider.sh              # Spider 1.0 + checksum
 .venv/bin/python scripts/datos/02_spider_a_mysql.py    # carga 166 bases y valida consultas en MySQL
@@ -63,14 +66,15 @@ bash scripts/datos/01_descargar_spider.sh              # Spider 1.0 + checksum
 ```
 
 ### 2. Entrenamiento (Colab, T4)
+
 Se entrena en Google Colab con GPU T4 (en una computadora sin GPU no es viable):
 
-1. Abrir `notebooks/02_entrenamiento.ipynb` en Colab (desde GitHub o *Subir cuaderno*).
-2. *Entorno de ejecución → Cambiar tipo → T4 GPU*.
-3. Guardar un token de GitHub (acceso de lectura y escritura a este repo) en *Secrets* como
+1. Abrir `notebooks/02_entrenamiento.ipynb` en Colab (desde GitHub o _Subir cuaderno_).
+2. _Entorno de ejecución → Cambiar tipo → T4 GPU_.
+3. Guardar un token de GitHub (acceso de lectura y escritura a este repo) en _Secrets_ como
    `GH_TOKEN`. Si los Secrets no están disponibles (p. ej. con la extensión de Colab para VS Code),
    el notebook pide el token en un cuadro de texto.
-4. *Ejecutar todas*. El notebook monta Google Drive, clona el repo, entrena A y B con
+4. _Ejecutar todas_. El notebook monta Google Drive, clona el repo, entrena A y B con
    `scripts/entrenamiento/entrenar.py` y sube los resultados de cada configuración al repo apenas
    termina.
 
@@ -79,17 +83,18 @@ desconecta, volver a ejecutar el notebook continúa desde el último checkpoint,
 que ya está en el repo no se vuelve a entrenar.
 
 Fuera del notebook: `python scripts/entrenamiento/entrenar.py --config A|B --checkpoints <carpeta>`.
-El adapter elegido se copia a `adapter/`.
+El adapter elegido (B, por EX en la validación propia) está copiado en `adapter/`.
 
 A se entrenó en tres sesiones (un corte de luz en el paso ~250 y el límite de uso de Colab en el
 paso ~380) y se reanudó desde los checkpoints 250 y 400; el historial de loss quedó completo.
 
-| Config | Módulos con LoRA | Parámetros entrenables | Pasos | Tiempo por paso (T4) | Loss dev final |
-|---|---|---|---|---|---|
-| A | atención (`q, k, v, o`) | 4,358,144 (0.282 %) | 495 | ~23 s (~3 h en total, en 3 sesiones) | 0.1174 (perplejidad 1.125) |
-| B | atención + MLP (`gate, up, down`) | 18,464,768 (1.182 %) | 495 | ~23 s (189 min en total) | 0.0997 (perplejidad 1.105) |
+| Config | Módulos con LoRA                  | Parámetros entrenables | Pasos | Tiempo por paso (T4)                 | Loss dev final             |
+| ------ | --------------------------------- | ---------------------- | ----- | ------------------------------------ | -------------------------- |
+| A      | atención (`q, k, v, o`)           | 4,358,144 (0.282 %)    | 495   | ~23 s (~3 h en total, en 3 sesiones) | 0.1174 (perplejidad 1.125) |
+| B      | atención + MLP (`gate, up, down`) | 18,464,768 (1.182 %)   | 495   | ~23 s (189 min en total)             | 0.0997 (perplejidad 1.105) |
 
 ### 3. Evaluación
+
 En Colab: `notebooks/03_evaluacion.ipynb` (instala MySQL 8.4.10, carga `datos/validacion/` y evalúa
 baseline, A y B). Localmente, con los esquemas cargados (`scripts/evaluacion/cargar_validacion.py`):
 `T2S_CONFIG=configs/baseline.json python scripts/evaluacion/evaluar.py` (`--sin-ejecutar` para el
@@ -97,37 +102,44 @@ experimento sin autocorrección). Los resultados se acumulan en `resultados/vali
 
 ## Dataset
 
-| Fuente | Pares | Notas |
-|---|---|---|
-| Spider 1.0 (train + others + dev), 166 bases | 9,693 → 9,516 válidos en MySQL → 8,261 traducidos | 6,000 muestreados para entrenar |
-| Esquemas propios (12) | 960 (25 fáciles / 30 medios / 25 difíciles por esquema) | generados con LLM, todos validados por ejecución; ×2 en el entrenamiento |
-| **Total entrenamiento** | **6,960 pares únicos, 7,920 ejemplos, 169 esquemas** | `datos/entrenamiento/resumen.json` |
+| Fuente                                       | Pares                                                   | Notas                                                                    |
+| -------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Spider 1.0 (train + others + dev), 166 bases | 9,693 → 9,516 válidos en MySQL → 8,261 traducidos       | 6,000 muestreados para entrenar                                          |
+| Esquemas propios (12)                        | 960 (25 fáciles / 30 medios / 25 difíciles por esquema) | generados con LLM, todos validados por ejecución; ×2 en el entrenamiento |
+| **Total entrenamiento**                      | **6,960 pares únicos, 7,920 ejemplos, 169 esquemas**    | `datos/entrenamiento/resumen.json`                                       |
 
 Descartes:
 
-| Etapa | Descartados | Motivo principal |
-|---|---|---|
-| Spider → MySQL | 177 | 91 `ONLY_FULL_GROUP_BY`, 25 duplicados, 24 ORDER BY fuera de DISTINCT, 11 derivada sin alias, 26 otros |
-| Traducción | 1,255 | el traductor alteró un valor literal de la consulta |
-| Largo | 63 | más de 3,072 tokens (esquemas muy grandes de Spider) |
-| Esquemas propios | 0 | — |
+| Etapa            | Descartados | Motivo principal                                                                                       |
+| ---------------- | ----------- | ------------------------------------------------------------------------------------------------------ |
+| Spider → MySQL   | 177         | 91 `ONLY_FULL_GROUP_BY`, 25 duplicados, 24 ORDER BY fuera de DISTINCT, 11 derivada sin alias, 26 otros |
+| Traducción       | 1,255       | el traductor alteró un valor literal de la consulta                                                    |
+| Largo            | 63          | más de 3,072 tokens (esquemas muy grandes de Spider)                                                   |
+| Esquemas propios | 0           | —                                                                                                      |
 
 Solo se aceptan pares cuya consulta corre sin error en MySQL 8.4.10. Los descartes, con su
 motivo, están en `datos/descartes/`.
 
 ## Resultados
 
-*(por completar: baseline, LoRA A, LoRA B, experimento de inferencia, análisis de errores,
-predicción de EX)*
+EX ponderada en la validación propia (2 esquemas no vistos, 40 preguntas):
+
+| Configuración               | EX        | Fáciles | Medias | Difíciles |
+| --------------------------- | --------- | ------- | ------ | --------- |
+| Baseline (sin adapter)      | 0.474     | 14/14   | 7/14   | 3/12      |
+| LoRA A (atención)           | 0.577     | 14/14   | 8/14   | 5/12      |
+| **LoRA B (atención + MLP)** | **0.590** | 14/14   | 10/14  | 4/12      |
+
+El adapter de la entrega es **B**.
 
 ## Licencias
 
-| Recurso | Licencia |
-|---|---|
-| Qwen/Qwen2.5-Coder-1.5B-Instruct | Apache 2.0 |
-| Spider 1.0 (Yu et al., 2018) | CC BY-SA 4.0. Los pares derivados en `datos/` se comparten bajo la misma licencia |
-| Helsinki-NLP/opus-mt-en-es (traducción) | Apache 2.0 |
-| MySQL 8.4 Community (imagen `mysql:8.4.10`) | GPL v2 |
+| Recurso                                     | Licencia                                                                          |
+| ------------------------------------------- | --------------------------------------------------------------------------------- |
+| Qwen/Qwen2.5-Coder-1.5B-Instruct            | Apache 2.0                                                                        |
+| Spider 1.0 (Yu et al., 2018)                | CC BY-SA 4.0. Los pares derivados en `datos/` se comparten bajo la misma licencia |
+| Helsinki-NLP/opus-mt-en-es (traducción)     | Apache 2.0                                                                        |
+| MySQL 8.4 Community (imagen `mysql:8.4.10`) | GPL v2                                                                            |
 
 ## Uso de IA
 
@@ -138,4 +150,3 @@ predicción de EX)*
   documentación. Revisamos, ejecutamos y entendemos todo el código entregado.
 - **En la inferencia no se usa ninguna API externa:** `solucion.py` solo usa el modelo base
   permitido y nuestro adapter LoRA.
-- Las 40 preguntas de validación propia las escribimos nosotras.
