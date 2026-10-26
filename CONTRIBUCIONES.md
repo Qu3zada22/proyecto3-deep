@@ -16,4 +16,5 @@
 | **Errores:** experimento de inferencia y análisis por categoría | Iris Ayala | `resultados/errores_lora_B.csv`, `resultados/*.png`, `scripts/evaluacion/graficar.py` |
 | Verificación de fuga validación/entrenamiento | Anggie Quezada | `scripts/evaluacion/verificar_fuga.py` |
 | Prueba final de la entrega (`solucion.py` con `adapter/`) | Iris Ayala | `solucion.py`, `config.json`, `adapter/` |
-| Predicción de EX y presentación | Ambas | `presentacion.pdf` |
+| Predicción justificada de EX | Iris Ayala | `presentacion.pdf` (diapositiva 11), `resultados/validacion_propia.csv` |
+| Presentación | Ambas: Anggie diapositivas 1–6, Iris 7–11, conclusiones en conjunto | `presentacion.pdf` |
