@@ -1,0 +1,430 @@
+commit b76f316f0a7395fdc48a64cfcdee3666270e3ff6
+Author: Qu3zada22 <139565119+Qu3zada22@users.noreply.github.com>
+Date:   2026-10-25 22:58:26 -0600
+
+    Presentación final (12 diapositivas) y usuario de Iris en el plan de trabajo
+
+ PLAN_TRABAJO.md  |   2 +-
+ presentacion.pdf | Bin 0 -> 2952660 bytes
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+
+commit d99b3d58e23891d2d3a54b320c0cc5257dce85d7
+Author: AleWWH1104 <irisale.ayala@gmail.com>
+Date:   2026-10-25 21:48:53 -0600
+
+    Adapter B, resultados y diapositivas de validación
+
+ BITACORA.md                       |     14 +-
+ CONTRIBUCIONES.md                 |      8 +-
+ README.md                         |     71 +-
+ adapter/README.md                 |    207 +
+ adapter/adapter_config.json       |     42 +
+ adapter/adapter_model.safetensors |    Bin 0 -> 73911112 bytes
+ adapter/added_tokens.json         |     24 +
+ adapter/chat_template.jinja       |     54 +
+ adapter/merges.txt                | 151388 +++++++
+ adapter/special_tokens_map.json   |     31 +
+ adapter/tokenizer.json            | 757444 +++++++++++++++++++++++++++++++++++
+ adapter/tokenizer_config.json     |    207 +
+ adapter/vocab.json                |      1 +
+ docs/diapositivas_validacion.md   |    103 +
+ 14 files changed, 909558 insertions(+), 36 deletions(-)
+
+commit de71be222da9a091898d34550dcc4a0d27acb00d
+Author: AleWWH1104 <irisale.ayala@gmail.com>
+Date:   2026-10-25 21:26:33 -0600
+
+    Resultados de evaluación y análisis de errores
+
+ BITACORA.md                      |  28 +++++++
+ CONTRIBUCIONES.md                |   7 +-
+ README.md                        |   7 +-
+ resultados/errores_lora_B.csv    |  13 ++++
+ resultados/errores_lora_B.png    | Bin 0 -> 29530 bytes
+ resultados/ex_por_config.png     | Bin 0 -> 58174 bytes
+ resultados/validacion_propia.csv | 161 +++++++++++++++++++++++++++++++++++++++
+ scripts/evaluacion/graficar.py   |  69 +++++++++++++++++
+ 8 files changed, 280 insertions(+), 5 deletions(-)
+
+commit 85c5c393970b4bcc98c43135577efcdb675b58ce
+Author: Qu3zada22 <139565119+Qu3zada22@users.noreply.github.com>
+Date:   2026-10-25 20:21:26 -0600
+
+    readme
+
+ README.md | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
+
+commit 6ce0692af8b30198b06bb7a1166f4ce7a1cc145a
+Author: Qu3zada22 <139565119+Qu3zada22@users.noreply.github.com>
+Date:   2026-10-25 20:20:03 -0600
+
+    README y bitácora con los resultados de entrenamiento de A y B
+
+ BITACORA.md | 10 ++++++++++
+ README.md   | 11 +++++++----
+ 2 files changed, 17 insertions(+), 4 deletions(-)
+
+commit 38fb326d215da82a8e0f2ae6601dcad72b9c091e
+Author: Qu3zada22 <139565119+Qu3zada22@users.noreply.github.com>
+Date:   2026-10-26 02:18:14 +0000
+
+    Resultados de entrenamiento LoRA A (Colab T4)
+
+ resultados/entrenamiento/A/adapter/README.md       |    207 +
+ .../entrenamiento/A/adapter/adapter_config.json    |     39 +
+ .../A/adapter/adapter_model.safetensors            |    Bin 0 -> 17462432 bytes
+ .../entrenamiento/A/adapter/added_tokens.json      |     24 +
+ .../entrenamiento/A/adapter/chat_template.jinja    |     54 +
+ resultados/entrenamiento/A/adapter/merges.txt      | 151388 ++++
+ .../A/adapter/special_tokens_map.json              |     31 +
+ resultados/entrenamiento/A/adapter/tokenizer.json  | 757444 ++++++++++++++++++
+ .../entrenamiento/A/adapter/tokenizer_config.json  |    207 +
+ resultados/entrenamiento/A/adapter/vocab.json      |      1 +
+ resultados/entrenamiento/A/curva_loss.png          |    Bin 0 -> 61506 bytes
+ resultados/entrenamiento/A/historial.json          |    394 +
+ resultados/entrenamiento/A/resumen.json            |     37 +
+ 13 files changed, 909826 insertions(+)
+
+commit fee0437ab863dceebbaffb8ce93c5a61a41a84ac
+Author: AleWWH1104 <irisale.ayala@gmail.com>
+Date:   2026-10-25 23:48:03 +0000
+
+    Resultados de entrenamiento LoRA B (Colab T4)
+
+ resultados/entrenamiento/B/adapter/README.md       |    207 +
+ .../entrenamiento/B/adapter/adapter_config.json    |     42 +
+ .../B/adapter/adapter_model.safetensors            |    Bin 0 -> 73911112 bytes
+ .../entrenamiento/B/adapter/added_tokens.json      |     24 +
+ .../entrenamiento/B/adapter/chat_template.jinja    |     54 +
+ resultados/entrenamiento/B/adapter/merges.txt      | 151388 ++++
+ .../B/adapter/special_tokens_map.json              |     31 +
+ resultados/entrenamiento/B/adapter/tokenizer.json  | 757444 ++++++++++++++++++
+ .../entrenamiento/B/adapter/tokenizer_config.json  |    207 +
+ resultados/entrenamiento/B/adapter/vocab.json      |      1 +
+ resultados/entrenamiento/B/curva_loss.png          |    Bin 0 -> 62480 bytes
+ resultados/entrenamiento/B/historial.json          |    394 +
+ resultados/entrenamiento/B/resumen.json            |     40 +
+ 13 files changed, 909832 insertions(+)
+
+commit 23deae3b8527c5075e4fed3158a244a61d07b71f
+Author: AleWWH1104 <irisale.ayala@gmail.com>
+Date:   2026-10-25 15:46:15 -0600
+
+    Evaluador y notebook de evaluación
+
+ notebooks/03_evaluacion.ipynb              | 175 ++++++++++++++++++++++++
+ scripts/evaluacion/evaluar.py              | 205 +++++++++++++++++++++++++++++
+ scripts/evaluacion/instalar_mysql_colab.sh |  53 ++++++++
+ 3 files changed, 433 insertions(+)
+
+commit a7e0bb94530cf98f3253f6e9c3de72620f82b484
+Author: AleWWH1104 <irisale.ayala@gmail.com>
+Date:   2026-10-25 15:31:39 -0600
+
+    Validación propia: 40 preguntas con SQL de referencia
+
+ datos/validacion/cooperativa_cafe/datos.sql      |  4 ++++
+ datos/validacion/cooperativa_cafe/preguntas.json | 22 ++++++++++++++++++++++
+ datos/validacion/gimnasio/datos.sql              | 10 ++++++++++
+ datos/validacion/gimnasio/preguntas.json         | 22 ++++++++++++++++++++++
+ 4 files changed, 58 insertions(+)
+
+commit 315b3ac64eb2927e1a43e84c3427a3c49bb8bf47
+Merge: 926f172 23d7a85
+Author: AleWWH1104 <irisale.ayala@gmail.com>
+Date:   2026-10-25 15:17:48 -0600
+
+    Merge branch 'main' of github-school:Qu3zada22/proyecto3-deep
+
+commit 926f1728e080005e99ac278ae76f0c4c2b76eece
+Author: AleWWH1104 <irisale.ayala@gmail.com>
+Date:   2026-10-25 15:07:26 -0600
+
+    Esquemas de validación: gimnasio y cooperativa de café
+
+ datos/validacion/cooperativa_cafe/datos.sql   | 562 ++++++++++++++++++
+ datos/validacion/cooperativa_cafe/esquema.sql |  90 +++
+ datos/validacion/gimnasio/datos.sql           | 826 ++++++++++++++++++++++++++
+ datos/validacion/gimnasio/esquema.sql         | 102 ++++
+ scripts/evaluacion/cargar_validacion.py       |  60 ++
+ 5 files changed, 1640 insertions(+)
+
+commit 23d7a85385f99ec6e236d0dbe0bdd2f0e5c405a8
+Author: Qu3zada22 <139565119+Qu3zada22@users.noreply.github.com>
+Date:   2026-10-25 14:45:04 -0600
+
+    Notebook de Colab con parámetros por integrante, token sin Secrets y documentación del entrenamiento
+
+ .gitignore                       |   3 +
+ BITACORA.md                      |  11 ++-
+ CONTRIBUCIONES.md                |   8 +--
+ PLAN_TRABAJO.md                  |   8 +--
+ README.md                        |  24 ++++++-
+ notebooks/02_entrenamiento.ipynb | 144 +++++++++++++++++++++++++++++++++------
+ 6 files changed, 165 insertions(+), 33 deletions(-)
+
+commit 14c8350166f1d5b9635e6a8e1b205b15bd22a8e2
+Author: Qu3zada22 <139565119+Qu3zada22@users.noreply.github.com>
+Date:   2026-10-24 21:49:59 -0600
+
+    Pipeline de datos, dataset de entrenamiento, solucion.py y notebook de Colab con checkpoints en Drive
+
+ .gitignore                                         |   13 +
+ BITACORA.md                                        |   43 +
+ CONTRIBUCIONES.md                                  |   18 +
+ PLAN_TRABAJO.md                                    |   65 +
+ README.md                                          |  118 +-
+ config.json                                        |    6 +
+ configs/baseline.json                              |    6 +
+ configs/lora_A.json                                |    6 +
+ configs/lora_B.json                                |    6 +
+ datos/descartes/dataset_descartes.csv              |   64 +
+ datos/descartes/propios_descartes.csv              |    1 +
+ datos/descartes/spider_descartes.csv               |  178 +
+ datos/descartes/spider_resumen.json                |   16 +
+ datos/descartes/traduccion_descartes.csv           | 1256 +++
+ datos/entrenamiento/dev_interno.jsonl              |  302 +
+ datos/entrenamiento/resumen.json                   |   37 +
+ datos/entrenamiento/train.jsonl                    | 7920 ++++++++++++++++
+ datos/esquemas_propios/README.md                   |   33 +
+ datos/esquemas_propios/banco/datos.sql             |  343 +
+ datos/esquemas_propios/banco/esquema.sql           |  103 +
+ datos/esquemas_propios/banco/pares.json            |  402 +
+ datos/esquemas_propios/hospital/datos.sql          |  320 +
+ datos/esquemas_propios/hospital/esquema.sql        |  100 +
+ datos/esquemas_propios/hospital/pares.json         |  402 +
+ datos/esquemas_propios/hotel/datos.sql             |  315 +
+ datos/esquemas_propios/hotel/esquema.sql           |  104 +
+ datos/esquemas_propios/hotel/pares.json            |  402 +
+ datos/esquemas_propios/hr_company/datos.sql        |  343 +
+ datos/esquemas_propios/hr_company/esquema.sql      |   92 +
+ datos/esquemas_propios/hr_company/pares.json       |   84 +
+ datos/esquemas_propios/inventario/datos.sql        |  430 +
+ datos/esquemas_propios/inventario/esquema.sql      |  111 +
+ datos/esquemas_propios/inventario/pares.json       |  402 +
+ datos/esquemas_propios/liga_futbol/datos.sql       |  308 +
+ datos/esquemas_propios/liga_futbol/esquema.sql     |  104 +
+ datos/esquemas_propios/liga_futbol/pares.json      |  402 +
+ datos/esquemas_propios/logistica/datos.sql         |  273 +
+ datos/esquemas_propios/logistica/esquema.sql       |  101 +
+ datos/esquemas_propios/logistica/pares.json        |  164 +
+ datos/esquemas_propios/restaurante/datos.sql       |  444 +
+ datos/esquemas_propios/restaurante/esquema.sql     |  102 +
+ datos/esquemas_propios/restaurante/pares.json      |  164 +
+ datos/esquemas_propios/sales_crm/datos.sql         |  385 +
+ datos/esquemas_propios/sales_crm/esquema.sql       |  116 +
+ datos/esquemas_propios/sales_crm/pares.json        |  402 +
+ datos/esquemas_propios/streaming/datos.sql         |  501 ++
+ datos/esquemas_propios/streaming/esquema.sql       |   98 +
+ datos/esquemas_propios/streaming/pares.json        |   84 +
+ datos/esquemas_propios/tienda_linea/datos.sql      |  450 +
+ datos/esquemas_propios/tienda_linea/esquema.sql    |   93 +
+ datos/esquemas_propios/tienda_linea/pares.json     |  402 +
+ datos/esquemas_propios/universidad/datos.sql       |  334 +
+ datos/esquemas_propios/universidad/esquema.sql     |   91 +
+ datos/esquemas_propios/universidad/pares.json      |  402 +
+ datos/procesados/esquemas_propios/banco.sql        |  114 +
+ datos/procesados/esquemas_propios/hospital.sql     |  109 +
+ datos/procesados/esquemas_propios/hotel.sql        |  113 +
+ datos/procesados/esquemas_propios/hr_company.sql   |   99 +
+ datos/procesados/esquemas_propios/inventario.sql   |  124 +
+ datos/procesados/esquemas_propios/liga_futbol.sql  |  118 +
+ datos/procesados/esquemas_propios/logistica.sql    |  108 +
+ datos/procesados/esquemas_propios/restaurante.sql  |  110 +
+ datos/procesados/esquemas_propios/sales_crm.sql    |  129 +
+ datos/procesados/esquemas_propios/streaming.sql    |  104 +
+ datos/procesados/esquemas_propios/tienda_linea.sql |  102 +
+ datos/procesados/esquemas_propios/universidad.sql  |  101 +
+ datos/procesados/esquemas_spider/academic.sql      |  129 +
+ datos/procesados/esquemas_spider/activity_1.sql    |   47 +
+ datos/procesados/esquemas_spider/aircraft.sql      |   54 +
+ datos/procesados/esquemas_spider/allergy_1.sql     |   26 +
+ .../esquemas_spider/apartment_rentals.sql          |   65 +
+ datos/procesados/esquemas_spider/architecture.sql  |   32 +
+ .../esquemas_spider/assets_maintenance.sql         |  151 +
+ datos/procesados/esquemas_spider/baseball_1.sql    |  429 +
+ datos/procesados/esquemas_spider/battle_death.sql  |   33 +
+ .../esquemas_spider/behavior_monitoring.sql        |  130 +
+ datos/procesados/esquemas_spider/bike_1.sql        |   61 +
+ datos/procesados/esquemas_spider/body_builder.sql  |   20 +
+ datos/procesados/esquemas_spider/book_2.sql        |   18 +
+ datos/procesados/esquemas_spider/browser_web.sql   |   25 +
+ .../procesados/esquemas_spider/candidate_poll.sql  |   23 +
+ datos/procesados/esquemas_spider/car_1.sql         |   53 +
+ datos/procesados/esquemas_spider/chinook_1.sql     |  128 +
+ datos/procesados/esquemas_spider/cinema.sql        |   31 +
+ datos/procesados/esquemas_spider/city_record.sql   |   47 +
+ datos/procesados/esquemas_spider/climbing.sql      |   21 +
+ datos/procesados/esquemas_spider/club_1.sql        |   29 +
+ datos/procesados/esquemas_spider/coffee_shop.sql   |   38 +
+ datos/procesados/esquemas_spider/college_1.sql     |   86 +
+ datos/procesados/esquemas_spider/college_2.sql     |  104 +
+ datos/procesados/esquemas_spider/college_3.sql     |   85 +
+ datos/procesados/esquemas_spider/company_1.sql     |   51 +
+ .../esquemas_spider/company_employee.sql           |   30 +
+ .../procesados/esquemas_spider/company_office.sql  |   31 +
+ .../procesados/esquemas_spider/concert_singer.sql  |   41 +
+ .../esquemas_spider/county_public_safety.sql       |   27 +
+ datos/procesados/esquemas_spider/course_teach.sql  |   24 +
+ .../esquemas_spider/cre_Doc_Control_Systems.sql    |   92 +
+ .../esquemas_spider/cre_Doc_Template_Mgt.sql       |   38 +
+ .../esquemas_spider/cre_Doc_Tracking_DB.sql        |   86 +
+ .../esquemas_spider/cre_Docs_and_Epenses.sql       |   59 +
+ .../esquemas_spider/cre_Drama_Workshop_Groups.sql  |  213 +
+ .../procesados/esquemas_spider/cre_Theme_park.sql  |  137 +
+ datos/procesados/esquemas_spider/csu_1.sql         |   52 +
+ .../procesados/esquemas_spider/culture_company.sql |   34 +
+ .../esquemas_spider/customer_complaints.sql        |   51 +
+ .../esquemas_spider/customer_deliveries.sql        |  128 +
+ .../esquemas_spider/customers_and_addresses.sql    |   68 +
+ .../esquemas_spider/customers_and_invoices.sql     |  111 +
+ .../customers_and_products_contacts.sql            |   70 +
+ .../customers_campaigns_ecommerce.sql              |   84 +
+ .../customers_card_transactions.sql                |   45 +
+ datos/procesados/esquemas_spider/debate.sql        |   29 +
+ .../esquemas_spider/decoration_competition.sql     |   26 +
+ .../esquemas_spider/department_management.sql      |   27 +
+ .../esquemas_spider/department_store.sql           |  133 +
+ datos/procesados/esquemas_spider/device.sql        |   28 +
+ .../esquemas_spider/document_management.sql        |   78 +
+ datos/procesados/esquemas_spider/dog_kennels.sql   |   93 +
+ datos/procesados/esquemas_spider/dorm_1.sql        |   36 +
+ .../procesados/esquemas_spider/driving_school.sql  |   74 +
+ datos/procesados/esquemas_spider/e_government.sql  |  103 +
+ datos/procesados/esquemas_spider/e_learning.sql    |   64 +
+ datos/procesados/esquemas_spider/election.sql      |   34 +
+ .../esquemas_spider/election_representative.sql    |   21 +
+ .../esquemas_spider/employee_hire_evaluation.sql   |   36 +
+ .../esquemas_spider/entertainment_awards.sql       |   26 +
+ datos/procesados/esquemas_spider/entrepreneur.sql  |   19 +
+ datos/procesados/esquemas_spider/epinions_1.sql    |   34 +
+ datos/procesados/esquemas_spider/farm.sql          |   44 +
+ datos/procesados/esquemas_spider/film_rank.sql     |   30 +
+ datos/procesados/esquemas_spider/flight_1.sql      |   36 +
+ datos/procesados/esquemas_spider/flight_2.sql      |   28 +
+ datos/procesados/esquemas_spider/flight_4.sql      |   41 +
+ .../procesados/esquemas_spider/flight_company.sql  |   35 +
+ datos/procesados/esquemas_spider/formula_1.sql     |  177 +
+ datos/procesados/esquemas_spider/game_1.sql        |   38 +
+ datos/procesados/esquemas_spider/game_injury.sql   |   35 +
+ datos/procesados/esquemas_spider/gas_company.sql   |   32 +
+ datos/procesados/esquemas_spider/geo.sql           |   65 +
+ datos/procesados/esquemas_spider/gymnast.sql       |   21 +
+ datos/procesados/esquemas_spider/hospital_1.sql    |  164 +
+ datos/procesados/esquemas_spider/hr_1.sql          |   75 +
+ datos/procesados/esquemas_spider/icfp_1.sql        |   32 +
+ datos/procesados/esquemas_spider/imdb.sql          |  138 +
+ datos/procesados/esquemas_spider/inn_1.sql         |   25 +
+ .../esquemas_spider/insurance_and_eClaims.sql      |   68 +
+ .../procesados/esquemas_spider/insurance_fnol.sql  |   58 +
+ .../esquemas_spider/insurance_policies.sql         |   52 +
+ .../esquemas_spider/journal_committee.sql          |   24 +
+ datos/procesados/esquemas_spider/loan_1.sql        |   35 +
+ .../esquemas_spider/local_govt_and_lot.sql         |  107 +
+ .../esquemas_spider/local_govt_in_alabama.sql      |   30 +
+ .../procesados/esquemas_spider/local_govt_mdm.sql  |   62 +
+ .../procesados/esquemas_spider/machine_repair.sql  |   39 +
+ datos/procesados/esquemas_spider/manufactory_1.sql |   18 +
+ datos/procesados/esquemas_spider/manufacturer.sql  |   26 +
+ datos/procesados/esquemas_spider/match_season.sql  |   42 +
+ .../medicine_enzyme_interaction.sql                |   28 +
+ .../procesados/esquemas_spider/mountain_photos.sql |   31 +
+ datos/procesados/esquemas_spider/movie_1.sql       |   24 +
+ datos/procesados/esquemas_spider/museum_visit.sql  |   26 +
+ datos/procesados/esquemas_spider/music_1.sql       |   46 +
+ datos/procesados/esquemas_spider/music_2.sql       |   61 +
+ datos/procesados/esquemas_spider/music_4.sql       |   32 +
+ datos/procesados/esquemas_spider/musical.sql       |   22 +
+ datos/procesados/esquemas_spider/network_1.sql     |   24 +
+ datos/procesados/esquemas_spider/network_2.sql     |   18 +
+ datos/procesados/esquemas_spider/news_report.sql   |   27 +
+ datos/procesados/esquemas_spider/orchestra.sql     |   43 +
+ datos/procesados/esquemas_spider/party_host.sql    |   27 +
+ datos/procesados/esquemas_spider/party_people.sql  |   43 +
+ .../esquemas_spider/performance_attendance.sql     |   26 +
+ datos/procesados/esquemas_spider/perpetrator.sql   |   22 +
+ datos/procesados/esquemas_spider/pets_1.sql        |   28 +
+ datos/procesados/esquemas_spider/phone_1.sql       |   36 +
+ datos/procesados/esquemas_spider/phone_market.sql  |   27 +
+ datos/procesados/esquemas_spider/pilot_record.sql  |   33 +
+ datos/procesados/esquemas_spider/poker_player.sql  |   20 +
+ .../procesados/esquemas_spider/product_catalog.sql |   55 +
+ .../esquemas_spider/products_for_hire.sql          |   87 +
+ .../products_gen_characteristics.sql               |   55 +
+ datos/procesados/esquemas_spider/program_share.sql |   38 +
+ .../esquemas_spider/protein_institute.sql          |   37 +
+ datos/procesados/esquemas_spider/race_track.sql    |   19 +
+ datos/procesados/esquemas_spider/railway.sql       |   42 +
+ .../esquemas_spider/real_estate_properties.sql     |   63 +
+ datos/procesados/esquemas_spider/restaurant_1.sql  |   46 +
+ datos/procesados/esquemas_spider/restaurants.sql   |   27 +
+ datos/procesados/esquemas_spider/riding_club.sql   |   53 +
+ .../procesados/esquemas_spider/roller_coaster.sql  |   23 +
+ datos/procesados/esquemas_spider/sakila_1.sql      |  192 +
+ datos/procesados/esquemas_spider/scholar.sql       |   77 +
+ datos/procesados/esquemas_spider/school_bus.sql    |   28 +
+ .../procesados/esquemas_spider/school_finance.sql  |   33 +
+ datos/procesados/esquemas_spider/school_player.sql |   45 +
+ datos/procesados/esquemas_spider/scientist_1.sql   |   21 +
+ datos/procesados/esquemas_spider/ship_1.sql        |   21 +
+ datos/procesados/esquemas_spider/ship_mission.sql  |   21 +
+ .../procesados/esquemas_spider/shop_membership.sql |   39 +
+ datos/procesados/esquemas_spider/singer.sql        |   19 +
+ datos/procesados/esquemas_spider/small_bank_1.sql  |   19 +
+ datos/procesados/esquemas_spider/soccer_1.sql      |  109 +
+ datos/procesados/esquemas_spider/soccer_2.sql      |   25 +
+ datos/procesados/esquemas_spider/solvency_ii.sql   |   97 +
+ .../esquemas_spider/sports_competition.sql         |   54 +
+ .../procesados/esquemas_spider/station_weather.sql |   38 +
+ datos/procesados/esquemas_spider/store_1.sql       |  128 +
+ datos/procesados/esquemas_spider/store_product.sql |   47 +
+ datos/procesados/esquemas_spider/storm_record.sql  |   26 +
+ datos/procesados/esquemas_spider/student_1.sql     |   14 +
+ .../esquemas_spider/student_assessment.sql         |   83 +
+ .../student_transcripts_tracking.sql               |  120 +
+ datos/procesados/esquemas_spider/swimming.sql      |   45 +
+ datos/procesados/esquemas_spider/theme_gallery.sql |   27 +
+ .../tracking_grants_for_research.sql               |  110 +
+ .../procesados/esquemas_spider/tracking_orders.sql |   67 +
+ .../tracking_share_transactions.sql                |   58 +
+ .../esquemas_spider/tracking_software_problems.sql |   65 +
+ datos/procesados/esquemas_spider/train_station.sql |   28 +
+ datos/procesados/esquemas_spider/tvshow.sql        |   40 +
+ datos/procesados/esquemas_spider/twitter_1.sql     |   27 +
+ .../esquemas_spider/university_basketball.sql      |   29 +
+ datos/procesados/esquemas_spider/voter_1.sql       |   22 +
+ datos/procesados/esquemas_spider/voter_2.sql       |   37 +
+ datos/procesados/esquemas_spider/wedding.sql       |   30 +
+ datos/procesados/esquemas_spider/wine_1.sql        |   30 +
+ .../procesados/esquemas_spider/workshop_paper.sql  |   25 +
+ datos/procesados/esquemas_spider/world_1.sql       |   38 +
+ datos/procesados/esquemas_spider/wrestler.sql      |   21 +
+ datos/procesados/esquemas_spider/wta_1.sql         |   58 +
+ datos/procesados/esquemas_spider/yelp.sql          |   65 +
+ datos/procesados/propios.jsonl                     |  960 ++
+ datos/procesados/spider_es.jsonl                   | 8261 +++++++++++++++++
+ datos/procesados/spider_mysql.jsonl                | 9516 ++++++++++++++++++++
+ docker-compose.yml                                 |   10 +
+ docs/Proyecto_3_Texto_a_SQL.md                     |  173 +
+ notebooks/02_entrenamiento.ipynb                   |   92 +
+ requirements.txt                                   |   10 +
+ scripts/comun.py                                   |   90 +
+ scripts/datos/01_descargar_spider.sh               |   14 +
+ scripts/datos/02_spider_a_mysql.py                 |  229 +
+ scripts/datos/03_traducir_spider.py                |  104 +
+ scripts/datos/04_validar_propios.py                |  131 +
+ scripts/datos/05_construir_dataset.py              |  117 +
+ scripts/entrenamiento/entrenar.py                  |  188 +
+ scripts/evaluacion/verificar_fuga.py               |   63 +
+ solucion.py                                        |  249 +
+ 248 files changed, 50040 insertions(+), 1 deletion(-)
+
+commit c0b3324ed7b92477f79cbbb55a35b64c7c43572d
+Author: Qu3zada22 <139565119+Qu3zada22@users.noreply.github.com>
+Date:   2026-10-22 08:13:24 -0600
+
+    first commit
+
+ README.md | 1 +
+ 1 file changed, 1 insertion(+)
