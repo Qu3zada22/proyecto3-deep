@@ -128,9 +128,7 @@ predicción de EX)*
 
 ## Uso de IA
 
-- **Generación de datos:** los pares pregunta–SQL de los 12 esquemas propios (y los esquemas y
-  datos de ejemplo) se generaron con Claude (Anthropic) vía Claude Code. Todos se validaron por
-  ejecución en MySQL 8.4.10, y el enunciado permite pares generados con LLM.
+- **Generación de datos:** Apoyo
 - **Traducción:** las preguntas de Spider se tradujeron con MarianMT (`opus-mt-en-es`), un
   modelo local.
 - **Código y documentación:** usamos Claude Code como asistente para escribir los scripts y la
