@@ -50,3 +50,13 @@ configuración al repo apenas termina. La extensión de Colab para VS Code no pu
 Secrets (`GH_TOKEN`), por lo que el notebook pide el token si no lo encuentra; al final se usó
 Colab en el navegador. Configuración A: 4,358,144 parámetros entrenables (0.282 %), ~19 s por
 paso, ~2 h 40 min para los 495 pasos. El loss de train arranca en ~0.29.
+
+### 2026-10-25 — Anggie Quezada
+**Configuraciones A y B terminadas.** Un corte de luz detuvo A cerca del paso 250 y luego Colab
+cortó la sesión por duración máxima en el paso ~380; las dos veces se reanudó desde los
+checkpoints en Drive (250 y 400), la última desde otra cuenta de Google porque se agotó la cuota
+de GPU. Iris entrenó B en paralelo en su cuenta (189 min). Loss en dev interno: A 0.1174 y
+B 0.0997, con B por debajo de A en todas las evaluaciones desde el paso 100. Se cumple la primera
+parte de la hipótesis (menor loss con MLP); B tiene 4.2× más parámetros, no 2.5× como estimamos.
+El dev de A se aplana desde el paso 200 y el de B desde el 400. Falta confirmar con la EX en la
+validación propia cuál adapter queda en `adapter/`.

@@ -81,10 +81,13 @@ que ya está en el repo no se vuelve a entrenar.
 Fuera del notebook: `python scripts/entrenamiento/entrenar.py --config A|B --checkpoints <carpeta>`.
 El adapter elegido se copia a `adapter/`.
 
-| Config | Módulos con LoRA | Parámetros entrenables | Pasos | Tiempo por paso (T4) |
-|---|---|---|---|---|
-| A | atención (`q, k, v, o`) | 4,358,144 (0.282 %) | 495 | ~19 s (~2 h 40 min en total) |
-| B | atención + MLP (`gate, up, down`) | *(por completar)* | 495 | *(por completar)* |
+A se entrenó en tres sesiones (un corte de luz en el paso ~250 y el límite de uso de Colab en el
+paso ~380) y se reanudó desde los checkpoints 250 y 400; el historial de loss quedó completo.
+
+| Config | Módulos con LoRA | Parámetros entrenables | Pasos | Tiempo por paso (T4) | Loss dev final |
+|---|---|---|---|---|---|
+| A | atención (`q, k, v, o`) | 4,358,144 (0.282 %) | 495 | ~23 s (~3 h en total, en 3 sesiones) | 0.1174 (perplejidad 1.125) |
+| B | atención + MLP (`gate, up, down`) | 18,464,768 (1.182 %) | 495 | ~23 s (189 min en total) | 0.0997 (perplejidad 1.105) |
 
 ### 3. Evaluación
 `T2S_CONFIG=configs/baseline.json python scripts/evaluacion/evaluar.py` (ver `PLAN_TRABAJO.md`).
